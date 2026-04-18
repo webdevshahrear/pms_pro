@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Management - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Emergency visibility override for Units page */
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+        .main-content-geist {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Unit Inventory</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">RC</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+                        
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-manager.html" class="nav-item-geist "><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-manager.html" class="nav-item-geist "><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units-manager.html" class="nav-item-geist active"><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners-manager.html" class="nav-item-geist "><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants-manager.html" class="nav-item-geist "><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing-manager.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts-manager.html" class="nav-item-geist "><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance-manager.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maintenance</a>
+                <a href="notices-manager.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings-manager.html" class="nav-item-geist "><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers-manager.html" class="nav-item-geist "><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports-manager.html" class="nav-item-geist "><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents-manager.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors-manager.html" class="nav-item-geist "><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="settings-manager.html" class="nav-item-geist "><i class="bi bi-gear"></i> Profile Settings</a>
+            </nav>
+
+                        
+            
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">RC</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Robert Chen</h6>
+                        <p class="profile-role">Estate Manager</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <!-- Cinematic Hero Banner (Asset Intelligence Edition) -->
+            <div class="position-relative overflow-hidden rounded-4 mb-4 shadow-lg bg-primary-navy" style="height: 320px; background-color: #0a192f !important; background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 100%) !important; border: 1px solid rgba(255,255,255,0.1); opacity: 1 !important; visibility: visible !important;">
+                <!-- Animated Ambient Background (Z-INDEX 0) -->
+                <div class="position-absolute inset-0 opacity-20" style="z-index: 0;">
+                    <div class="position-absolute bg-accent-blue rounded-circle blur-3xl shadow-lg" style="width: 500px; height: 500px; top: -150px; right: -150px; animation: pulse-slow 8s infinite alternate;"></div>
+                    <div class="position-absolute bg-primary-navy rounded-circle blur-3xl shadow-lg" style="width: 400px; height: 400px; bottom: -80px; left: -80px; animation: pulse-slow 12s infinite reverse;"></div>
+                </div>
+                <!-- Content Layer (Z-INDEX 1) -->
+                <div class="position-relative z-1 h-100 d-flex flex-column justify-content-center px-5 text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div data-aos="fade-right" data-aos-delay="200">
+                            <span class="badge border border-white border-opacity-25 px-3 py-2 rounded-pill extra-small uppercase tracking-widest mb-3 backdrop-blur shadow-sm text-white fw-bold">Unit Inventory System</span>
+                            <h1 class="display-3 fw-bold mb-2 tracking-tight text-white shadow-sm">Unit Inventory</h1>
+                            <p class="lead opacity-90 mb-0" style="max-width: 550px; color: #f8fafc;">Enterprise oversight of 142 discrete units across 12 high-yield assets.</p>
+                        </div>
+                        <div class="d-flex gap-3" data-aos="fade-left" data-aos-delay="400">
+                            <button class="btn btn-white bg-opacity-10 border border-white border-opacity-20 text-white backdrop-blur rounded-4 px-4 py-2 small shadow-sm transition-hover">
+                                <i class="bi bi-download me-2"></i> Export Schema
+                            </button>
+                            <button class="btn btn-white text-primary-navy fw-bold rounded-4 px-4 py-2 border-0 shadow-lg transition-hover" data-action="create" data-id="NEW_UNIT">
+                                <i class="bi bi-plus-lg me-2"></i> Add Unit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset Intelligence Layer (AOS Force In View) -->
+            <div class="row g-4 mb-5" data-aos="fade-up" data-aos-offset="0">
+                <!-- Unit ROI Matrix -->
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden transition-hover translate-y-hover border-primary-top">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-light-subtle">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary-navy">Unit ROI Efficiency Matrix</h6>
+                                <p class="extra-small text-muted mb-0">Yield analysis per square foot diagnostics.</p>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="spinner-grow spinner-grow-sm text-primary shadow-sm" style="width: 8px; height: 8px;"></span>
+                                <span class="extra-small fw-bold text-primary-navy tracking-tight">Real-time Node</span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0 custom-table-geist">
+                                <thead class="bg-light">
+                                    <tr class="extra-small text-muted uppercase tracking-widest font-mono">
+                                        <th class="ps-4">Identifier</th>
+                                        <th>Occupancy</th>
+                                        <th>Revenue</th>
+                                        <th class="pe-4">Yield</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small">
+                                    <tr class="transition">
+                                        <td class="ps-4 py-3"><span class="fw-bold text-primary-navy">Apt 402</span><br><span class="extra-small text-muted">Imperial Heights</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress" style="height: 6px; width: 60px; background: #f1f5f9;"><div class="progress-bar bg-success rounded-pill shadow-sm" style="width: 92%;"></div></div>
+                                                <span class="extra-small fw-bold">92%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-bold text-dark font-mono">৳120K</span></td>
+                                        <td class="pe-4"><span class="badge bg-success-subtle text-success rounded-pill fw-bold border border-success border-opacity-10">+8.2%</span></td>
+                                    </tr>
+                                    <tr class="transition">
+                                        <td class="ps-4 py-3"><span class="fw-bold text-primary-navy">Off 801</span><br><span class="extra-small text-muted">Skyline Plaza</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress" style="height: 6px; width: 60px; background: #f1f5f9;"><div class="progress-bar bg-primary rounded-pill shadow-sm" style="width: 76%;"></div></div>
+                                                <span class="extra-small fw-bold">76%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-bold text-dark font-mono">৳540K</span></td>
+                                        <td class="pe-4"><span class="badge bg-primary-subtle text-primary rounded-pill fw-bold border border-primary border-opacity-10">+6.4%</span></td>
+                                    </tr>
+                                    <tr class="transition">
+                                        <td class="ps-4 py-3"><span class="fw-bold text-primary-navy">Shop 04</span><br><span class="extra-small text-muted">Imperial Heights</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress" style="height: 6px; width: 60px; background: #f1f5f9; border: 1px solid #e2e8f0;"><div class="progress-bar bg-warning rounded-pill shadow-sm" style="width: 45%;"></div></div>
+                                                <span class="extra-small fw-bold">45%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-bold text-dark font-mono">৳320K</span></td>
+                                        <td class="pe-4"><span class="badge bg-warning-subtle text-warning rounded-pill fw-bold border border-warning border-opacity-20">+4.1%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Utility Consumption Heatmap -->
+                <div class="col-lg-5">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4 transition-hover translate-y-hover position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary-navy">Grid Consumption Pulse</h6>
+                                <p class="extra-small text-muted mb-0">Ecosystem utility drain diagnostics.</p>
+                            </div>
+                            <div class="p-2 bg-warning-subtle text-warning rounded-3 border border-warning border-opacity-10 shadow-sm">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                            </div>
+                        </div>
+                        <div class="p-0 bg-transparent rounded-4 mb-3 overflow-hidden" style="min-height: 180px;">
+                            <div id="unitConsumptionChart"></div>
+                        </div>
+                        <div class="d-flex justify-content-between extra-small text-muted px-2 font-mono uppercase tracking-widest fw-bold border-top pt-3">
+                            <span>MON</span>
+                            <span>WED</span>
+                            <span class="text-accent-blue opacity-100"><i class="bi bi-graph-up-arrow me-1"></i> SAT (PEAK)</span>
+                            <span>SUN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters & Building Selector -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-3">
+                        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+                            <div class="d-flex gap-2">
+                                <div class="input-group input-group-sm shadow-sm rounded-4 overflow-hidden border border-light" style="width: 240px;">
+                                    <span class="input-group-text bg-white border-0 opacity-50 pe-0"><i class="bi bi-buildings"></i></span>
+                                    <select class="form-select border-0 shadow-none ps-2 fw-bold tracking-tight text-primary-navy">
+                                        <option>All Buildings</option>
+                                        <option>Imperial Heights</option>
+                                        <option>Skyline Plaza</option>
+                                        <option>Emerald Gardens</option>
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-sm shadow-sm rounded-4 overflow-hidden border border-light" style="width: 160px;">
+                                    <span class="input-group-text bg-white border-0 opacity-50 pe-0"><i class="bi bi-layers"></i></span>
+                                    <select class="form-select border-0 shadow-none ps-2 fw-bold tracking-tight text-primary-navy">
+                                        <option>All Floors</option>
+                                        <option>Ground Floor</option>
+                                        <option>1st Floor</option>
+                                        <option>2nd Floor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <div class="btn-group btn-group-sm shadow-sm rounded-pill p-1 bg-light border">
+                                    <button id="btn-view-grid" class="btn btn-white border-0 active rounded-pill px-3 shadow-sm" onclick="switchUnitView('grid')"><i class="bi bi-grid-fill me-1"></i> Grid</button>
+                                    <button id="btn-view-list" class="btn btn-white border-0 rounded-pill px-3" onclick="switchUnitView('list')"><i class="bi bi-list-task me-1"></i> List</button>
+                                </div>
+                                <div class="input-group input-group-sm shadow-sm rounded-4 overflow-hidden border border-light" style="width: 280px;">
+                                    <span class="input-group-text bg-white border-0 opacity-50"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control border-0 shadow-none px-2 small" placeholder="Search Unit # or Stakeholder...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Unit Grid -->
+            <div id="unit-grid-container" class="row g-4 mb-5">
+                <!-- Unit 1 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="0" data-aos-offset="0">
+                    <div class="bg-white border rounded-4 p-4 shadow-sm h-100 transition-hover translate-y-hover border-success-top-bold">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0 text-primary-navy tracking-tight">Apt 402</h5>
+                            <span class="badge bg-success text-white extra-small rounded-pill px-3 shadow-glow-green border-0">VACANT</span>
+                        </div>
+                        <p class="extra-small text-muted mb-4 d-flex align-items-center"><i class="bi bi-geo-alt-fill me-2 text-primary opacity-50"></i> Imperial Heights • Floor 4</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-4 bg-light-subtle p-3 rounded-4 border border-light">
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-door-open mb-1 opacity-50"></i> 3 Bed</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-droplet mb-1 opacity-50"></i> 3 Bath</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-bounding-box mb-1 opacity-50"></i> 1850 SF</span>
+                        </div>
+                        <div class="pt-3 d-flex justify-content-between align-items-center border-top border-light">
+                            <div class="d-flex flex-column">
+                                <span class="extra-small text-muted uppercase tracking-widest fw-bold opacity-50" style="font-size: 0.65rem;">Market Yield</span>
+                                <span class="fw-bold small text-primary-navy font-mono">৳35,000/mo</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-white border p-2 rounded-circle shadow-sm transition-hover" title="View Diagnostics"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-primary-navy p-2 rounded-circle shadow-sm transition-hover" title="Edit Logic"><i class="bi bi-pencil-fill small"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 2 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100" data-aos-offset="0">
+                    <div class="bg-white border rounded-4 p-4 shadow-sm h-100 transition-hover translate-y-hover border-primary-top-bold">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0 text-primary-navy tracking-tight">Apt 12B</h5>
+                            <span class="badge bg-primary text-white extra-small rounded-pill px-3 shadow-glow-blue border-0">OCCUPIED</span>
+                        </div>
+                        <p class="extra-small text-muted mb-2 d-flex align-items-center"><i class="bi bi-geo-alt-fill me-2 text-primary opacity-50"></i> Skyline Plaza • Floor 12</p>
+                        <p class="extra-small fw-bold text-dark mb-4 d-flex align-items-center p-2 bg-light rounded-3"><i class="bi bi-person-circle me-2 text-primary"></i> Sarah Jenkins</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-4 bg-light-subtle p-3 rounded-4 border border-light">
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-door-open mb-1 opacity-50"></i> 2 Bed</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-droplet mb-1 opacity-50"></i> 2 Bath</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-bounding-box mb-1 opacity-50"></i> 1450 SF</span>
+                        </div>
+                        <div class="pt-3 d-flex justify-content-between align-items-center border-top border-light">
+                            <div class="d-flex flex-column">
+                                <span class="extra-small text-muted uppercase tracking-widest fw-bold opacity-50" style="font-size: 0.65rem;">Active Yield</span>
+                                <span class="fw-bold small text-primary-navy font-mono">৳48,000/mo</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-white border p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-primary-navy p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-pencil-fill small"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 3 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200" data-aos-offset="0">
+                    <div class="bg-white border rounded-4 p-4 shadow-sm h-100 transition-hover translate-y-hover border-warning-top-bold">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0 text-primary-navy tracking-tight">Shop 04</h5>
+                            <span class="badge bg-warning text-white extra-small rounded-pill px-3 shadow-sm border-0">BOOKED</span>
+                        </div>
+                        <p class="extra-small text-muted mb-4 d-flex align-items-center"><i class="bi bi-geo-alt-fill me-2 text-primary opacity-50"></i> Imperial Heights • Ground</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-4 bg-light-subtle p-3 rounded-4 border border-light">
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-shop mb-1 opacity-50"></i> Retail</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-bounding-box mb-1 opacity-50"></i> 850 SF</span>
+                        </div>
+                        <div class="pt-3 d-flex justify-content-between align-items-center border-top border-light">
+                            <div class="d-flex flex-column">
+                                <span class="extra-small text-muted uppercase tracking-widest fw-bold opacity-50" style="font-size: 0.65rem;">Contract Yield</span>
+                                <span class="fw-bold small text-primary-navy font-mono">৳85,000/mo</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-white border p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-primary-navy p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-pencil-fill small"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 4 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300" data-aos-offset="0">
+                    <div class="bg-white border rounded-4 p-4 shadow-sm h-100 transition-hover translate-y-hover border-danger-top-bold">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0 text-primary-navy tracking-tight">Off 801</h5>
+                            <span class="badge bg-danger text-white extra-small rounded-pill px-3 shadow-sm border-0">REPAIR</span>
+                        </div>
+                        <p class="extra-small text-muted mb-4 d-flex align-items-center"><i class="bi bi-geo-alt-fill me-2 text-primary opacity-50"></i> Skyline Plaza • Floor 8</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-4 bg-light-subtle p-3 rounded-4 border border-light">
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-building mb-1 opacity-50"></i> Office</span>
+                            <div class="vr opacity-10" style="height: 20px;"></div>
+                            <span class="d-flex flex-column text-center fw-bold text-primary-navy"><i class="bi bi-bounding-box mb-1 opacity-50"></i> 2400 SF</span>
+                        </div>
+                        <div class="pt-3 d-flex justify-content-between align-items-center border-top border-light">
+                            <div class="d-flex flex-column">
+                                <span class="extra-small text-muted uppercase tracking-widest fw-bold opacity-50" style="font-size: 0.65rem;">Potential Yield</span>
+                                <span class="fw-bold small text-primary-navy font-mono">৳145K/mo</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-white border p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-primary-navy p-2 rounded-circle shadow-sm transition-hover"><i class="bi bi-pencil-fill small"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Detailed Table View (AOS Force In View) -->
+            <div id="unit-list-container" class="row g-4 mb-5 d-none">
+                <div class="col-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 border-primary-top">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <div>
+                                <h5 class="fw-bold mb-0 text-primary-navy">Unit Analytics & Audit Archive</h5>
+                                <p class="extra-small text-muted mb-0 font-mono text-uppercase tracking-tighter">Secure Ledger Status: Synced</p>
+                            </div>
+                            <button class="btn btn-sm btn-white border rounded-pill px-3 shadow-sm extra-small fw-bold transition-hover">Historical Logs</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table-geist">
+                                <thead>
+                                    <tr class="extra-small text-muted uppercase tracking-widest font-mono">
+                                        <th class="ps-4">Discrete Unit</th>
+                                        <th>Asset Type</th>
+                                        <th>Current Status</th>
+                                        <th>Yield Performance</th>
+                                        <th>Active Ledger</th>
+                                        <th class="pe-4">Audit Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="transition">
+                                        <td class="ps-4"><span class="small fw-bold text-primary-navy">Apt 402</span><br><span class="extra-small text-muted">Residential Unit</span></td>
+                                        <td class="small fw-medium">Flat / Apt</td>
+                                        <td><span class="badge bg-success text-white border-0 extra-small rounded-pill px-3 shadow-sm">VACANT</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress" style="height: 6px; width: 60px; background: #f1f5f9;"><div class="progress-bar bg-success" style="width: 92%;"></div></div>
+                                                <span class="extra-small fw-bold text-success">Optimal</span>
+                                            </div>
+                                        </td>
+                                        <td class="small fw-bold text-primary-navy font-mono">৳35,000.00</td>
+                                        <td class="pe-4">
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-white border rounded-3 p-1 px-2 shadow-sm transition-hover" title="View Details" data-action="view" data-id="APT-402"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-white border rounded-3 p-1 px-2 shadow-sm transition-hover" title="Edit Unit" data-action="edit" data-id="APT-402"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-danger-subtle text-danger border border-danger border-opacity-10 rounded-3 p-1 px-2 shadow-sm transition-hover" title="Decommission" data-action="delete" data-id="APT-402"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="transition">
+                                        <td class="ps-4"><span class="small fw-bold text-primary-navy">Apt 12B</span><br><span class="extra-small text-muted">Premium Suite</span></td>
+                                        <td class="small fw-medium">Residential</td>
+                                        <td><span class="badge bg-primary text-white border-0 extra-small rounded-pill px-3 shadow-sm">OCCUPIED</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress" style="height: 6px; width: 60px; background: #f1f5f9;"><div class="progress-bar bg-primary" style="width: 76%;"></div></div>
+                                                <span class="extra-small fw-bold text-primary">Standard</span>
+                                            </div>
+                                        </td>
+                                        <td class="small fw-bold text-primary-navy font-mono">৳48,500.00</td>
+                                        <td class="pe-4">
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-white border rounded-3 p-1 px-2 shadow-sm transition-hover" title="View Details" data-action="view" data-id="APT-12B"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-white border rounded-3 p-1 px-2 shadow-sm transition-hover" title="Edit Unit" data-action="edit" data-id="APT-12B"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-danger-subtle text-danger border border-danger border-opacity-10 rounded-3 p-1 px-2 shadow-sm transition-hover" title="Decommission" data-action="delete" data-id="APT-12B"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-manager.html" class="bottom-nav-item">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-manager.html" class="bottom-nav-item active">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-manager.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance-manager.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

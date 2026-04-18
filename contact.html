@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concierge Inquiry - The Imperial</title>
+    <meta name="description" content="Connect with The Imperial's asset management team for property viewings, acquisition, and premium residency inquiries.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .inquiry-hero {
+            background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 100%);
+            padding: 8rem 0 10rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .hero-badge .dot {
+            width: 8px; height: 8px; border-radius: 50%; background: #10b981; 
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.25rem;
+        }
+        .hero-title span { color: #93c5fd; }
+        .hero-subtitle {
+            color: rgba(255,255,255,0.55);
+            font-size: 1rem;
+            line-height: 1.75;
+            max-width: 560px;
+        }
+
+        /* ─── STATS STRIP ─── */
+        .stats-strip {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-block { text-align: left; }
+        .stat-block .val { font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; }
+        .stat-block .lbl { font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+        /* ─── MAIN CARD GRID ─── */
+        .inquiry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.55fr;
+            gap: 1.75rem;
+            margin-top: -60px;
+            padding-bottom: 5rem;
+        }
+        @media (max-width: 992px) { .inquiry-grid { grid-template-columns: 1fr; margin-top: -30px; } }
+
+        /* ─── LEFT PANEL ─── */
+        .left-panel { display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .contact-info-card {
+            background: #1e3a5f;
+            border-radius: 24px;
+            padding: 2rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-info-card .section-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.35);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .contact-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .contact-row .c-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 3px; }
+        .contact-row .c-val { font-size: 0.9rem; font-weight: 600; }
+
+        .node-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+        .node-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.82rem;
+        }
+        .node-row:last-child { border-bottom: none; }
+        .node-status { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 700; }
+        .node-status .ns-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+        .performance-card {
+            background: linear-gradient(135deg, #1e3a5f, #0a192f);
+            border-radius: 20px;
+            padding: 1.5rem;
+            color: #fff;
+        }
+        .perf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+        .perf-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.9rem; text-align: center; }
+        .perf-box .perf-val { font-size: 1.4rem; font-weight: 800; color: #fff; line-height: 1; }
+        .perf-box .perf-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 4px; }
+
+        /* ─── FORM CARD ─── */
+        .form-card {
+            background: #fff;
+            border-radius: 28px;
+            padding: 2.5rem 2.75rem;
+            box-shadow: 0 25px 60px rgba(30,58,95,0.08);
+        }
+        .form-card h2 { font-size: 1.75rem; font-weight: 800; color: #1e3a5f; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+        .form-card .subtitle { font-size: 0.85rem; color: #9ca3af; margin-bottom: 2rem; }
+
+        /* Type Selector */
+        .type-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
+        .type-card {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 1rem 1.1rem;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #fafafa;
+        }
+        .type-card:hover { border-color: #2b7be8; background: #eff6ff; }
+        .type-card.selected { border-color: #1e3a5f; background: #eff6ff; }
+        .type-card .tc-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .type-card .tc-label { font-size: 0.78rem; font-weight: 700; color: #1e3a5f; }
+        .type-card .tc-sub { font-size: 0.65rem; color: #9ca3af; }
+
+        /* Premium Input */
+        .field-group { margin-bottom: 1.5rem; }
+        .field-group label { display: block; font-size: 0.68rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+        .premium-input {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s;
+            outline: none;
+        }
+        .premium-input::placeholder { color: #c4c9d4; }
+        .premium-input:focus {
+            border-color: #2b7be8;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(43,123,232,0.08);
+        }
+        .premium-input.error-field { border-color: #dc2626; background: #fef2f2; }
+        .error-msg { font-size: 0.68rem; color: #dc2626; margin-top: 4px; display: none; }
+        .error-msg.show { display: block; }
+
+        /* Budget Range slider */
+        .budget-range { width: 100%; accent-color: #1e3a5f; height: 4px; }
+
+        /* Submit button */
+        .btn-submit-premium {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3a5f, #2b7be8);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 1.1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-submit-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: 0.55s;
+        }
+        .btn-submit-premium:hover::before { left: 100%; }
+        .btn-submit-premium:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(30,58,95,0.35); }
+
+        /* Map */
+        .map-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(30,58,95,0.12);
+            border: 1px solid #e5e7eb;
+            height: 420px;
+            margin-bottom: 5rem;
+        }
+        .map-container iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) saturate(0.9); }
+
+        /* Success Screen */
+        .success-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            border-radius: 28px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 3rem;
+            z-index: 10;
+        }
+        .success-overlay.show { display: flex; }
+        .checkmark-circle {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(22,163,74,0.3);
+        }
+
+        /* Whatsapp float */
+        .wa-float {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 56px; height: 56px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+            z-index: 999;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        .wa-float:hover { transform: scale(1.1); color: #fff; }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Pill Navbar -->
+    <nav class="navbar-geist">
+        <!-- Left: Hamburger (Mobile) & Logo (Desktop) -->
+        <div class="d-flex align-items-center position-relative z-1">
+            <button class="navbar-mobile-toggle d-md-none me-3 btn btn-light rounded-circle shadow-sm border border-light-subtle d-flex align-items-center justify-content-center transition" style="width: 44px; height: 44px;" aria-label="Toggle Menu">
+                <i class="bi bi-list text-primary-navy" style="font-size: 1.5rem;"></i>
+            </button>
+            <a href="index.html" class="navbar-brand text-decoration-none d-none d-md-flex align-items-center font-cinzel text-primary-navy fw-bold tracking-wide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                </svg>
+                THE IMPERIAL
+            </a>
+        </div>
+        
+        <!-- Desktop Nav Links -->
+        <ul class="nav-links d-none d-md-flex mb-0 mx-auto position-relative z-1">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="properties.html" class="nav-link">Properties</a></li>
+        </ul>
+
+        <!-- Mobile Centered Logo -->
+        <a href="index.html" class="navbar-brand text-decoration-none d-flex d-md-none align-items-center position-absolute top-50 start-50 translate-middle z-0 font-cinzel text-primary-navy fw-bold tracking-wide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+            </svg>
+            IMPERIAL
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-2 position-relative z-1">
+            <a href="login.html" class="btn-geist-secondary d-none d-sm-block text-uppercase fw-bold" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; letter-spacing: 1px;">Portal</a>
+            <a href="contact.html" class="btn-geist text-uppercase fw-bold active" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; letter-spacing: 1px;">Inquiry</a>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay d-lg-none">
+        <button class="navbar-mobile-toggle position-absolute top-0 end-0 m-4 btn btn-outline-light rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; border-width: 2px;" aria-label="Close Menu">
+            <i class="bi bi-x-lg fs-5"></i>
+        </button>
+        
+        <!-- Elegant Crest inside menu -->
+        <div class="mb-5 text-center mobile-nav-link" style="transition-delay: 0.1s;">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" class="mb-3 drop-shadow">
+                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#ffffff"/>
+            </svg>
+            <div class="font-cinzel text-white fs-4 tracking-wide fw-bold">THE IMPERIAL</div>
+            <div class="text-white-50 mt-1" style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Residences & Suites</div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center flex-grow-1 justify-content-center w-100">
+            <a href="index.html" class="mobile-nav-link" style="transition-delay: 0.1s;">Home</a>
+            <a href="about.html" class="mobile-nav-link" style="transition-delay: 0.2s;">About</a>
+            <a href="services.html" class="mobile-nav-link" style="transition-delay: 0.3s;">Services</a>
+            <a href="properties.html" class="mobile-nav-link" style="transition-delay: 0.4s;">Properties</a>
+        </div>
+
+        <div class="w-100 px-4 pb-5 mobile-nav-link" style="transition-delay: 0.5s; max-width: 320px;">
+            <a href="contact.html" class="btn btn-light rounded-pill py-3 fw-bold border-0 shadow-lg w-100 text-primary-navy tracking-wide mb-3">SCHEDULE VIEWING</a>
+            <a href="login.html" class="btn btn-outline-light rounded-pill py-3 fw-bold w-100 tracking-wide border-2 bg-dark bg-opacity-25 backdrop-blur">RESIDENT PORTAL</a>
+        </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="inquiry-hero">
+        <div class="grid-lines"></div>
+        <div class="container position-relative" style="z-index:2;">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        Concierge Desk — Live 24/7
+                    </div>
+                    <h1 class="hero-title">Connect With <span>Excellence.</span><br>We're Listening.</h1>
+                    <p class="hero-subtitle">Direct communication with The Imperial's senior asset management team. Reserved for serious property viewings, acquisition, and premium residency inquiries.</p>
+                    <div class="stats-strip">
+                        <div class="stat-block">
+                            <div class="val">12 min</div>
+                            <div class="lbl">Avg. Response</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="val">98.4%</div>
+                            <div class="lbl">Resolution Rate</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="val">3 Hubs</div>
+                            <div class="lbl">City Coverage</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="val">500+</div>
+                            <div class="lbl">Happy Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ MAIN GRID ═══ -->
+    <div class="container">
+        <div class="inquiry-grid">
+
+            <!-- ── LEFT PANEL ── -->
+            <div class="left-panel">
+
+                <!-- Contact Info -->
+                <div class="contact-info-card" data-aos="fade-up">
+                    <p class="section-label">Operations Center</p>
+                    <div class="contact-row">
+                        <div class="contact-icon text-white"><i class="bi bi-telephone-outbound"></i></div>
+                        <div>
+                            <p class="c-label">Direct Support Line</p>
+                            <p class="c-val mb-0">+880 1711-223344</p>
+                            <p class="c-val mb-0" style="font-size:0.8rem;opacity:0.55;">+880 1900-112233 (Emergency)</p>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon text-white"><i class="bi bi-envelope-at"></i></div>
+                        <div>
+                            <p class="c-label">Enterprise Email</p>
+                            <p class="c-val mb-0">concierge@theimperial.luxury</p>
+                            <p class="c-val mb-0" style="font-size:0.8rem;opacity:0.55;">support@theimperial.luxury</p>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon text-white"><i class="bi bi-geo-alt"></i></div>
+                        <div>
+                            <p class="c-label">Headquarters</p>
+                            <p class="c-val mb-0">123 Elite Avenue, Gulshan-1</p>
+                            <p class="c-val mb-0" style="font-size:0.8rem;opacity:0.55;">Dhaka-1212, Bangladesh</p>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon text-white"><i class="bi bi-clock"></i></div>
+                        <div>
+                            <p class="c-label">Operating Hours</p>
+                            <p class="c-val mb-0">Sun – Thu: 9 AM – 9 PM</p>
+                            <p class="c-val mb-0" style="font-size:0.8rem;opacity:0.55;">Fri – Sat: 10 AM – 6 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node Coverage -->
+                <div class="node-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="fw-bold mb-0 small">Network Coverage</h6>
+                        <span class="badge bg-success-subtle text-success extra-small rounded-pill px-3">Live</span>
+                    </div>
+                    <div class="node-row">
+                        <span class="small text-muted">Gulshan Hub</span>
+                        <span class="node-status text-success"><span class="ns-dot bg-success"></span>Operational</span>
+                    </div>
+                    <div class="node-row">
+                        <span class="small text-muted">Banani Satellite</span>
+                        <span class="node-status text-success"><span class="ns-dot bg-success"></span>Operational</span>
+                    </div>
+                    <div class="node-row">
+                        <span class="small text-muted">Uttara Node</span>
+                        <span class="node-status text-warning"><span class="ns-dot bg-warning"></span>Maintenance</span>
+                    </div>
+                    <div class="node-row">
+                        <span class="small text-muted">Dhanmondi Desk</span>
+                        <span class="node-status text-success"><span class="ns-dot bg-success"></span>Operational</span>
+                    </div>
+                </div>
+
+                <!-- Performance -->
+                <div class="performance-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="bi bi-bar-chart-line opacity-50"></i>
+                        <p class="small fw-bold mb-0 opacity-75">Service Performance — April 2026</p>
+                    </div>
+                    <div class="perf-grid">
+                        <div class="perf-box">
+                            <div class="perf-val">12m</div>
+                            <div class="perf-lbl">Avg. Reply</div>
+                        </div>
+                        <div class="perf-box">
+                            <div class="perf-val">98%</div>
+                            <div class="perf-lbl">Resolution</div>
+                        </div>
+                        <div class="perf-box">
+                            <div class="perf-val">4.9★</div>
+                            <div class="perf-lbl">CSAT Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social links -->
+                <div class="node-card" data-aos="fade-up" data-aos-delay="150">
+                    <p class="extra-small fw-bold text-muted mb-3 uppercase">Reach Us On</p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 border rounded-3 extra-small fw-bold text-decoration-none text-dark" style="transition:all 0.2s;" onmouseover="this.style.background='#25d366';this.style.color='#fff';this.style.border='1px solid #25d366';" onmouseout="this.style.background='';this.style.color='#000';this.style.border='1px solid #dee2e6';">
+                            <i class="bi bi-whatsapp text-success"></i>WhatsApp
+                        </a>
+                        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 border rounded-3 extra-small fw-bold text-decoration-none text-dark">
+                            <i class="bi bi-facebook text-primary"></i>Facebook
+                        </a>
+                        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 border rounded-3 extra-small fw-bold text-decoration-none text-dark">
+                            <i class="bi bi-linkedin text-info"></i>LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── FORM CARD ── -->
+            <div data-aos="fade-left">
+                <div class="form-card position-relative">
+
+                    <!-- Success Overlay -->
+                    <div class="success-overlay" id="successOverlay">
+                        <div class="checkmark-circle"><i class="bi bi-check-lg"></i></div>
+                        <h4 class="fw-bold mb-2" style="color:#1e3a5f;letter-spacing:-0.02em;">Inquiry Transmitted!</h4>
+                        <p class="text-muted mb-4" style="max-width:320px;">Our concierge team has received your inquiry and will respond within <strong>12 minutes</strong>.</p>
+                        <div class="p-3 bg-light rounded-3 text-start mb-4" style="max-width:320px;">
+                            <p class="extra-small fw-bold text-muted mb-2 uppercase">Reference Token</p>
+                            <code class="small fw-bold" id="refToken" style="color:#1e3a5f;"></code>
+                        </div>
+                        <button class="btn border rounded-4 px-5 py-2 small fw-bold" onclick="resetForm()">Submit Another Inquiry</button>
+                    </div>
+
+                    <h2>Initialize Inquiry</h2>
+                    <p class="subtitle">All fields marked <span style="color:#dc2626;">*</span> are required. We operate on strict data confidentiality.</p>
+
+                    <!-- Inquiry Type Selector -->
+                    <p style="font-size:0.68rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Inquiry Type <span style="color:#dc2626;">*</span></p>
+                    <div class="type-selector" id="typeSelector">
+                        <div class="type-card selected" onclick="selectType(this)" data-type="buy">
+                            <div class="tc-icon" style="background:#eff6ff;color:#2b7be8;"><i class="bi bi-building-add"></i></div>
+                            <div>
+                                <div class="tc-label">Property Acquisition</div>
+                                <div class="tc-sub">Buy a unit or plot</div>
+                            </div>
+                        </div>
+                        <div class="type-card" onclick="selectType(this)" data-type="rent">
+                            <div class="tc-icon" style="background:#f0fdf4;color:#16a34a;"><i class="bi bi-house-heart"></i></div>
+                            <div>
+                                <div class="tc-label">Premium Residency</div>
+                                <div class="tc-sub">Rent a unit</div>
+                            </div>
+                        </div>
+                        <div class="type-card" onclick="selectType(this)" data-type="corporate">
+                            <div class="tc-icon" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-briefcase"></i></div>
+                            <div>
+                                <div class="tc-label">Corporate Partnership</div>
+                                <div class="tc-sub">B2B / collaboration</div>
+                            </div>
+                        </div>
+                        <div class="type-card" onclick="selectType(this)" data-type="support">
+                            <div class="tc-icon" style="background:#fff7ed;color:#d97706;"><i class="bi bi-headset"></i></div>
+                            <div>
+                                <div class="tc-label">General Support</div>
+                                <div class="tc-sub">Questions & help</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name Row -->
+                    <div class="row g-3 mb-0">
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>First Name <span style="color:#dc2626;">*</span></label>
+                                <input type="text" class="premium-input" id="fname" placeholder="e.g. Rahim" oninput="clearError(this)">
+                                <p class="error-msg" id="fname-err">First name is required.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>Last Name <span style="color:#dc2626;">*</span></label>
+                                <input type="text" class="premium-input" id="lname" placeholder="e.g. Uddin" oninput="clearError(this)">
+                                <p class="error-msg" id="lname-err">Last name is required.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email + Phone -->
+                    <div class="row g-3 mb-0">
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>Email Address <span style="color:#dc2626;">*</span></label>
+                                <input type="email" class="premium-input" id="email" placeholder="name@company.com" oninput="clearError(this)">
+                                <p class="error-msg" id="email-err">Valid email is required.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>Phone Number <span style="color:#dc2626;">*</span></label>
+                                <input type="tel" class="premium-input" id="phone" placeholder="+880 17XX-XXXXXX" oninput="clearError(this)">
+                                <p class="error-msg" id="phone-err">Phone number is required.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Interest -->
+                    <div class="field-group">
+                        <label>Property / Area of Interest</label>
+                        <select class="premium-input" id="property">
+                            <option value="">— Select area / project —</option>
+                            <option>Imperial Heights, Gulshan-1</option>
+                            <option>Imperial Banani, Banani-11</option>
+                            <option>Imperial Tower, Uttara</option>
+                            <option>Dhanmondi Boulevard</option>
+                            <option>No preference — Open to suggestions</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget Range -->
+                    <div class="field-group">
+                        <label>Monthly Budget / Budget Range (BDT)</label>
+                        <input type="range" class="budget-range form-range mb-2" id="budgetRange" min="10000" max="500000" step="5000" value="50000" oninput="updateBudget(this.value)">
+                        <div class="d-flex justify-content-between extra-small text-muted">
+                            <span>৳10,000</span>
+                            <span class="fw-bold text-primary" id="budgetDisplay">৳50,000</span>
+                            <span>৳5,00,000+</span>
+                        </div>
+                    </div>
+
+                    <!-- Preferred Time -->
+                    <div class="row g-3 mb-0">
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>Preferred Viewing Date</label>
+                                <input type="date" class="premium-input" id="viewDate">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label>Preferred Time Slot</label>
+                                <select class="premium-input">
+                                    <option>— Select time —</option>
+                                    <option>Morning (9 AM – 12 PM)</option>
+                                    <option>Afternoon (12 PM – 4 PM)</option>
+                                    <option>Evening (4 PM – 8 PM)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="field-group">
+                        <label>Inquiry Details <span style="color:#dc2626;">*</span></label>
+                        <textarea class="premium-input" id="message" rows="4" placeholder="Describe your requirements — unit size, floor preference, family members, move-in timeline, or any specific requests..." oninput="clearError(this);updateCharCount(this)"></textarea>
+                        <div class="d-flex justify-content-between mt-1">
+                            <p class="error-msg" id="message-err">Please provide inquiry details.</p>
+                            <span class="extra-small text-muted ms-auto" id="charCount">0 / 500</span>
+                        </div>
+                    </div>
+
+                    <!-- Consent -->
+                    <div class="d-flex align-items-start gap-3 mb-4 p-3 bg-light rounded-3">
+                        <input type="checkbox" id="consent" class="form-check-input mt-1 flex-shrink-0">
+                        <label for="consent" class="extra-small text-muted" style="cursor:pointer;">
+                            I agree that The Imperial may contact me regarding my inquiry. My data is handled under the
+                            <a href="#" class="text-decoration-none fw-bold" style="color:#2b7be8;">Privacy Policy</a>.
+                        </label>
+                    </div>
+
+                    <!-- Submit -->
+                    <button class="btn-submit-premium" onclick="handleSubmit()">
+                        <span id="submitBtnText">Transmit Inquiry</span>
+                        <i class="bi bi-send" id="submitBtnIcon"></i>
+                    </button>
+
+                    <p class="text-center extra-small text-muted mt-3 mb-0">
+                        <i class="bi bi-shield-lock me-1 text-success"></i>Encrypted with TLS 1.3. Your data is never sold.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ MAP ═══ -->
+        <div class="map-container" data-aos="fade-up">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.1365440656114!2d90.40714397631899!3d23.778147687714578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c77094eace8b%3A0x1cd8c2d9239b6cb7!2sGulshan-1%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1709849200000!5m2!1sen!2sbd"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- NEW: Premium Footer Section -->
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Column 1: Brand & Social -->
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center mb-4">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="me-2">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                        </svg>
+                        <span class="fs-4 fw-bold text-primary-navy">The Imperial</span>
+                    </a>
+                    <p class="mb-4 lh-lg">Empowering luxury real estate with the world's most advanced property management operating system. Experience the future of living.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-social-link"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Platform -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-title-modern">Resources</h6>
+                    <nav>
+                        <a href="login.html" class="footer-link-modern">Resident Portal</a>
+                        <a href="faq.html" class="footer-link-modern">Knowledge Base</a>
+                        <a href="contact.html" class="footer-link-modern">Contact Support</a>
+                        <a href="about.html" class="footer-link-modern">Corporate Info</a>
+                        <a href="terms-conditions.html" class="footer-link-modern">Legal Terms</a>
+                    </nav>
+                </div>
+
+                <!-- Column 3: Inventory -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-title-modern">Inventory</h6>
+                    <nav>
+                        <a href="properties.html" class="footer-link-modern">All Units</a>
+                        <a href="flats-for-sale.html" class="footer-link-modern">For Sale</a>
+                        <a href="flats-for-rent.html" class="footer-link-modern">For Rent</a>
+                        <a href="commercial-spaces.html" class="footer-link-modern">Commercial</a>
+                        <a href="buildings.html" class="footer-link-modern">Project View</a>
+                    </nav>
+                </div>
+
+                <!-- Column 4: Corporate -->
+                <div class="col-lg-4">
+                    <h6 class="footer-title-modern">Direct Inquiry</h6>
+                    <p class="small mb-4">Stay updated with the latest off-plan releases and project milestones globally.</p>
+                    <div class="position-relative">
+                        <input type="email" class="newsletter-input" placeholder="Your executive email...">
+                        <button class="btn btn-primary rounded-circle position-absolute end-0 top-0 mt-1 me-1 shadow-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4 pt-2">
+                        <a href="about.html" class="footer-link-modern d-inline-block me-3">About Us</a>
+                        <a href="contact.html" class="footer-link-modern d-inline-block">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top mt-5 pt-4" style="border-color: rgba(30, 58, 95, 0.08) !important;">
+                <p class="small mb-0">&copy; 2026 Imperial Inc. All rights reserved.</p>
+                <div class="d-flex gap-4 mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="footer-link-modern small mb-0">Privacy Policy</a>
+                    <a href="terms-conditions.html" class="footer-link-modern small mb-0">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/8801711223344" class="wa-float" target="_blank" title="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 700, offset: 80 });
+
+        // Type selector
+        function selectType(el) {
+            document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        // Budget display
+        function updateBudget(val) {
+            const formatted = '৳' + Number(val).toLocaleString('en-BD');
+            document.getElementById('budgetDisplay').textContent = val >= 500000 ? '৳5,00,000+' : formatted;
+        }
+
+        // Char count
+        function updateCharCount(el) {
+            const len = el.value.length;
+            document.getElementById('charCount').textContent = len + ' / 500';
+            if (len > 500) el.value = el.value.substring(0, 500);
+        }
+
+        // Clear error on input
+        function clearError(el) {
+            el.classList.remove('error-field');
+            const errEl = document.getElementById(el.id + '-err');
+            if (errEl) errEl.classList.remove('show');
+        }
+
+        function showError(id, msg) {
+            const el = document.getElementById(id);
+            el.classList.add('error-field');
+            const err = document.getElementById(id + '-err');
+            if (err) { err.textContent = msg; err.classList.add('show'); }
+        }
+
+        // Validate + Submit
+        function handleSubmit() {
+            const fname = document.getElementById('fname').value.trim();
+            const lname = document.getElementById('lname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const consent = document.getElementById('consent').checked;
+
+            let valid = true;
+            if (!fname) { showError('fname', 'First name is required.'); valid = false; }
+            if (!lname) { showError('lname', 'Last name is required.'); valid = false; }
+            if (!email || !/\S+@\S+\.\S+/.test(email)) { showError('email', 'Valid email address is required.'); valid = false; }
+            if (!phone) { showError('phone', 'Phone number is required.'); valid = false; }
+            if (!message) { showError('message', 'Please provide inquiry details.'); valid = false; }
+            if (!consent) { alert('Please agree to our Privacy Policy to proceed.'); valid = false; }
+
+            if (!valid) return;
+
+            // Loading state
+            const btn = document.querySelector('.btn-submit-premium');
+            document.getElementById('submitBtnText').textContent = 'Transmitting...';
+            document.getElementById('submitBtnIcon').className = 'spinner-border spinner-border-sm';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Generate ref token
+                const token = 'IMP-' + Date.now().toString(36).toUpperCase().slice(-6) + '-' + Math.random().toString(36).substring(2,5).toUpperCase();
+                document.getElementById('refToken').textContent = token;
+                document.getElementById('successOverlay').classList.add('show');
+            }, 1800);
+        }
+
+        function resetForm() {
+            document.getElementById('successOverlay').classList.remove('show');
+            document.querySelector('.btn-submit-premium').disabled = false;
+            document.getElementById('submitBtnText').textContent = 'Transmit Inquiry';
+            document.getElementById('submitBtnIcon').className = 'bi bi-send';
+            document.querySelectorAll('.premium-input').forEach(el => { el.value = ''; el.classList.remove('error-field'); });
+            document.getElementById('consent').checked = false;
+            document.getElementById('budgetDisplay').textContent = '৳50,000';
+            document.getElementById('budgetRange').value = 50000;
+        }
+    </script>
+</body>
+</html>

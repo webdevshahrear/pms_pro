@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store/Inventory - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar (Role: Manager) -->
+        <aside class="sidebar-geist">
+             <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                <p class="text-uppercase small fw-bold text-muted px-3 mb-3 opacity-50" style="letter-spacing: 1px;">Admin Panel</p>
+                <a href="dashboard-manager.html" class="nav-item-geist"><i class="bi bi-speedometer2"></i> Portfolio</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-shield-lock"></i> User Roles</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist"><i class="bi bi-grid-3x3-gap"></i> Units</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Operations</p>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Billing</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Services</p>
+                <a href="visitors.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Visitor Log</a>
+                <a href="parking.html" class="nav-item-geist"><i class="bi bi-p-circle"></i> Parking</a>
+                <a href="store.html" class="nav-item-geist active"><i class="bi bi-box-seam"></i> Store/Inventory</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-file-earmark-bar-graph"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist"><i class="bi bi-folder2-open"></i> Documents</a>
+            </nav>
+
+            <div class="mt-auto border-top pt-4 px-3 bg-white">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-navy d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">RC</div>
+                    <div>
+                        <h6 class="mb-0 fw-bold small">Robert Chen</h6>
+                        <p class="mb-0 text-muted extra-small">Estate Manager</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Store & Inventory</h2>
+                    <p class="text-muted mb-0">Centralized management of building assets, maintenance supplies, and procurement.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="create" data-id="STOCK">
+                        <i class="bi bi-plus-lg me-2"></i> Add Stock Item
+                    </button>
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="export">
+                        <i class="bi bi-file-pdf me-2"></i> Inventory Audit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inventory KPIs -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Total Assets</p>
+                        <h3 class="fw-bold mb-0">12,450</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">Serialized & Tracked</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border border-danger rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Low Stock Alerts</p>
+                        <h3 class="fw-bold mb-0 text-danger">8</h3>
+                        <p class="text-danger extra-small mt-2 mb-0">Reorder triggered</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Store Value</p>
+                        <h3 class="fw-bold mb-0">$18,200</h3>
+                        <p class="text-muted extra-small mt-2 mb-0">Non-liquid inventory</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Last Audit</p>
+                        <h3 class="fw-bold mb-0">12 APR</h3>
+                        <p class="text-success extra-small mt-2 mb-0">100% Reconciliation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Categories -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-5 border shadow-sm shadow-sm-hover transition text-center">
+                        <div class="icon-box bg-primary-subtle text-primary p-3 rounded-circle d-inline-block mb-3"><i class="bi bi-lightbulb fs-4"></i></div>
+                        <h6 class="fw-bold small mb-1">Electrical Supplies</h6>
+                        <p class="extra-small text-muted mb-0">Bulbs, Switches, Wiring</p>
+                        <hr class="opacity-10 my-3">
+                        <span class="badge bg-light text-dark extra-small">42 Items</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-5 border shadow-sm shadow-sm-hover transition text-center">
+                        <div class="icon-box bg-info-subtle text-info p-3 rounded-circle d-inline-block mb-3"><i class="bi bi-droplet fs-4"></i></div>
+                        <h6 class="fw-bold small mb-1">Plumbing & HVAC</h6>
+                        <p class="extra-small text-muted mb-0">Pipes, Valves, Filters</p>
+                        <hr class="opacity-10 my-3">
+                        <span class="badge bg-light text-dark extra-small">28 Items</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-5 border-danger shadow-sm shadow-sm-hover transition text-center">
+                        <div class="icon-box bg-danger-subtle text-danger p-3 rounded-circle d-inline-block mb-3"><i class="bi bi-shield-lock fs-4"></i></div>
+                        <h6 class="fw-bold small mb-1">Security Systems</h6>
+                        <p class="extra-small text-muted mb-0">RFID Card, Sensors, Cameras</p>
+                        <hr class="opacity-10 my-3">
+                        <span class="badge bg-danger-subtle text-danger extra-small">CRITICAL STOCK</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock Movement Table -->
+            <div class="bg-white border rounded-4 shadow-sm p-4" data-aos="fade-up">
+                <h5 class="fw-bold mb-4">Stock Ledger (Latest Movements)</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table-geist">
+                        <thead>
+                            <tr class="extra-small text-muted uppercase">
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Associated Ticket</th>
+                                <th class="text-end">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="small fw-bold text-primary-navy">SKU-9921</span></td>
+                                <td><span class="small fw-bold">LED Panel 12W (Phillips)</span></td>
+                                <td><span class="extra-small">Electrical</span></td>
+                                <td><span class="small">12 Units</span></td>
+                                <td><span class="badge bg-light text-dark extra-small">MT-0x4F2</span></td>
+                                <td class="text-end"><span class="badge bg-primary-subtle text-primary extra-small">ISSUED</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="small fw-bold text-primary-navy">SKU-8812</span></td>
+                                <td><span class="small fw-bold">RFID Smart Card v2.0</span></td>
+                                <td><span class="extra-small">Security</span></td>
+                                <td><span class="small">500 Units</span></td>
+                                <td><span class="badge bg-light text-dark extra-small">N/A (Bulk)</span></td>
+                                <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">IN STOCK</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

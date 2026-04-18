@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Log - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+    
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Command Center</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">JS</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+<div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard.html" class="nav-item-geist"><i class="bi bi-grid-1x2-fill"></i> Overview</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist"><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings.html" class="nav-item-geist"><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers.html" class="nav-item-geist"><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors.html" class="nav-item-geist active"><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-person-gear"></i> User Roles</a>
+                <a href="settings.html" class="nav-item-geist"><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">JS</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">James Sterling</h6>
+                        <p class="profile-role">Super Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Security & Visitor Log</h2>
+                    <p class="text-muted mb-0">Real-time tracking of guest entries, vehicle identity, and authorization.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="create" data-id="NEW_VISITOR">
+                        <i class="bi bi-plus-lg me-2"></i> Register New Guest
+                    </button>
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="export">
+                        <i class="bi bi-download me-2"></i> Export Log
+                    </button>
+                </div>
+            </div>
+
+            <!-- Security KPIs -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Checked In</p>
+                        <h3 class="fw-bold mb-0 text-primary">12</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">Currently in buildings</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Total Today</p>
+                        <h3 class="fw-bold mb-0">85</h3>
+                        <p class="text-muted extra-small mt-2 mb-0">Verified Entries</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 border-warning">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Awaiting Auth</p>
+                        <h3 class="fw-bold mb-0 text-warning">3</h3>
+                        <p class="text-warning extra-small mt-2 mb-0">Pending resident approval</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Vehicles In</p>
+                        <h3 class="fw-bold mb-0">42</h3>
+                        <p class="text-muted extra-small mt-2 mb-0">RFID Tracked</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visitor Table -->
+            <div class="bg-white border rounded-4 shadow-sm p-4" data-aos="fade-up">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Live Entry Stream</h5>
+                    <div class="input-group" style="max-width: 300px;">
+                        <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0 extra-small" placeholder="Search Visitor/Vehicle...">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table-geist">
+                        <thead>
+                            <tr class="extra-small text-muted uppercase">
+                                <th>Visitor</th>
+                                <th>Purpose & Destination</th>
+                                <th>Vehicle #</th>
+                                <th>Check In</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center fw-bold small shadow-sm" style="width: 35px; height: 35px;">JK</div>
+                                        <div>
+                                            <h6 class="mb-0 small fw-bold">Junaid Khan</h6>
+                                            <p class="mb-0 extra-small text-muted">Food Delivery (Foodpanda)</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="small fw-bold">Tower A • Apt 902</span>
+                                    <p class="extra-small text-muted mb-0">Delivery Service</p>
+                                </td>
+                                <td><span class="badge bg-light text-dark extra-small">DHAKA-METRO-12-4501</span></td>
+                                <td><span class="small">12:30 PM</span></td>
+                                <td><span class="extra-small text-muted">15 mins ago</span></td>
+                                <td><span class="badge bg-success-subtle text-success extra-small">INSIDE</span></td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="view" data-id="VISIT-JK" title="Verify Identity"><i class="bi bi-person-badge"></i></button>
+                                        <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="comment" data-id="VISIT-JK" title="Security Remark"><i class="bi bi-chat-left-text"></i></button>
+                                        <button class="btn btn-sm btn-light-subtle border text-danger rounded-3 shadow-sm-hover" data-action="delete" data-id="VISIT-JK" title="Force Checkout"><i class="bi bi-box-arrow-right"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center fw-bold small shadow-sm" style="width: 35px; height: 35px;">MS</div>
+                                        <div>
+                                            <h6 class="mb-0 small fw-bold">Mahmuda Sultana</h6>
+                                            <p class="mb-0 extra-small text-muted">Guest of Resident</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="small fw-bold">Tower B • Apt 405</span>
+                                    <p class="extra-small text-muted mb-0">Personal Visit</p>
+                                </td>
+                                <td><span class="extra-small text-muted">N/A (Pedestrian)</span></td>
+                                <td><span class="small">11:15 AM</span></td>
+                                <td><span class="extra-small text-muted">1h 15m</span></td>
+                                <td><span class="badge bg-secondary-subtle text-secondary extra-small">CHECKED OUT</span></td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button class="btn btn-sm btn-light border rounded-3" data-action="view" title="View History"><i class="bi bi-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Overview</span>
+        </a>
+        <a href="buildings.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Ops</span>
+        </a>
+        <a href="settings.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

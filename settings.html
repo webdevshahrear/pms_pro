@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+    
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Command Center</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">JS</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+<div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard.html" class="nav-item-geist"><i class="bi bi-grid-1x2-fill"></i> Overview</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist"><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings.html" class="nav-item-geist"><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers.html" class="nav-item-geist"><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors.html" class="nav-item-geist"><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-person-gear"></i> User Roles</a>
+                <a href="settings.html" class="nav-item-geist active"><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">JS</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">James Sterling</h6>
+                        <p class="profile-role">Super Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">General Settings</h2>
+                    <p class="text-muted mb-0">Configuring the core parameters of the Imperial OS ecosystem.</p>
+                </div>
+            </div>
+
+            <!-- Infrastructure Intelligence Layer -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <!-- System Integrity Pulse -->
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center">
+                            <h5 class="fw-bold mb-0">System Integrity Pulse</h5>
+                            <span class="badge bg-success-subtle text-success extra-small">All Nodes Operational</span>
+                        </div>
+                        <div class="row g-0 h-100">
+                            <div class="col-md-7 p-4 border-end">
+                                <div class="mb-4">
+                                    <h6 class="extra-small text-muted fw-bold uppercase mb-2">Global API Latency</h6>
+                                    <div class="display-5 fw-bold text-primary-navy">42 <span class="fs-6 text-muted">ms</span></div>
+                                    <p class="extra-small text-success mb-0"><i class="bi bi-activity"></i> Performance optimized via Edge Caching</p>
+                                </div>
+                                <div class="p-3 bg-light rounded-4">
+                                    <h6 class="extra-small fw-bold mb-2">Data Residency Compliance</h6>
+                                    <div class="d-flex justify-content-between extra-small mb-1"><span>GDPR / Local Sovereignty:</span><span class="fw-bold text-success">Verified</span></div>
+                                    <div class="progress" style="height: 4px;"><div class="progress-bar bg-success" style="width: 100%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 p-4 bg-light-subtle d-flex flex-column justify-content-center border-start">
+                                <h6 class="fw-bold small mb-3">Backup Integrity</h6>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between extra-small mb-1"><span>Last Snapshot:</span><span class="fw-bold">2h ago</span></div>
+                                    <div class="progress" style="height: 4px;"><div class="progress-bar bg-primary" style="width: 100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between extra-small mb-1"><span>DR Recovery Time:</span><span class="fw-bold">4 min</span></div>
+                                    <div class="progress" style="height: 4px;"><div class="progress-bar bg-info" style="width: 80%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Infrastructure Strength -->
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <h5 class="fw-bold mb-4">Cloud Footprint</h5>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div class="rounded-circle bg-primary-navy text-white d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="bi bi-cloud-check fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold small mb-0">AWS Multi-Region</h6>
+                                <p class="extra-small text-muted mb-0">Redundancy Active</p>
+                            </div>
+                        </div>
+                        <div class="p-3 border rounded-4 bg-light text-center">
+                            <span class="extra-small text-muted">Monthly SLA Commitment: <strong class="text-dark">99.99%</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Grid -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm mb-4 p-4">
+                        <h5 class="fw-bold mb-4">Company Profile</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Company Name</label>
+                                <input type="text" class="geist-input" value="The Imperial Inc.">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Support Email</label>
+                                <input type="email" class="geist-input" value="ops@imperial.os">
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-geist px-4 rounded-3 shadow-sm-hover" data-action="save" data-id="COMPANY_PROFILE" title="Commit System Changes">
+                                    <i class="bi bi-check-lg me-2"></i> Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h5 class="fw-bold mb-4">Notifications & Alerts</h5>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0 py-3">
+                                <div>
+                                    <h6 class="mb-0 small fw-bold">Email Notifications</h6>
+                                    <p class="extra-small text-muted mb-0">Receive daily operational summaries via email.</p>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0 py-3">
+                                <div>
+                                    <h6 class="mb-0 small fw-bold">SMS Gateways</h6>
+                                    <p class="extra-small text-muted mb-0">Alert tenants regarding emergency maintenance via SMS.</p>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm mb-4 p-4">
+                        <h5 class="fw-bold mb-4">System Health</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="small">Main Database</span>
+                            <span class="badge bg-success-subtle text-success extra-small">Operational</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="small">Document Storage</span>
+                            <span class="badge bg-success-subtle text-success extra-small">92% Free</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small">API Gateway</span>
+                            <span class="badge bg-success-subtle text-success extra-small">Ready</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h5 class="fw-bold mb-3 text-danger">Danger Zone</h5>
+                        <p class="extra-small text-muted mb-4">Destructive actions regarding the system state.</p>
+                        <button class="btn btn-outline-danger w-100 rounded-3 extra-small fw-bold shadow-sm-hover" data-action="delete" data-id="AUDIT_LOGS" title="Irreversible Action">
+                            <i class="bi bi-trash3 me-1"></i> WIPE AUDIT LOGS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Overview</span>
+        </a>
+        <a href="buildings.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Ops</span>
+        </a>
+        <a href="settings.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

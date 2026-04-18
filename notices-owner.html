@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Notices - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Official Notices</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">SW</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-owner.html" class="nav-item-geist "><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-owner.html" class="nav-item-geist "><i class="bi bi-buildings"></i> My Buildings</a>
+                <a href="units-owner.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> My Units</a>
+
+                <p class="nav-category">Stakeholders</p>
+                <a href="tenants-owner.html" class="nav-item-geist "><i class="bi bi-people"></i> Resident Base</a>
+
+                <p class="nav-category">Operations</p>
+                <a href="billing-owner.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Revenue Stream</a>
+                <a href="maintenance-owner.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maint. Overview</a>
+                <a href="notices-owner.html" class="nav-item-geist active"><i class="bi bi-megaphone"></i> Notice Board</a>
+
+                <p class="nav-category">Intelligence</p>
+                <a href="statements-owner.html" class="nav-item-geist "><i class="bi bi-bar-chart-line"></i> Statements</a>
+                <a href="documents-owner.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+
+                <p class="nav-category">System</p>
+                <a href="settings-owner.html" class="nav-item-geist "><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">SW</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Sheikh Waqas</h6>
+                        <p class="profile-role">Portfolio Owner</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Official Notices</h2>
+                    <p class="text-muted mb-0">Direct administrative broadcasts and estate-wide announcements.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="message">
+                         Mark all as read
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notice Grid -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-widget h-100 p-4 border-primary position-relative shadow-sm-hover transition">
+                        <span class="badge bg-primary extra-small mb-3">URGENT</span>
+                        <h6 class="fw-bold mb-2">Annual General Meeting 2026</h6>
+                        <p class="extra-small text-muted mb-4 opacity-75">Notice is hereby given for the AGM to discuss building upgrades and fiscal budget for Tower A & B. Your presence is highly requested.</p>
+                        <hr class="opacity-10 mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="extra-small text-muted fw-bold">18 APR • 10:00 AM</span>
+                            <button class="btn btn-sm btn-link text-decoration-none extra-small blue-text" data-action="view">View PDF</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-widget h-100 p-4 border-warning position-relative shadow-sm-hover transition">
+                        <span class="badge bg-warning text-dark extra-small mb-3">OPERATIONAL</span>
+                        <h6 class="fw-bold mb-2">Solar Panel Phase 2 Upgrade</h6>
+                        <p class="extra-small text-muted mb-4 opacity-75">Work is scheduled to commence on Tower B's rooftop. Temporary power fluctuations may occur in communal areas between 2-4 PM.</p>
+                        <hr class="opacity-10 mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="extra-small text-muted fw-bold">20 APR • 2:00 PM</span>
+                            <button class="btn btn-sm btn-link text-decoration-none extra-small blue-text" data-action="view">View Log</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-widget h-100 p-4 position-relative shadow-sm-hover transition">
+                        <span class="badge bg-secondary extra-small mb-3">GREETING</span>
+                        <h6 class="fw-bold mb-2">Eid-Ul-Fitr Celebrations</h6>
+                        <p class="extra-small text-muted mb-4 opacity-75">The Imperial Management team wishes you and your family a blessed Eid. Community dinner is planned at the Grand Banquet Hall on Day 2.</p>
+                        <hr class="opacity-10 mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="extra-small text-muted fw-bold">TBA • NIGHT 2</span>
+                            <button class="btn btn-sm btn-link text-decoration-none extra-small blue-text" data-action="view">Invite Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Broadcast Log -->
+            <div class="glass-widget mt-5" data-aos="fade-up">
+                <h5 class="fw-bold mb-4">Historical Announcements</h5>
+                <div class="list-group list-group-flush gap-3">
+                    <div class="d-flex align-items-center justify-content-between p-3 border rounded-4 bg-light-subtle shadow-sm-hover transition">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center text-primary" style="width: 40px; height: 40px;"><i class="bi bi-shield-check"></i></div>
+                            <div>
+                                <h6 class="mb-0 small fw-bold">Biometric Security Update Complete</h6>
+                                <p class="mb-0 extra-small text-muted">All entry points at Tower A now fully support Fingerprint & Face ID.</p>
+                            </div>
+                        </div>
+                        <span class="extra-small text-muted">12 Apr 2026</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between p-3 border rounded-4 bg-light-subtle shadow-sm-hover transition">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center text-primary" style="width: 40px; height: 40px;"><i class="bi bi-receipt"></i></div>
+                            <div>
+                                <h6 class="mb-0 small fw-bold">March Rental Audit Released</h6>
+                                <p class="mb-0 extra-small text-muted">Download your building performance audit from the statements section.</p>
+                            </div>
+                        </div>
+                        <span class="extra-small text-muted">05 Apr 2026</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-owner.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-owner.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="statements-owner.html" class="bottom-nav-item">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

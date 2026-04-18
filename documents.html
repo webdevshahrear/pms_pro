@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Vault - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+    
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Command Center</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">JS</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+<div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard.html" class="nav-item-geist"><i class="bi bi-grid-1x2-fill"></i> Overview</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist"><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings.html" class="nav-item-geist"><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers.html" class="nav-item-geist"><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist active"><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors.html" class="nav-item-geist"><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-person-gear"></i> User Roles</a>
+                <a href="settings.html" class="nav-item-geist"><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">JS</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">James Sterling</h6>
+                        <p class="profile-role">Super Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Document Vault</h2>
+                    <p class="text-muted mb-0">Secure repository for legal, financial, and operational assets.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="create" data-id="UPLOAD_DOCUMENT">
+                        <i class="bi bi-cloud-upload me-2"></i> Upload File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vault Security & Intelligence Layer -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-light-subtle">
+                            <h5 class="fw-bold mb-0">AES-256 Vault Encryption Node</h5>
+                            <span class="badge bg-primary-navy text-white extra-small"><i class="bi bi-shield-fill-check me-1"></i> FIPS 140-2 Compliant</span>
+                        </div>
+                        <div class="row g-0 h-100">
+                            <div class="col-md-7 p-4 border-end">
+                                <div class="mb-4">
+                                    <h6 class="extra-small text-muted fw-bold uppercase mb-2">Vault Integrity Status</h6>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="display-5 fw-bold text-primary-navy">99.9%</div>
+                                        <div class="spinner-grow text-success" style="width: 1rem; height: 1rem;"></div>
+                                    </div>
+                                    <p class="extra-small text-muted mt-2 mb-0">No unauthorized access attempts in 184 days.</p>
+                                </div>
+                                <div class="p-3 border rounded-4 bg-light extra-small">
+                                    <div class="d-flex justify-content-between mb-2"><span>Total Encrypted Blocks:</span><span class="fw-bold font-mono">14,204</span></div>
+                                    <div class="d-flex justify-content-between mb-0"><span>System Entropy:</span><span class="fw-bold text-success">Optimized</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 p-4 bg-primary-navy text-white d-flex align-items-center justify-content-center overflow-hidden position-relative">
+                                <div class="text-center position-relative z-1">
+                                    <i class="bi bi-lock-fill display-3 opacity-25 mb-3"></i>
+                                    <h6 class="fw-bold small mb-1">Rotational Key Active</h6>
+                                    <p class="extra-small text-white-50">Next rotation: 14h 22m</p>
+                                </div>
+                                <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 opacity-10">
+                                    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="2 2"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/></circle></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <h5 class="fw-bold mb-4">Storage Consumption</h5>
+                        <div class="text-center py-4">
+                            <h2 class="fw-bold mb-1">4.2 <span class="fs-6 text-muted">TB</span></h2>
+                            <p class="extra-small text-muted mb-4">of 10 TB Enterprise Cloud</p>
+                            <div class="progress rounded-pill mb-4" style="height: 12px;">
+                                <div class="progress-bar bg-primary-navy" style="width: 42%;"></div>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="p-2 border rounded-3 text-center extra-small">
+                                    <span class="text-muted d-block">Media</span>
+                                    <span class="fw-bold">2.8 TB</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-2 border rounded-3 text-center extra-small">
+                                    <span class="text-muted d-block">Docs</span>
+                                    <span class="fw-bold">1.4 TB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Lifecycle & Security Hub (Original) -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <!-- Document Expiry Pulse -->
+                <div class="col-lg-5">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Legal Health Pulse</h5>
+                            <span class="badge bg-warning-subtle text-warning extra-small">2 Critical Expiries</span>
+                        </div>
+                        <div class="list-group list-group-flush gap-3">
+                            <div class="p-3 border rounded-4 bg-light-subtle">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="extra-small fw-bold">Trade License (2025-26)</h6>
+                                    <span class="badge bg-danger extra-small text-white">Expires in 12 days</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-danger" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="p-3 border rounded-4 bg-light-subtle">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="extra-small fw-bold">Property Insurance Certificate</h6>
+                                    <span class="badge bg-warning extra-small text-dark">Expires in 45 days</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-warning" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secure Sharing & Folders -->
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Encrypted External Sharing</h5>
+                            <button class="btn btn-sm btn-white border rounded-pill px-3 extra-small" data-action="view" title="Activity Logs">Internal Audit Link</button>
+                        </div>
+                        <div class="p-4 border rounded-4 bg-light-dotted text-center mb-4" style="border: 2px dashed #ddd;">
+                            <i class="bi bi-shield-lock-fill text-primary mb-2 opacity-50" style="font-size: 2rem;"></i>
+                            <h6 class="fw-bold small mb-1">Generate Timed Access Link</h6>
+                            <p class="extra-small text-muted mb-0">Links automatically expire after 24 hours of generation.</p>
+                            <button class="btn btn-geist-dark mt-3 rounded-pill px-4 extra-small" data-action="create" data-id="SECURE_LINK">Generate Secure URL</button>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-3">
+                                <div class="text-center p-2 rounded-3 bg-light">
+                                    <i class="bi bi-folder-fill text-warning mb-1"></i>
+                                    <span class="d-block extra-small fw-bold">Legal</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="text-center p-2 rounded-3 bg-light">
+                                    <i class="bi bi-folder-fill text-primary mb-1"></i>
+                                    <span class="d-block extra-small fw-bold">Taxes</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="text-center p-2 rounded-3 bg-light">
+                                    <i class="bi bi-folder-fill text-success mb-1"></i>
+                                    <span class="d-block extra-small fw-bold">Bills</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="text-center p-2 rounded-3 bg-light">
+                                    <i class="bi bi-folder-fill text-info mb-1"></i>
+                                    <span class="d-block extra-small fw-bold">Blueprints</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Folders -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="folder-card bg-white">
+                        <i class="bi bi-folder-fill text-warning fs-1 mb-3 d-block"></i>
+                        <h6 class="fw-bold mb-1">Agreements</h6>
+                        <p class="extra-small text-muted mb-0">124 Items • 2.4 GB</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="folder-card bg-white">
+                        <i class="bi bi-folder-fill text-primary fs-1 mb-3 d-block"></i>
+                        <h6 class="fw-bold mb-1">Property Deeds</h6>
+                        <p class="extra-small text-muted mb-0">42 Items • 850 MB</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="folder-card bg-white">
+                        <i class="bi bi-folder-fill text-success fs-1 mb-3 d-block"></i>
+                        <h6 class="fw-bold mb-1">Audit Reports</h6>
+                        <p class="extra-small text-muted mb-0">12 Items • 120 MB</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="folder-card bg-white">
+                        <i class="bi bi-folder-fill text-info fs-1 mb-3 d-block"></i>
+                        <h6 class="fw-bold mb-1">NID & KYC</h6>
+                        <p class="extra-small text-muted mb-0">210 Items • 1.2 GB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Documents -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h5 class="fw-bold mb-4">Recent Assets</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table-geist">
+                                <thead>
+                                    <tr>
+                                        <th class="extra-small text-muted uppercase">File Name</th>
+                                        <th class="extra-small text-muted uppercase">Entity / Related</th>
+                                        <th class="extra-small text-muted uppercase">Uploaded By</th>
+                                        <th class="extra-small text-muted uppercase">Size</th>
+                                        <th class="extra-small text-muted uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <i class="bi bi-file-earmark-pdf text-danger fs-4"></i>
+                                                <span class="small fw-bold">Tenancy_Apt402_Sarah.pdf</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="extra-small">Sarah Jenkins (Apt 402)</span></td>
+                                        <td><span class="extra-small">Admin</span></td>
+                                        <td><span class="extra-small">2.4 MB</span></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="view" data-id="DOC-402-S" title="Preview Document"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="comment" data-id="DOC-402-S" title="Audit Remark"><i class="bi bi-chat-left-text"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="edit" data-id="DOC-402-S" title="Edit Metadata"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-light-subtle border text-danger rounded-3 shadow-sm-hover" data-action="delete" data-id="DOC-402-S" title="Delete Permanent"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <i class="bi bi-file-earmark-image text-info fs-4"></i>
+                                                <span class="small fw-bold">Deed_Imperial_Heights_2024.jpg</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="extra-small">Imperial Heights</span></td>
+                                        <td><span class="extra-small">Super Admin</span></td>
+                                        <td><span class="extra-small">850 KB</span></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="view" data-id="DOC-DEED-IH" title="Preview Document"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="comment" data-id="DOC-DEED-IH" title="Audit Remark"><i class="bi bi-chat-left-text"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 shadow-sm-hover" data-action="edit" data-id="DOC-DEED-IH" title="Edit Metadata"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-light-subtle border text-danger rounded-3 shadow-sm-hover" data-action="delete" data-id="DOC-DEED-IH" title="Delete Permanent"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Overview</span>
+        </a>
+        <a href="buildings.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Ops</span>
+        </a>
+        <a href="settings.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

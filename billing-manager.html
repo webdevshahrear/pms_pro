@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing & Payments - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Financial Central</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">RC</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+                        
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-manager.html" class="nav-item-geist "><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-manager.html" class="nav-item-geist "><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units-manager.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners-manager.html" class="nav-item-geist "><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants-manager.html" class="nav-item-geist "><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing-manager.html" class="nav-item-geist active"><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts-manager.html" class="nav-item-geist "><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance-manager.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maintenance</a>
+                <a href="notices-manager.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings-manager.html" class="nav-item-geist "><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers-manager.html" class="nav-item-geist "><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports-manager.html" class="nav-item-geist "><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents-manager.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors-manager.html" class="nav-item-geist "><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="settings-manager.html" class="nav-item-geist "><i class="bi bi-gear"></i> Profile Settings</a>
+            </nav>
+
+                        
+            
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">RC</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Robert Chen</h6>
+                        <p class="profile-role">Estate Manager</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Billing & Revenue</h2>
+                    <p class="text-muted mb-0">Total of 84 outstanding invoices for Apr 2026.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm d-flex align-items-center gap-2 transition-hover" data-action="create" data-id="GENERATE_INVOICES">
+                        <i class="bi bi-receipt-cutoff text-primary"></i>
+                        <span>Bulk Generate</span>
+                    </button>
+                    <button class="btn btn-primary-navy rounded-4 px-4 py-2 shadow-sm d-flex align-items-center gap-2 transition-hover" data-action="create" data-id="PAYMENT">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <span>Record Settlement</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Financial Intelligence Layer -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden transition-hover translate-y-hover">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-light-subtle">
+                            <div>
+                                <h6 class="fw-bold mb-0">Collection Aging & Cashflow Intelligence</h6>
+                                <p class="extra-small text-muted mb-0">Managed receivables performance vs settlement targets.</p>
+                            </div>
+                            <span class="badge bg-primary-navy text-white extra-small px-3 rounded-pill shadow-sm">AI Pulse Active</span>
+                        </div>
+                        <div class="p-4">
+                            <div class="row g-4 text-center mb-4">
+                                <div class="col-3 border-end">
+                                    <h4 class="fw-bold mb-1 text-primary-navy">৳1.2M</h4>
+                                    <p class="extra-small text-muted uppercase fw-bold opacity-50">Current</p>
+                                    <div class="progress mt-2" style="height: 4px; background: rgba(0,0,0,0.05);"><div class="progress-bar bg-success rounded-pill" style="width: 100%;"></div></div>
+                                </div>
+                                <div class="col-3 border-end">
+                                    <h4 class="fw-bold mb-1 text-primary-navy">৳420K</h4>
+                                    <p class="extra-small text-muted uppercase fw-bold opacity-50">1-30 Days</p>
+                                    <div class="progress mt-2" style="height: 4px; background: rgba(0,0,0,0.05);"><div class="progress-bar bg-primary rounded-pill" style="width: 60%;"></div></div>
+                                </div>
+                                <div class="col-3 border-end">
+                                    <h4 class="fw-bold mb-1 text-primary-navy">৳180K</h4>
+                                    <p class="extra-small text-muted uppercase fw-bold opacity-50">31-60 Days</p>
+                                    <div class="progress mt-2" style="height: 4px; background: rgba(0,0,0,0.05);"><div class="progress-bar bg-warning rounded-pill" style="width: 30%;"></div></div>
+                                </div>
+                                <div class="col-3">
+                                    <h4 class="fw-bold text-danger mb-1">৳85K</h4>
+                                    <p class="extra-small text-muted uppercase fw-bold opacity-50">60+ Days</p>
+                                    <div class="progress mt-2" style="height: 4px; background: rgba(0,0,0,0.05);"><div class="progress-bar bg-danger rounded-pill" style="width: 15%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-light-subtle border rounded-4 d-flex justify-content-between align-items-center shadow-sm-inset">
+                                <div class="small fw-bold text-primary-navy d-flex align-items-center gap-2">
+                                    <i class="bi bi-graph-up-arrow text-success"></i>
+                                    <span>Projected Cashflow (Next 30 Days): <strong>৳4.82M</strong></span>
+                                </div>
+                                <button class="btn btn-link extra-small text-primary-navy fw-bold text-decoration-none p-0">Detailed Forecast <i class="bi bi-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4 transition-hover translate-y-hover">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="fw-bold mb-0">Reconciliation Pulse</h6>
+                            <div class="spinner-grow text-success spinner-grow-sm" role="status"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mb-4 p-3 bg-success-subtle rounded-4 border border-success border-opacity-10">
+                            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;"><i class="bi bi-bank"></i></div>
+                            <div>
+                                <h6 class="mb-0 small fw-bold text-success">Bank Matched</h6>
+                                <p class="extra-small text-success opacity-75 mb-0">Synced 4 mins ago</p>
+                            </div>
+                        </div>
+                        <div class="p-3 border rounded-4 bg-light shadow-sm-inset mb-4">
+                            <div class="d-flex justify-content-between mb-2 extra-small"><span>Unallocated Credits</span><span class="fw-bold">৳12,400</span></div>
+                            <div class="d-flex justify-content-between extra-small"><span>Pending Clearances</span><span class="fw-bold text-warning">৳45,000</span></div>
+                        </div>
+                        <button class="btn btn-primary-navy w-100 rounded-pill py-2 extra-small shadow-sm transition" data-action="message" data-id="SETTLEMENT">
+                            Execute Daily Settlement
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Finance Operations (Original) -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <!-- Batch Hub & Late Fee Engine -->
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Automated Billing Engine</h5>
+                            <span class="badge bg-primary text-white extra-small">Ready for May 2026</span>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-4 bg-light-subtle h-100">
+                                    <h6 class="extra-small text-muted uppercase fw-bold mb-3">Batch Generator</h6>
+                                    <p class="small text-dark mb-4">Generate invoices for all 142 units with monthly recurring charges.</p>
+                                    <button class="btn btn-primary-navy w-100 rounded-3 py-2 extra-small" data-action="create" data-id="GENERATE_INVOICES">Preview 142 Invoices</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-4 bg-light-subtle h-100">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <h6 class="extra-small text-muted uppercase fw-bold">Late Fee Rules</h6>
+                                        <i class="bi bi-gear-fill text-muted"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="extra-small">Grace Period:</span>
+                                        <span class="extra-small fw-bold">5 Days</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <span class="extra-small">Penalty Rate:</span>
+                                        <span class="extra-small fw-bold">10% Daily</span>
+                                    </div>
+                                    <button class="btn btn-white border w-100 rounded-3 py-2 extra-small" data-action="edit" data-id="LATE_FEE_RULES">Update Rule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collection Pulse -->
+                <div class="col-lg-5">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 text-center p-4">
+                        <h5 class="fw-bold mb-4 text-start">Collection Pulse (Live)</h5>
+                        <div id="billingProgressCircle" style="min-height: 150px;" class="mb-3">
+                            <!-- Visual Ring representing 82% collection -->
+                            <div class="position-relative d-inline-block">
+                                <svg width="120" height="120" viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" stroke-width="12"></circle>
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#1E3A5F" stroke-width="12" stroke-dasharray="339.29" stroke-dashoffset="61.07" transform="rotate(-90 60 60)"></circle>
+                                </svg>
+                                <div class="position-absolute top-50 start-50 translate-middle">
+                                    <h4 class="fw-bold mb-0">82%</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="extra-small text-muted mb-0">Real-time payment gateway synchronization active.</p>
+                        <div class="mt-4 pt-3 border-top text-start">
+                            <div class="d-flex justify-content-between small">
+                                <span>bKash (Automated)</span>
+                                <span class="fw-bold text-success">+$42,150.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing KPI Grid -->
+
+            <!-- Payment Records -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Invoicing Ledger</h5>
+                            <div class="d-flex gap-2">
+                                <select class="form-select border-0 shadow-sm rounded-4 px-3 extra-small" style="width: 140px;">
+                                    <option>Apr 2026</option>
+                                    <option>Mar 2026</option>
+                                </select>
+                                <div class="input-group shadow-sm rounded-4 overflow-hidden" style="width: 250px;">
+                                    <span class="input-group-text bg-white border-0"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control border-0 px-2 small" placeholder="Search Invoice...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table-geist">
+                                <thead>
+                                    <tr>
+                                        <th class="extra-small text-muted uppercase">Invoice #</th>
+                                        <th class="extra-small text-muted uppercase">Resident</th>
+                                        <th class="extra-small text-muted uppercase">Unit</th>
+                                        <th class="extra-small text-muted uppercase">Amount</th>
+                                        <th class="extra-small text-muted uppercase">Status</th>
+                                        <th class="extra-small text-muted uppercase">Due Date</th>
+                                        <th class="extra-small text-muted uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="transition">
+                                        <td><span class="small font-mono fw-bold text-primary-navy">INV-26-0042</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center extra-small fw-bold text-muted border" style="width: 24px; height: 24px;">SJ</div>
+                                                <span class="small fw-bold">Sarah Jenkins</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-light text-dark extra-small border rounded-pill px-3">Apt 402</span></td>
+                                        <td><span class="small fw-bold">৳142,500</span></td>
+                                        <td><span class="badge bg-success-subtle text-success extra-small rounded-pill px-3 shadow-sm">Paid Full</span></td>
+                                        <td><span class="extra-small text-muted">Apr 10, 2026</span></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-white border rounded-circle shadow-sm transition p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="Print Invoice"><i class="bi bi-printer small"></i></button>
+                                                <button class="btn btn-sm btn-primary-navy rounded-circle shadow-sm transition p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="View Detail"><i class="bi bi-eye small"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="transition">
+                                        <td><span class="small font-mono fw-bold text-primary-navy">INV-26-0043</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center extra-small fw-bold text-muted border" style="width: 24px; height: 24px;">AM</div>
+                                                <span class="small fw-bold">Arlene McCoy</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-light text-dark extra-small border rounded-pill px-3">Shop 04</span></td>
+                                        <td><span class="small fw-bold text-danger">৳380,200</span></td>
+                                        <td><span class="badge bg-danger-subtle text-danger extra-small rounded-pill px-3 shadow-sm">Overdue</span></td>
+                                        <td><span class="extra-small text-danger fw-bold">Apr 05, 2026</span></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-white border rounded-circle shadow-sm transition p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="Send Reminder"><i class="bi bi-bell small text-warning"></i></button>
+                                                <button class="btn btn-sm btn-white border rounded-circle shadow-sm transition p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="View Detail"><i class="bi bi-eye small"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-manager.html" class="bottom-nav-item">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-manager.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-manager.html" class="bottom-nav-item active">
+            <i class="bi bi-receipt-cutoff"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance-manager.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

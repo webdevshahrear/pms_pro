@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Stream - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Revenue Stream</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">SW</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-owner.html" class="nav-item-geist "><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-owner.html" class="nav-item-geist "><i class="bi bi-buildings"></i> My Buildings</a>
+                <a href="units-owner.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> My Units</a>
+
+                <p class="nav-category">Stakeholders</p>
+                <a href="tenants-owner.html" class="nav-item-geist "><i class="bi bi-people"></i> Resident Base</a>
+
+                <p class="nav-category">Operations</p>
+                <a href="billing-owner.html" class="nav-item-geist active"><i class="bi bi-receipt"></i> Revenue Stream</a>
+                <a href="maintenance-owner.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maint. Overview</a>
+                <a href="notices-owner.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Notice Board</a>
+
+                <p class="nav-category">Intelligence</p>
+                <a href="statements-owner.html" class="nav-item-geist "><i class="bi bi-bar-chart-line"></i> Statements</a>
+                <a href="documents-owner.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+
+                <p class="nav-category">System</p>
+                <a href="settings-owner.html" class="nav-item-geist "><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">SW</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Sheikh Waqas</h6>
+                        <p class="profile-role">Portfolio Owner</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Revenue Stream</h2>
+                    <p class="text-muted mb-0">Monthly rental income and operational payout tracking.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="export">
+                        <i class="bi bi-download me-2"></i> Export P&L
+                    </button>
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="view">
+                        <i class="bi bi-credit-card me-2"></i> Payout Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Financial Summary Row -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="glass-widget border-success">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Gross Collections</p>
+                        <h3 class="fw-bold mb-0 text-success">$1,225,000</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">Current Month</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-widget">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Management Fees</p>
+                        <h3 class="fw-bold mb-0 text-danger">-$61,250</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">5% Platform Commission</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-widget">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Utility Deductions</p>
+                        <h3 class="fw-bold mb-0">-$12,400</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">Building Maintenance Fund</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-widget bg-primary-navy text-white">
+                        <p class="text-white-50 extra-small fw-bold uppercase mb-1">Expected Payout</p>
+                        <h3 class="fw-bold mb-0 text-white">$1,151,350</h3>
+                        <div class="progress mt-2 bg-white-10" style="height: 4px;">
+                            <div class="progress-bar bg-white" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Trend & Breakdown -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="glass-widget h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Income Analytics</h5>
+                            <ul class="nav nav-pills nav-pills-geist p-1 bg-light rounded-pill border" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation"><button class="nav-link active rounded-pill extra-small" data-bs-toggle="pill">Monthly</button></li>
+                                <li class="nav-item" role="presentation"><button class="nav-link rounded-pill extra-small" data-bs-toggle="pill">Quarterly</button></li>
+                            </ul>
+                        </div>
+                        <div id="revenueExpenseChart" style="min-height: 350px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="glass-widget h-100">
+                        <h5 class="fw-bold mb-4">Revenue by Building</h5>
+                        <div class="d-flex flex-column gap-4">
+                            <div>
+                                <div class="d-flex justify-content-between small mb-2">
+                                    <span class="fw-bold text-primary-navy">Imperial Tower A</span>
+                                    <span class="fw-bold">$620,000</span>
+                                </div>
+                                <div class="progress" style="height: 8px;"><div class="progress-bar bg-primary-navy" style="width: 51%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-between small mb-2">
+                                    <span class="fw-bold text-primary">Imperial Tower B</span>
+                                    <span class="fw-bold">$605,000</span>
+                                </div>
+                                <div class="progress" style="height: 8px;"><div class="progress-bar bg-primary" style="width: 49%;"></div></div>
+                            </div>
+                            <hr class="opacity-10 my-2">
+                            <div class="p-3 bg-light rounded-4 text-center">
+                                <h6 class="extra-small fw-bold text-muted mb-2 uppercase">Market Comparison</h6>
+                                <p class="small text-muted mb-0">Your portfolio is performing <strong class="text-success">12.5% above</strong> the Gulshan zone average.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Log -->
+            <div class="glass-widget" data-aos="fade-up">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Recent Payout Transactions</h5>
+                    <button class="btn btn-sm btn-link text-decoration-none extra-small">Download CSV</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table-geist">
+                        <thead>
+                            <tr class="extra-small text-muted uppercase">
+                                <th>Ref #</th>
+                                <th>Date</th>
+                                <th>Building</th>
+                                <th>Type</th>
+                                <th>Net Amount</th>
+                                <th class="text-end">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="small fw-bold">PAY-4202</span></td>
+                                <td><span class="small">15 Apr 2026</span></td>
+                                <td><span class="badge bg-light text-dark extra-small">Imperial Tower A</span></td>
+                                <td><span class="small text-muted">Rental Payout</span></td>
+                                <td><span class="small fw-bold text-success">$310,000</span></td>
+                                <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">COMPLETED</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="small fw-bold">PAY-4201</span></td>
+                                <td><span class="small">15 Apr 2026</span></td>
+                                <td><span class="badge bg-light text-dark extra-small">Imperial Tower B</span></td>
+                                <td><span class="small text-muted">Rental Payout</span></td>
+                                <td><span class="small fw-bold text-success">$302,500</span></td>
+                                <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">COMPLETED</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="small fw-bold">DED-4189</span></td>
+                                <td><span class="small">12 Apr 2026</span></td>
+                                <td><span class="badge bg-light text-dark extra-small">Imperial Tower A</span></td>
+                                <td><span class="small text-muted">M&E Reserve</span></td>
+                                <td><span class="small fw-bold text-danger">-$6,200</span></td>
+                                <td class="text-end"><span class="badge bg-primary-subtle text-primary extra-small">DEBITED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-owner.html" class="bottom-nav-item">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-owner.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="statements-owner.html" class="bottom-nav-item">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simplified revenue chart for Owner
+            const options = {
+                series: [{ name: 'Collections', data: [42, 52, 38, 65, 48, 72, 68, 85, 92, 110, 115, 122] }],
+                chart: { type: 'area', height: 350, toolbar: { show: false }, zoom: { enabled: false } },
+                dataLabels: { enabled: false },
+                stroke: { curve: 'smooth', width: 2, colors: ['#1E3A5F'] },
+                fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1, stops: [0, 90, 100] } },
+                xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] },
+                colors: ['#1E3A5F']
+            };
+            const chart = new ApexCharts(document.querySelector("#revenueExpenseChart"), options);
+            chart.render();
+        });
+    </script>
+</body>
+</html>

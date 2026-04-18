@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Management - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+
+        .parking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1.5rem;
+        }
+        .parking-slot {
+            background: white;
+            border: 1px solid var(--accents-2);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .parking-slot:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .parking-slot.occupied { border-left: 4px solid var(--primary-navy); }
+        .parking-slot.available { border-left: 4px solid #10b981; }
+        .parking-slot.reserved { border-left: 4px solid #f59e0b; }
+        
+        .slot-id { font-size: 0.8rem; font-weight: 800; color: var(--accents-5); position: absolute; top: 10px; left: 12px; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar (Role: Manager) -->
+        <aside class="sidebar-geist">
+             <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                <p class="text-uppercase small fw-bold text-muted px-3 mb-3 opacity-50" style="letter-spacing: 1px;">Admin Panel</p>
+                <a href="dashboard-manager.html" class="nav-item-geist"><i class="bi bi-speedometer2"></i> Portfolio</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-shield-lock"></i> User Roles</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist"><i class="bi bi-grid-3x3-gap"></i> Units</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Operations</p>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Billing</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Services</p>
+                <a href="visitors.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Visitor Log</a>
+                <a href="parking.html" class="nav-item-geist active"><i class="bi bi-p-circle"></i> Parking</a>
+                <a href="store.html" class="nav-item-geist"><i class="bi bi-box-seam"></i> Store/Inventory</a>
+
+                <p class="text-uppercase small fw-bold text-muted px-3 mt-4 mb-3 opacity-50" style="letter-spacing: 1px;">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-file-earmark-bar-graph"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist"><i class="bi bi-folder2-open"></i> Documents</a>
+            </nav>
+
+            <div class="mt-auto border-top pt-4 px-3 bg-white">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-navy d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">RC</div>
+                    <div>
+                        <h6 class="mb-0 fw-bold small">Robert Chen</h6>
+                        <p class="mb-0 text-muted extra-small">Estate Manager</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Parking Hub</h2>
+                    <p class="text-muted mb-0">Operational control of slot allocation and vehicle verification.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="create" data-id="SLOT">
+                        <i class="bi bi-plus-lg me-2"></i> Allocation Batch
+                    </button>
+                    <select class="form-select border rounded-4 shadow-sm" style="width: 200px;">
+                        <option>Tower A - Basement 1</option>
+                        <option>Tower A - Basement 2</option>
+                        <option>Tower B - Basement 1</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Parking Statistics -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Total Capacity</p>
+                        <h3 class="fw-bold mb-0">450</h3>
+                        <p class="extra-small text-muted mt-2 mb-0">Across all basements</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border border-success rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Available Now</p>
+                        <h3 class="fw-bold mb-0 text-success">82</h3>
+                        <p class="text-success extra-small mt-2 mb-0">Status: Optimized</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Guest Slots</p>
+                        <h3 class="fw-bold mb-0">15 / 25</h3>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-primary" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border border-warning rounded-4 shadow-sm p-4 text-dark">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Overdue Vehicles</p>
+                        <h3 class="fw-bold mb-0 text-warning">4</h3>
+                        <p class="text-warning extra-small mt-2 mb-0">Unrecognized RFID Tags</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slot Visual Grid -->
+            <div class="bg-white border rounded-4 shadow-sm mb-5 p-4" data-aos="fade-up">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Basement 1 Visual Map</h5>
+                    <div class="d-flex gap-4">
+                        <div class="d-flex align-items-center gap-2 small"><span class="bg-success rounded-circle" style="width: 10px; height: 10px; display: inline-block;"></span> Available</div>
+                        <div class="d-flex align-items-center gap-2 small"><span class="bg-primary-navy rounded-circle" style="width: 10px; height: 10px; display: inline-block;"></span> Occupied</div>
+                        <div class="d-flex align-items-center gap-2 small"><span class="bg-warning rounded-circle" style="width: 10px; height: 10px; display: inline-block;"></span> Reserved</div>
+                    </div>
+                </div>
+                
+                <div class="parking-grid">
+                    <div class="parking-slot occupied">
+                        <span class="slot-id">A-101</span>
+                        <i class="bi bi-car-front fs-2 text-primary-navy"></i>
+                        <p class="extra-small mt-2 mb-0 fw-bold">DHK-781</p>
+                        <p class="extra-small text-muted mb-0">Apt 405</p>
+                    </div>
+                    <div class="parking-slot occupied">
+                        <span class="slot-id">A-102</span>
+                        <i class="bi bi-car-front fs-2 text-primary-navy"></i>
+                        <p class="extra-small mt-2 mb-0 fw-bold">DHK-122</p>
+                        <p class="extra-small text-muted mb-0">Apt 406</p>
+                    </div>
+                    <div class="parking-slot available">
+                        <span class="slot-id">A-103</span>
+                        <i class="bi bi-plus-circle fs-3 text-success opacity-50"></i>
+                        <p class="extra-small mt-2 mb-0 fw-bold text-success">EMPTY</p>
+                        <p class="extra-small text-muted mb-0">Level 01</p>
+                    </div>
+                    <div class="parking-slot occupied">
+                        <span class="slot-id">A-104</span>
+                        <i class="bi bi-car-front fs-2 text-primary-navy"></i>
+                        <p class="extra-small mt-2 mb-0 fw-bold">DHK-009</p>
+                        <p class="extra-small text-muted mb-0">Admin</p>
+                    </div>
+                    <div class="parking-slot reserved">
+                        <span class="slot-id">A-105</span>
+                        <i class="bi bi-person-lock fs-3 text-warning"></i>
+                        <p class="extra-small mt-2 mb-0 fw-bold text-warning">RESERVED</p>
+                        <p class="extra-small text-muted mb-0">GUEST-X</p>
+                    </div>
+                    <!-- Repeated elements for visual fill -->
+                    <div class="parking-slot available"><span class="slot-id">A-106</span><i class="bi bi-plus-circle fs-3 text-success opacity-50"></i></div>
+                    <div class="parking-slot occupied"><span class="slot-id">A-107</span><i class="bi bi-car-front fs-2 text-primary-navy"></i></div>
+                    <div class="parking-slot available"><span class="slot-id">A-108</span><i class="bi bi-plus-circle fs-3 text-success opacity-50"></i></div>
+                </div>
+            </div>
+
+            <!-- Vehicle Log Table -->
+            <div class="bg-white border rounded-4 shadow-sm p-4" data-aos="fade-up">
+                <h5 class="fw-bold mb-4">Latest Vehicle Movements</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table-geist">
+                        <thead>
+                            <tr class="extra-small text-muted uppercase">
+                                <th>Vehicle Plate</th>
+                                <th>Tag ID (RFID)</th>
+                                <th>Owner / Resident</th>
+                                <th>Movement</th>
+                                <th>Time</th>
+                                <th class="text-end">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-light text-dark fw-bold">DHK-METRO-KA-8821</span></td>
+                                <td><span class="extra-small text-muted fw-mono">#RFID-928-102</span></td>
+                                <td><span class="small fw-bold">Adnan Ahmed (Apt 12B)</span></td>
+                                <td><span class="extra-small text-success"><i class="bi bi-arrow-right"></i> ENTRY</span></td>
+                                <td><span class="small">12:15 PM</span></td>
+                                <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">AUTH_VERIFIED</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-light text-dark fw-bold">DHK-METRO-GA-4102</span></td>
+                                <td><span class="extra-small text-muted fw-mono">#RFID-881-X92</span></td>
+                                <td><span class="small fw-bold">Zahid Hasan (Shop 04)</span></td>
+                                <td><span class="extra-small text-danger"><i class="bi bi-arrow-left"></i> EXIT</span></td>
+                                <td><span class="small">11:45 AM</span></td>
+                                <td class="text-end"><span class="badge bg-secondary-subtle text-secondary extra-small">COMPLETED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Notices - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .notice-card { background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:1.4rem 1.6rem;transition:all 0.3s;cursor:pointer; }
+        .notice-card:hover { box-shadow:0 12px 30px rgba(30,58,95,0.09);transform:translateY(-3px); }
+        .notice-card.unread { border-left:4px solid #2b7be8; }
+        .cat-chip { display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;border:1px solid #e5e7eb;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap; }
+        .cat-chip.active,.cat-chip:hover { background:#1e3a5f;color:#fff;border-color:#1e3a5f; }
+        .urgency-emergency { border-left:5px solid #dc2626!important;background:#fff5f5; }
+        .urgency-maintenance { border-left:5px solid #d97706!important; }
+        .urgency-event { border-left:5px solid #16a34a!important; }
+        .urgency-policy { border-left:5px solid #7c3aed!important; }
+        .urgency-utility { border-left:5px solid #0891b2!important; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Building Broadcast</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TN</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar-geist">
+        <div class="px-3 mb-5">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/></svg>
+                Imperial OS
+            </a>
+        </div>
+        <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+            <p class="nav-category">Primary</p>
+            <a href="dashboard-tenant.html" class="nav-item-geist"><i class="bi bi-house-door"></i> My Residence</a>
+            <a href="billing-tenant.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Monthly Bills</a>
+            <a href="maintenance-tenant.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance</a>
+            <p class="nav-category">Finance</p>
+            <a href="payment-history-tenant.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Payment History</a>
+            <a href="documents-tenant.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> My Documents</a>
+            <p class="nav-category">System</p>
+            <a href="notices-tenant.html" class="nav-item-geist active"><i class="bi bi-megaphone"></i> Building Notices</a>
+            <a href="settings-tenant.html" class="nav-item-geist"><i class="bi bi-gear"></i> Portal Settings</a>
+        </nav>
+        <div class="sidebar-profile">
+            <div class="d-flex align-items-center gap-3">
+                <div class="profile-avatar">TN</div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <h6 class="profile-name">Sarah Rahman</h6>
+                    <p class="profile-role">Imperial Resident</p>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Sign Out</button>
+        </div>
+    </aside>
+
+    <main class="main-content-geist">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div data-aos="fade-right">
+                <h2 class="fw-bold mb-1">Building Broadcast</h2>
+                <p class="text-muted mb-0">Stay informed — <strong>3 unread</strong> notices since your last visit.</p>
+            </div>
+            <div class="d-flex gap-3" data-aos="fade-left">
+                <div class="input-group" style="max-width:280px;">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control border-start-0 small" placeholder="Search announcements...">
+                </div>
+                <button class="btn btn-sm border extra-small px-3 rounded-3 text-muted">Mark All Read</button>
+            </div>
+        </div>
+
+        <!-- Category Filter Chips (PRD Section 11.1) -->
+        <div class="d-flex gap-2 mb-4 flex-wrap" data-aos="fade-up">
+            <div class="cat-chip active" onclick="filterNotices('all',this)">All</div>
+            <div class="cat-chip" onclick="filterNotices('emergency',this)"><i class="bi bi-exclamation-octagon"></i> Emergency</div>
+            <div class="cat-chip" onclick="filterNotices('maintenance',this)"><i class="bi bi-tools"></i> Maintenance</div>
+            <div class="cat-chip" onclick="filterNotices('utility',this)"><i class="bi bi-lightning-charge"></i> Utility Outage</div>
+            <div class="cat-chip" onclick="filterNotices('event',this)"><i class="bi bi-calendar-event"></i> Event</div>
+            <div class="cat-chip" onclick="filterNotices('policy',this)"><i class="bi bi-shield-check"></i> Policy Change</div>
+            <div class="cat-chip" onclick="filterNotices('holiday',this)"><i class="bi bi-star"></i> Holiday</div>
+        </div>
+
+        <!-- Emergency Banner -->
+        <div class="notice-card urgency-emergency mb-4 unread" data-category="emergency" data-aos="fade-up"
+             data-bs-toggle="modal" data-bs-target="#noticeModal"
+             onclick="loadNotice('EMERGENCY NOTICE: Gas Line Inspection','All residents of Tower A must vacate floors 3–6 on April 22nd between 9 AM–1 PM for mandatory gas line safety inspection. This is a legal requirement by DESA. Residents must not use stoves during this period.','Emergency','22 Apr 2026','Tower A — All Tenants')">
+            <div class="d-flex align-items-start gap-3">
+                <div class="stats-icon bg-danger-subtle text-danger flex-shrink-0"><i class="bi bi-exclamation-octagon"></i></div>
+                <div class="flex-grow-1">
+                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                        <span class="badge bg-danger extra-small rounded-pill">EMERGENCY</span>
+                        <span class="badge bg-light text-dark extra-small">Tower A — All Tenants</span>
+                        <span class="extra-small text-muted ms-auto">18 Apr 2026 · Expires: 22 Apr</span>
+                        <span class="badge bg-primary-subtle text-primary extra-small rounded-circle" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;">●</span>
+                    </div>
+                    <h5 class="fw-bold mb-1 text-danger">Gas Line Safety Inspection</h5>
+                    <p class="small text-muted mb-0">Mandatory inspection on Apr 22nd. Floors 3–6 must be vacated between 9 AM–1 PM. Do not use gas stoves during this period.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notices Grid -->
+        <div class="row g-3 mb-4">
+            <!-- Maintenance Notice -->
+            <div class="col-md-6" data-category="maintenance" data-aos="fade-up">
+                <div class="notice-card urgency-maintenance unread h-100"
+                     data-bs-toggle="modal" data-bs-target="#noticeModal"
+                     onclick="loadNotice('Elevator Maintenance — Tower A','Lifts #2 and #4 will be offline on April 20th from 2:00 PM–5:00 PM for annual safety inspection by DESCO. Use Lift #1 and Lift #3 during this window. We apologize for any inconvenience.','Maintenance','20 Apr 2026','Tower A — Floor 1–10')">
+                    <div class="d-flex gap-3">
+                        <div class="stats-icon bg-warning-subtle text-warning flex-shrink-0"><i class="bi bi-tools"></i></div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge bg-warning text-dark extra-small rounded-pill">MAINTENANCE</span>
+                                <span class="badge bg-light text-dark extra-small">Floor 1–10</span>
+                                <span class="badge bg-primary-subtle text-primary extra-small rounded-circle ms-auto" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;">●</span>
+                            </div>
+                            <h6 class="fw-bold mb-1">Elevator Maintenance — Tower A</h6>
+                            <p class="extra-small text-muted mb-3">Lifts #2 and #4 offline on Apr 20 · 2:00 PM–5:00 PM. Use Lift #1 and #3.</p>
+                            <div class="d-flex justify-content-between extra-small text-muted">
+                                <span>Posted: 17 Apr 2026</span>
+                                <span class="text-warning">Expires: 20 Apr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Notice -->
+            <div class="col-md-6" data-category="event" data-aos="fade-up" data-aos-delay="50">
+                <div class="notice-card urgency-event h-100"
+                     data-bs-toggle="modal" data-bs-target="#noticeModal"
+                     onclick="loadNotice('Annual Rooftop BBQ Night 2026','Join us for the Annual Imperial Heights Community BBQ at the Sky Lounge on April 25th, starting 7 PM. Food & drinks provided. RSVP via the portal by April 23rd. All residents and their guests are welcome — just show your resident QR code at the entrance.','Event','25 Apr 2026','All Residents')">
+                    <div class="d-flex gap-3">
+                        <div class="stats-icon bg-success-subtle text-success flex-shrink-0"><i class="bi bi-calendar-event"></i></div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge bg-success extra-small rounded-pill">EVENT</span>
+                                <span class="badge bg-light text-dark extra-small">All Residents</span>
+                            </div>
+                            <h6 class="fw-bold mb-1">Annual Rooftop BBQ Night 2026</h6>
+                            <p class="extra-small text-muted mb-3">Sky Lounge · Apr 25 @ 7 PM. RSVP by Apr 23 via portal.</p>
+                            <div class="d-flex justify-content-between extra-small text-muted">
+                                <span>Posted: 15 Apr 2026</span>
+                                <span>Expires: 25 Apr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utility Outage -->
+            <div class="col-md-6" data-category="utility" data-aos="fade-up">
+                <div class="notice-card urgency-utility h-100"
+                     data-bs-toggle="modal" data-bs-target="#noticeModal"
+                     onclick="loadNotice('Scheduled Power Outage — Tower A','DESCO will perform scheduled grid maintenance on April 21st. Expected power downtime: 11 AM–2 PM for Tower A. Generator backup will cover common areas and emergency lighting. Please save your work and avoid using elevators during this window.','Utility Outage','21 Apr 2026','Tower A')">
+                    <div class="d-flex gap-3">
+                        <div class="stats-icon bg-info-subtle text-info flex-shrink-0"><i class="bi bi-lightning-charge"></i></div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge bg-info extra-small rounded-pill">UTILITY OUTAGE</span>
+                                <span class="badge bg-light text-dark extra-small">Tower A</span>
+                            </div>
+                            <h6 class="fw-bold mb-1">Scheduled Power Outage</h6>
+                            <p class="extra-small text-muted mb-3">DESCO maintenance · Apr 21 · 11 AM–2 PM. Generator backup active.</p>
+                            <div class="d-flex justify-content-between extra-small text-muted">
+                                <span>Posted: 16 Apr 2026</span>
+                                <span>Expires: 21 Apr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy Change -->
+            <div class="col-md-6" data-category="policy" data-aos="fade-up" data-aos-delay="50">
+                <div class="notice-card urgency-policy h-100"
+                     data-bs-toggle="modal" data-bs-target="#noticeModal"
+                     onclick="loadNotice('Updated Visitor Policy Effective May 2026','Effective 1st May 2026, all visitors must be pre-registered via the Resident Portal at least 2 hours before arrival. Walk-in visitors without QR gate passes will not be permitted entry. This policy is introduced to enhance building security for all residents.','Policy Change','01 May 2026','All Residents')">
+                    <div class="d-flex gap-3">
+                        <div class="stats-icon flex-shrink-0" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-shield-check"></i></div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge extra-small rounded-pill" style="background:#7c3aed;">POLICY CHANGE</span>
+                                <span class="badge bg-light text-dark extra-small">All Residents</span>
+                            </div>
+                            <h6 class="fw-bold mb-1">Updated Visitor Policy</h6>
+                            <p class="extra-small text-muted mb-3">Effective May 1 — All visitors must be pre-registered via portal.</p>
+                            <div class="d-flex justify-content-between extra-small text-muted">
+                                <span>Posted: 12 Apr 2026</span>
+                                <span>Expires: 01 Jun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Maintenance -->
+            <div class="col-md-6" data-category="maintenance" data-aos="fade-up">
+                <div class="notice-card opacity-75 h-100">
+                    <div class="d-flex gap-3">
+                        <div class="stats-icon bg-light text-muted flex-shrink-0"><i class="bi bi-droplet"></i></div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <span class="badge bg-secondary bg-opacity-10 text-secondary extra-small rounded-pill">COMPLETED</span>
+                                <span class="badge bg-light text-dark extra-small">Apt 401–410</span>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-muted">Water Tank Cleaning</h6>
+                            <p class="extra-small text-muted mb-3">Routine tank sterilization completed. Normal supply restored.</p>
+                            <div class="d-flex justify-content-between extra-small text-muted">
+                                <span>Posted: 08 Apr 2026</span>
+                                <span class="text-success">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="billing-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Bills</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+</div>
+
+<!-- Notice Detail Modal -->
+<div class="modal fade" id="noticeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="modalNoticeTitle">Notice Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3 mb-4">
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Category</p><strong class="small" id="modalNoticeCategory">—</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Valid Until</p><strong class="small" id="modalNoticeExpiry">—</strong></div>
+                    <div class="col-12"><p class="extra-small text-muted mb-1">Target Audience</p><strong class="small" id="modalNoticeAudience">—</strong></div>
+                </div>
+                <div class="p-4 bg-light rounded-4 mb-4">
+                    <p class="small mb-0" id="modalNoticeBody">Body text here.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary rounded-4 py-2 extra-small fw-bold px-4">
+                        <i class="bi bi-download me-1"></i>Download PDF
+                    </button>
+                    <button class="btn btn-primary-navy rounded-4 py-2 extra-small fw-bold px-4 ms-auto" data-bs-dismiss="modal">
+                        Mark as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+    AOS.init({ once: true, duration: 600, offset: 0 });
+
+    function filterNotices(cat, el) {
+        document.querySelectorAll('[data-category]').forEach(card => {
+            card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+        });
+        document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    function loadNotice(title, body, cat, expiry, audience) {
+        document.getElementById('modalNoticeTitle').textContent = title;
+        document.getElementById('modalNoticeBody').textContent = body;
+        document.getElementById('modalNoticeCategory').textContent = cat;
+        document.getElementById('modalNoticeExpiry').textContent = expiry;
+        document.getElementById('modalNoticeAudience').textContent = audience;
+    }
+</script>
+</body>
+</html>

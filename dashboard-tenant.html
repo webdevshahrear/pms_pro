@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resident Portal - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Emergency visibility override for Resident Portal */
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+
+        /* ---- PRD Summary Cards ---- */
+        .kpi-card {
+            background: #fff;
+            border: 1px solid var(--accents-2, #e5e7eb);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.1);
+        }
+        .kpi-card .kpi-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .kpi-card .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e3a5f;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .kpi-card .kpi-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+            color: #9ca3af;
+        }
+        .kpi-card .kpi-badge {
+            position: absolute;
+            top: 1.2rem; right: 1.2rem;
+            font-size: 0.65rem;
+            padding: 0.3em 0.75em;
+            border-radius: 100px;
+            font-weight: 700;
+        }
+        .kpi-card.border-danger-soft { border-left: 4px solid #dc2626; }
+        .kpi-card.border-success-soft { border-left: 4px solid #16a34a; }
+        .kpi-card.border-warning-soft { border-left: 4px solid #d97706; }
+        .kpi-card.border-blue-soft { border-left: 4px solid #2b7be8; }
+
+        /* Quick actions bar */
+        .quick-action-btn {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.4rem;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .quick-action-btn i { font-size: 1.4rem; color: #2b7be8; }
+        .quick-action-btn:hover {
+            background: #1e3a5f;
+            color: #fff;
+            border-color: #1e3a5f;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(30, 58, 95, 0.2);
+        }
+        .quick-action-btn:hover i { color: #fff; }
+
+        /* Agreement timeline bar */
+        .agreement-progress-track {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+        }
+        .agreement-progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, #2b7be8, #16a34a);
+            transition: width 1.5s ease;
+        }
+
+        /* Complaint row */
+        .complaint-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .complaint-row:last-child { border-bottom: none; }
+        .complaint-dot {
+            width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Resident Portal</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TN</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-tenant.html" class="nav-item-geist active"><i class="bi bi-house-door"></i> My Residence</a>
+                <a href="billing-tenant.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Monthly Bills</a>
+                <a href="maintenance-tenant.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance</a>
+
+                <p class="nav-category">Finance</p>
+                <a href="payment-history-tenant.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Payment History</a>
+                <a href="documents-tenant.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> My Documents</a>
+
+                <p class="nav-category">System</p>
+                <a href="notices-tenant.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Building Notices</a>
+                <a href="settings-tenant.html" class="nav-item-geist"><i class="bi bi-gear"></i> Portal Settings</a>
+            </nav>
+
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">TN</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Sarah Rahman</h6>
+                        <p class="profile-role">Imperial Resident</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+
+            <!-- ════════ CINEMATIC HERO BANNER ════════ -->
+            <div class="position-relative overflow-hidden rounded-4 mb-4 shadow-lg"
+                 style="height: 280px; background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 60%, #0d2d5e 100%); border: 1px solid rgba(255,255,255,0.08);">
+                <!-- Glow orbs -->
+                <div class="position-absolute" style="width:350px;height:350px;top:-120px;right:-80px;background:radial-gradient(circle,rgba(43,123,232,0.25),transparent 70%);border-radius:50%;"></div>
+                <div class="position-absolute" style="width:250px;height:250px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(22,163,74,0.15),transparent 70%);border-radius:50%;"></div>
+
+                <div class="position-relative h-100 d-flex flex-column justify-content-between px-5 py-4 text-white" style="z-index:2;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <span class="badge px-3 py-2 fw-bold rounded-pill extra-small" style="background:#2b7be8;">RESIDENT PORTAL</span>
+                                <span class="badge border border-white border-opacity-25 text-white extra-small rounded-pill px-3 py-2 fw-bold">UNIT 402 · TOWER A</span>
+                            </div>
+                            <h1 class="display-5 fw-bold mb-1 text-white" style="letter-spacing:-0.03em;">Welcome Home, Sarah.</h1>
+                            <p class="mb-0 d-flex align-items-center gap-2" style="color:#93c5fd;font-size:0.9rem;">
+                                <i class="bi bi-geo-alt-fill"></i> Imperial Heights &bull; Floor 4 &bull; Dhaka, Bangladesh
+                            </p>
+                        </div>
+                        <div class="d-flex gap-3 flex-wrap justify-content-end">
+                            <button class="btn btn-sm border border-white border-opacity-20 text-white rounded-4 px-4 py-2"
+                                    style="background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);"
+                                    data-bs-toggle="modal" data-bs-target="#guestPassModal">
+                                <i class="bi bi-qr-code-scan me-2"></i>Guest Entry
+                            </button>
+                            <button class="btn btn-sm fw-bold rounded-4 px-4 py-2 border-0 shadow"
+                                    style="background:#fff;color:#1e3a5f;"
+                                    data-bs-toggle="modal" data-bs-target="#newComplaintModal">
+                                <i class="bi bi-tools me-2"></i>Report Issue
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Ambient status bar -->
+                    <div class="d-flex gap-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="rounded-circle bg-success" style="width:8px;height:8px;display:inline-block;"></span>
+                            <span style="font-size:0.75rem;opacity:0.8;">Agreement Active</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="rounded-circle bg-warning" style="width:8px;height:8px;display:inline-block;"></span>
+                            <span style="font-size:0.75rem;opacity:0.8;">Bill Due: 20 Apr</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="rounded-circle" style="width:8px;height:8px;display:inline-block;background:#60a5fa;"></span>
+                            <span style="font-size:0.75rem;opacity:0.8;">1 Open Complaint</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════ PRD SUMMARY CARDS (Section 17.5) ════════ -->
+            <div class="row g-3 mb-4">
+                <!-- Card 1: Current Month Bill -->
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                    <div class="kpi-card border-danger-soft">
+                        <span class="kpi-badge bg-danger-subtle text-danger">DUE IN 4 DAYS</span>
+                        <div class="kpi-icon bg-danger-subtle text-danger">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+                        <div class="kpi-label">Current Month Bill</div>
+                        <div class="kpi-value">৳24,500</div>
+                        <div class="extra-small text-muted mt-1">April 2026 &bull; Due: 20 Apr</div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Last Payment Date -->
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="kpi-card border-success-soft">
+                        <span class="kpi-badge bg-success-subtle text-success">CLEARED</span>
+                        <div class="kpi-icon bg-success-subtle text-success">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                        <div class="kpi-label">Last Payment Date</div>
+                        <div class="kpi-value">12 Mar</div>
+                        <div class="extra-small text-muted mt-1">Amount: ৳23,800 &bull; bKash</div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Active Complaints -->
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                    <div class="kpi-card border-warning-soft">
+                        <span class="kpi-badge bg-warning-subtle text-warning">IN PROGRESS</span>
+                        <div class="kpi-icon bg-warning-subtle text-warning">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <div class="kpi-label">Active Complaint</div>
+                        <div class="kpi-value">1 Open</div>
+                        <div class="extra-small text-muted mt-1">TKT-49210 &bull; HVAC Issue</div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Agreement End Date -->
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="kpi-card border-blue-soft">
+                        <span class="kpi-badge bg-primary-subtle text-primary">8 MONTHS LEFT</span>
+                        <div class="kpi-icon" style="background:#eff6ff;color:#2b7be8;">
+                            <i class="bi bi-calendar2-check"></i>
+                        </div>
+                        <div class="kpi-label">Agreement End Date</div>
+                        <div class="kpi-value">Jan 2027</div>
+                        <div class="extra-small text-muted mt-1">Started: 01 Jan 2026 &bull; 12 Months</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════ QUICK ACTIONS (Section 17.5) ════════ -->
+            <div class="bg-white border rounded-4 p-4 mb-4 shadow-sm" data-aos="fade-up">
+                <h6 class="fw-bold mb-3 text-primary-navy small uppercase" style="letter-spacing:0.08em;opacity:0.6;">Quick Actions</h6>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="maintenance-tenant.html" class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#newComplaintModal" onclick="return false;">
+                        <i class="bi bi-tools"></i> Submit Complaint
+                    </a>
+                    <a href="documents-tenant.html" class="quick-action-btn">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Download Receipt
+                    </a>
+                    <a href="notices-tenant.html" class="quick-action-btn">
+                        <i class="bi bi-megaphone"></i> Notice Board
+                    </a>
+                    <a href="billing-tenant.html" class="quick-action-btn">
+                        <i class="bi bi-credit-card"></i> Pay Bill
+                    </a>
+                    <a href="payment-history-tenant.html" class="quick-action-btn">
+                        <i class="bi bi-clock-history"></i> Payment History
+                    </a>
+                    <a href="settings-tenant.html" class="quick-action-btn">
+                        <i class="bi bi-sliders"></i> Portal Settings
+                    </a>
+                </div>
+            </div>
+
+            <!-- ════════ ROW: Finance + Utility Chart ════════ -->
+            <div class="row g-4 mb-4">
+                <!-- Finance Snapshot -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <h6 class="fw-bold mb-0 text-primary-navy">Financial Snapshot</h6>
+                            <i class="bi bi-wallet2 text-primary opacity-50"></i>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-muted extra-small fw-bold mb-1 uppercase">Next Due Amount</p>
+                            <div class="d-flex align-items-end gap-2">
+                                <h3 class="fw-bold mb-0 text-primary-navy">24,500 <span class="small opacity-50">BDT</span></h3>
+                                <span class="badge bg-danger-subtle text-danger extra-small rounded-pill px-2 mb-1">DUE IN 4 DAYS</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-light rounded-4 border mb-4">
+                            <div class="d-flex justify-content-between extra-small mb-2">
+                                <span class="text-muted">Monthly Rent</span>
+                                <span class="fw-bold text-primary-navy">22,000</span>
+                            </div>
+                            <div class="d-flex justify-content-between extra-small mb-2">
+                                <span class="text-muted">Service Charge</span>
+                                <span class="fw-bold text-primary-navy">1,500</span>
+                            </div>
+                            <div class="d-flex justify-content-between extra-small mb-0">
+                                <span class="text-muted">Utility Average</span>
+                                <span class="fw-bold text-primary-navy">1,000</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary-navy w-100 rounded-pill py-2 shadow-sm fw-bold small">
+                            <i class="bi bi-credit-card me-2"></i>Pay Now (Instant bKash)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Consumption Analytics Chart -->
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <div>
+                                <h6 class="fw-bold mb-1 text-primary-navy">Consumption Analytics</h6>
+                                <p class="extra-small text-muted mb-0">Weekly utility performance tracker.</p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-primary rounded-pill extra-small border-0 px-3">ELEC</span>
+                                <span class="badge bg-success rounded-pill extra-small border-0 px-3">WATER</span>
+                            </div>
+                        </div>
+                        <div id="tenantUtilityChart" style="min-height: 220px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════ AGREEMENT TIMELINE ════════ -->
+            <div class="bg-white border rounded-4 p-4 mb-4 shadow-sm" data-aos="fade-up">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="fw-bold mb-1 text-primary-navy">Lease Agreement Status</h6>
+                        <p class="extra-small text-muted mb-0">Agreement #AGR-2026-00084 &bull; Unit 402, Tower A</p>
+                    </div>
+                    <a href="documents-tenant.html" class="btn btn-sm border extra-small px-3 rounded-pill">
+                        <i class="bi bi-file-earmark-pdf me-1 text-danger"></i>View Agreement
+                    </a>
+                </div>
+                <div class="d-flex justify-content-between extra-small text-muted mb-1">
+                    <span>Start: 01 Jan 2026</span>
+                    <span class="fw-bold text-success">67% Complete</span>
+                    <span>End: 31 Dec 2026</span>
+                </div>
+                <div class="agreement-progress-track">
+                    <div class="agreement-progress-fill" style="width: 30%;"></div>
+                </div>
+                <div class="row g-3 mt-2">
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-calendar-check text-success small"></i>
+                            <span class="extra-small"><strong>Tenure:</strong> 12 Months</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-shield-check text-primary small"></i>
+                            <span class="extra-small"><strong>Security Deposit:</strong> ৳44,000</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-bell text-warning small"></i>
+                            <span class="extra-small"><strong>Renewal Reminder:</strong> 30 Nov 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════ ROW: Payment History + My Complaints (PRD Section 17.5) ════════ -->
+            <div class="row g-4 mb-4">
+                <!-- Recent Invoices / Payment History Table -->
+                <div class="col-lg-7" data-aos="fade-up">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <h6 class="fw-bold mb-0 text-primary-navy">Recent Invoices</h6>
+                            <a href="billing-tenant.html" class="extra-small text-decoration-none fw-bold text-accent-blue">
+                                Full Audit Ledger <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0 custom-table-geist">
+                                <thead>
+                                    <tr class="extra-small text-muted uppercase border-0">
+                                        <th class="ps-0 border-0">Invoice</th>
+                                        <th class="border-0">Period</th>
+                                        <th class="border-0 text-center">Status</th>
+                                        <th class="border-0 text-end pe-0">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="ps-0 py-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="p-2 bg-danger-subtle rounded-3 text-danger"><i class="bi bi-receipt"></i></div>
+                                                <div><span class="small fw-bold text-primary-navy d-block">INV-4902</span><span class="extra-small text-muted">Rent + Service</span></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="small text-muted">April 2026</span></td>
+                                        <td class="text-center"><span class="badge bg-danger-subtle text-danger extra-small rounded-pill px-3">UNPAID</span></td>
+                                        <td class="text-end pe-0 fw-bold text-danger" style="font-variant-numeric:tabular-nums;">৳24,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-0 py-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="p-2 bg-success-subtle rounded-3 text-success"><i class="bi bi-check-circle"></i></div>
+                                                <div><span class="small fw-bold text-primary-navy d-block">INV-4821</span><span class="extra-small text-muted">March 2026</span></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="small text-muted">March 2026</span></td>
+                                        <td class="text-center"><span class="badge bg-success-subtle text-success extra-small rounded-pill px-3">PAID</span></td>
+                                        <td class="text-end pe-0 fw-bold text-success" style="font-variant-numeric:tabular-nums;">৳23,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-0 py-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="p-2 bg-success-subtle rounded-3 text-success"><i class="bi bi-check-circle"></i></div>
+                                                <div><span class="small fw-bold text-primary-navy d-block">INV-4740</span><span class="extra-small text-muted">February 2026</span></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="small text-muted">Feb 2026</span></td>
+                                        <td class="text-center"><span class="badge bg-success-subtle text-success extra-small rounded-pill px-3">PAID</span></td>
+                                        <td class="text-end pe-0 fw-bold text-success" style="font-variant-numeric:tabular-nums;">৳23,800</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pt-3 border-top mt-2">
+                            <a href="billing-tenant.html" class="btn btn-sm extra-small border rounded-pill px-4 fw-bold">
+                                <i class="bi bi-download me-1 text-danger"></i> Download Latest Receipt
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Complaints Table (PRD 17.5 missing section) -->
+                <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                            <h6 class="fw-bold mb-0 text-primary-navy">My Complaints</h6>
+                            <a href="maintenance-tenant.html" class="extra-small text-decoration-none fw-bold text-accent-blue">
+                                All Tickets <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Complaint 1: In Progress -->
+                        <div class="complaint-row">
+                            <span class="complaint-dot bg-warning"></span>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small fw-bold text-primary-navy">HVAC Fan Noise</span>
+                                    <span class="badge bg-warning-subtle text-warning extra-small rounded-pill">IN PROGRESS</span>
+                                </div>
+                                <div class="extra-small text-muted mt-1">TKT-49210 &bull; 14 Apr 2026 &bull; Electrical</div>
+                                <div class="d-flex align-items-center gap-2 mt-2">
+                                    <div class="progress flex-grow-1" style="height:3px;">
+                                        <div class="progress-bar bg-warning" style="width:50%;"></div>
+                                    </div>
+                                    <span class="extra-small text-muted" style="white-space:nowrap;">50%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Complaint 2: Resolved -->
+                        <div class="complaint-row">
+                            <span class="complaint-dot bg-success"></span>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small fw-bold text-primary-navy">Kitchen Leakage</span>
+                                    <span class="badge bg-success-subtle text-success extra-small rounded-pill">RESOLVED</span>
+                                </div>
+                                <div class="extra-small text-muted mt-1">TKT-48112 &bull; Closed 02 Apr 2026</div>
+                                <div class="extra-small text-muted mt-1">Technician: Kamal Ahmed ⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+
+                        <!-- Complaint 3: Closed -->
+                        <div class="complaint-row">
+                            <span class="complaint-dot" style="background:#9ca3af;"></span>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small fw-bold text-muted">Door Lock Issue</span>
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary extra-small rounded-pill">CLOSED</span>
+                                </div>
+                                <div class="extra-small text-muted mt-1">TKT-47001 &bull; Closed 15 Mar 2026</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-top mt-2">
+                            <button class="btn btn-sm extra-small border rounded-pill px-4 fw-bold w-100"
+                                    data-bs-toggle="modal" data-bs-target="#newComplaintModal">
+                                <i class="bi bi-plus-lg me-1 text-primary"></i> New Service Ticket
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════ Building Broadcast ════════ -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-12" data-aos="fade-up">
+                    <div class="bg-primary-navy border border-white border-opacity-10 rounded-4 shadow-lg p-4 text-white position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 p-4 opacity-10"><i class="bi bi-megaphone-fill display-4"></i></div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="fw-bold mb-0">Community Broadcast Feed</h6>
+                            <a href="notices-tenant.html" class="btn btn-sm border border-white border-opacity-20 text-white extra-small rounded-pill px-3"
+                               style="background:rgba(255,255,255,0.08);">View All</a>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="d-flex gap-3" style="background:rgba(255,255,255,0.06);border-radius:16px;padding:1rem;">
+                                    <div class="bg-white bg-opacity-10 rounded-4 p-2 text-center" style="min-width:56px;height:56px;">
+                                        <span class="d-block fw-bold" style="font-size:0.65rem;">APR</span>
+                                        <span class="d-block fw-bold" style="font-size:1.2rem;line-height:1;">18</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1 small fw-bold">Rooftop BBQ Night</h6>
+                                        <p class="mb-0 extra-small opacity-60">Sky Lounge @ 7 PM. All residents welcome.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex gap-3" style="background:rgba(255,255,255,0.06);border-radius:16px;padding:1rem;">
+                                    <div class="bg-white bg-opacity-10 rounded-4 p-2 text-center" style="min-width:56px;height:56px;">
+                                        <span class="d-block fw-bold" style="font-size:0.65rem;">APR</span>
+                                        <span class="d-block fw-bold" style="font-size:1.2rem;line-height:1;">20</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1 small fw-bold text-warning">Elevator Maintenance</h6>
+                                        <p class="mb-0 extra-small opacity-60">Lift #3 offline 10 AM–12 PM. Plan ahead.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex gap-3" style="background:rgba(255,255,255,0.06);border-radius:16px;padding:1rem;">
+                                    <div class="bg-white bg-opacity-10 rounded-4 p-2 text-center" style="min-width:56px;height:56px;">
+                                        <span class="d-block fw-bold" style="font-size:0.65rem;">APR</span>
+                                        <span class="d-block fw-bold" style="font-size:1.2rem;line-height:1;">25</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1 small fw-bold">Rent Due Reminder</h6>
+                                        <p class="mb-0 extra-small opacity-60">Monthly dues closing on 25 Apr. Avoid late fees.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ════════ MODAL: New Complaint (PRD Section 10.1) ════════ -->
+    <div class="modal fade" id="newComplaintModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">New Service Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">ISSUE CATEGORY</label>
+                        <select class="form-select border-0 bg-light py-2 small">
+                            <option>Plumbing</option>
+                            <option>Electrical</option>
+                            <option>HVAC / Cooling</option>
+                            <option>Structural</option>
+                            <option>Cleaning</option>
+                            <option>Pest Control</option>
+                            <option>Security</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">PRIORITY</label>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-secondary rounded-pill extra-small px-3 priority-btn" data-priority="low">Low</button>
+                            <button class="btn btn-sm btn-warning rounded-pill extra-small px-3 priority-btn" data-priority="medium">Medium</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill extra-small px-3 priority-btn" data-priority="high">High</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill extra-small px-3 priority-btn" data-priority="emergency">Emergency</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">TITLE</label>
+                        <input type="text" class="form-control border-0 bg-light py-2 small" placeholder="Brief title of the issue">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">DESCRIPTION</label>
+                        <textarea class="form-control border-0 bg-light py-2 small" rows="3" placeholder="Describe the problem in detail..."></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label extra-small fw-bold text-muted">ATTACH PHOTO (OPTIONAL)</label>
+                        <div class="border border-dashed rounded-4 p-4 text-center" style="cursor:pointer;">
+                            <i class="bi bi-camera fs-2 text-muted"></i>
+                            <p class="extra-small text-muted mb-0 mt-2">Click or drag to upload</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary-navy w-100 rounded-4 py-2 small fw-bold" data-bs-dismiss="modal">
+                        <i class="bi bi-send me-2"></i>Submit Ticket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════ MODAL: Guest Pass ════════ -->
+    <div class="modal fade" id="guestPassModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Generate Guest Entry Pass</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">VISITOR NAME</label>
+                        <input type="text" class="form-control border-0 bg-light py-2 small" placeholder="Full name of visitor">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">VISITOR PHONE</label>
+                        <input type="tel" class="form-control border-0 bg-light py-2 small" placeholder="01XXXXXXXXX">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label extra-small fw-bold text-muted">PURPOSE OF VISIT</label>
+                        <select class="form-select border-0 bg-light py-2 small">
+                            <option>Personal Visit</option>
+                            <option>Delivery</option>
+                            <option>Service / Repair</option>
+                            <option>Medical</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label class="form-label extra-small fw-bold text-muted">VALID FROM</label>
+                            <input type="datetime-local" class="form-control border-0 bg-light py-2 small">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label extra-small fw-bold text-muted">VALID UNTIL</label>
+                            <input type="datetime-local" class="form-control border-0 bg-light py-2 small">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary-navy w-100 rounded-4 py-2 small fw-bold" data-bs-dismiss="modal">
+                        <i class="bi bi-qr-code me-2"></i>Generate QR Gate Pass
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item active">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="billing-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Bills</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item active">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="payment-history-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-wallet2"></i>
+            <span>Wallet</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Maint</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 600, offset: 0 });
+
+        // Agreement progress bar animation on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.agreement-progress-fill').style.width = '30%';
+            }, 300);
+        });
+
+        // Consumption Analytics Chart (ApexCharts)
+        var utilityOptions = {
+            series: [
+                { name: 'Electricity (kWh)', data: [85, 72, 90, 68, 95, 80, 73] },
+                { name: 'Water (Liters)', data: [320, 290, 350, 280, 370, 315, 300] }
+            ],
+            chart: { type: 'area', height: 220, toolbar: { show: false }, fontFamily: 'Inter, sans-serif', sparkline: { enabled: false } },
+            colors: ['#2b7be8', '#16a34a'],
+            fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0.05 } },
+            stroke: { curve: 'smooth', width: 2.5 },
+            dataLabels: { enabled: false },
+            xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], labels: { style: { fontSize: '11px', colors: '#9ca3af' } }, axisBorder: { show: false }, axisTicks: { show: false } },
+            yaxis: [
+                { labels: { style: { fontSize: '11px', colors: '#9ca3af' } } },
+                { opposite: true, labels: { style: { fontSize: '11px', colors: '#9ca3af' } } }
+            ],
+            grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
+            legend: { position: 'top', horizontalAlign: 'right', fontSize: '11px', markers: { width: 8, height: 8, radius: 10 } },
+            tooltip: { theme: 'light', shared: true, intersect: false }
+        };
+        var utilityChart = new ApexCharts(document.querySelector('#tenantUtilityChart'), utilityOptions);
+        utilityChart.render();
+
+        // Priority button toggle
+        document.querySelectorAll('.priority-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.priority-btn').forEach(b => {
+                    b.className = 'btn btn-sm btn-outline-secondary rounded-pill extra-small px-3 priority-btn';
+                });
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-warning');
+            });
+        });
+    </script>
+</body>
+</html>

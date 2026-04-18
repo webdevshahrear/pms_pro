@@ -1,0 +1,114 @@
+/* ─── Premium Inventory Redesign ─── */
+.inventory-filter-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    background: #fff;
+    border: 1px solid rgba(30, 58, 95, 0.08);
+    padding: 0.6rem 1.75rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.filter-tab:hover {
+    border-color: #1E3A5F;
+    color: #1E3A5F;
+    transform: translateY(-2px);
+}
+
+.filter-tab.active {
+    background: #1E3A5F;
+    border-color: #1E3A5F;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(30, 58, 95, 0.15);
+}
+
+.inventory-card {
+    background: #fff;
+    border: 1px solid rgba(30, 58, 95, 0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(30, 58, 95, 0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+}
+
+.inventory-img-wrapper {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.inventory-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inventory-card:hover .inventory-img {
+    transform: scale(1.1);
+}
+
+.inventory-badge-overlay {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 2;
+}
+
+.inventory-glass-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.inventory-card:hover .inventory-glass-overlay {
+    opacity: 1;
+}
+
+.inventory-details {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #888;
+}
+
+.inventory-meta i {
+    color: #1E3A5F;
+    margin-right: 0.5rem;
+}
+
+.inventory-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1E3A5F;
+    letter-spacing: -0.02em;
+}

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Bills - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .bill-row { border-left: 3px solid transparent; transition: all 0.2s; }
+        .bill-row:hover { background: #f8fafc; }
+        .bill-row.unpaid { border-left-color: #dc2626; }
+        .bill-row.overdue { border-left-color: #d97706; }
+        .bill-row.paid   { border-left-color: #16a34a; }
+        .breakdown-item { display:flex; justify-content:space-between; align-items:center; padding:0.55rem 0; border-bottom:1px solid #f1f5f9; font-size:0.85rem; }
+        .breakdown-item:last-child { border-bottom:none; font-weight:700; }
+        .method-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid #e5e7eb; border-radius:100px; font-size:0.75rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+        .method-badge.active, .method-badge:hover { background:#1e3a5f; color:#fff; border-color:#1e3a5f; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Tenant Billing</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TN</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar-geist">
+        <div class="px-3 mb-5">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/></svg>
+                Imperial OS
+            </a>
+        </div>
+        <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+            <p class="nav-category">Primary</p>
+            <a href="dashboard-tenant.html" class="nav-item-geist"><i class="bi bi-house-door"></i> My Residence</a>
+            <a href="billing-tenant.html" class="nav-item-geist active"><i class="bi bi-receipt"></i> Monthly Bills</a>
+            <a href="maintenance-tenant.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance</a>
+            <p class="nav-category">Finance</p>
+            <a href="payment-history-tenant.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Payment History</a>
+            <a href="documents-tenant.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> My Documents</a>
+            <p class="nav-category">System</p>
+            <a href="notices-tenant.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Building Notices</a>
+            <a href="settings-tenant.html" class="nav-item-geist"><i class="bi bi-gear"></i> Portal Settings</a>
+        </nav>
+        <div class="sidebar-profile">
+            <div class="d-flex align-items-center gap-3">
+                <div class="profile-avatar">TN</div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <h6 class="profile-name">Sarah Rahman</h6>
+                    <p class="profile-role">Imperial Resident</p>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Sign Out</button>
+        </div>
+    </aside>
+
+    <main class="main-content-geist">
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div data-aos="fade-right">
+                <h2 class="fw-bold mb-1">Monthly Billing</h2>
+                <p class="text-muted mb-0">Review, settle, and download your unit dues. Due date: <strong>20th of every month.</strong></p>
+            </div>
+            <div class="d-flex gap-3" data-aos="fade-left">
+                <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm small">
+                    <i class="bi bi-file-earmark-excel me-2 text-success"></i>Export Excel
+                </button>
+                <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm small">
+                    <i class="bi bi-download me-2"></i>Download Statement
+                </button>
+                <button class="btn btn-primary-navy rounded-4 px-4 py-2 small fw-bold" data-bs-toggle="modal" data-bs-target="#payNowModal">
+                    <i class="bi bi-credit-card me-2"></i>Quick Pay All
+                </button>
+            </div>
+        </div>
+
+        <!-- Summary KPI Cards -->
+        <div class="row g-3 mb-4" data-aos="fade-up">
+            <div class="col-6 col-lg-3">
+                <div class="glass-widget h-100">
+                    <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-60">Outstanding Balance</p>
+                    <h3 class="fw-bold mb-0 text-danger">৳24,500</h3>
+                    <p class="text-danger extra-small mt-2 mb-0"><i class="bi bi-clock me-1"></i>Due: 20 April 2026</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="glass-widget h-100">
+                    <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-60">Late Fee (If Overdue)</p>
+                    <h3 class="fw-bold mb-0 text-warning">৳1,225</h3>
+                    <p class="extra-small text-muted mt-2 mb-0">5% of rent after due date</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="glass-widget h-100">
+                    <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-60">Advance Credit</p>
+                    <h3 class="fw-bold mb-0">৳0</h3>
+                    <p class="extra-small text-muted mt-2 mb-0">No unallocated funds</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="glass-widget h-100 border-success border-opacity-25">
+                    <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-60">Last Payment</p>
+                    <h3 class="fw-bold mb-0 text-success">৳23,800</h3>
+                    <p class="text-muted extra-small mt-2 mb-0">Cleared 12 Mar 2026</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Invoice Breakdown + Bill Table -->
+        <div class="row g-4 mb-4">
+            <!-- Detailed Breakdown -->
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="glass-widget h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                        <h6 class="fw-bold mb-0">April 2026 Breakdown</h6>
+                        <span class="badge bg-danger-subtle text-danger extra-small">UNPAID</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted">Monthly Rent</span><span class="fw-bold">৳22,000</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted">Service Charge</span><span class="fw-bold">৳1,500</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted d-flex align-items-center gap-1"><i class="bi bi-lightning-fill text-warning" style="font-size:0.75rem;"></i>Electricity</span><span class="fw-bold">৳680</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted d-flex align-items-center gap-1"><i class="bi bi-droplet-fill text-info" style="font-size:0.75rem;"></i>Water</span><span class="fw-bold">৳220</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted d-flex align-items-center gap-1"><i class="bi bi-fire text-danger" style="font-size:0.75rem;"></i>Gas</span><span class="fw-bold">৳100</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="text-muted">Late Fee</span><span class="fw-bold text-muted">৳0 (not due yet)</span>
+                    </div>
+                    <div class="breakdown-item mt-1 pt-1 border-top">
+                        <span>Total Due</span><span class="text-danger" style="font-size:1.1rem;">৳24,500</span>
+                    </div>
+                    <div class="p-3 bg-info-subtle border border-info border-opacity-25 rounded-3 mt-3">
+                        <p class="extra-small text-info mb-0"><i class="bi bi-info-circle me-1"></i>Partial payment accepted. Remaining balance tracked automatically.</p>
+                    </div>
+                    <button class="btn btn-primary-navy w-100 rounded-pill py-2 mt-3 fw-bold small"
+                            data-bs-toggle="modal" data-bs-target="#payNowModal">
+                        <i class="bi bi-credit-card me-2"></i>Pay Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Invoices Table -->
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-widget h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h6 class="fw-bold mb-0">Current & Recent Invoices</h6>
+                        <a href="payment-history-tenant.html" class="extra-small fw-bold text-decoration-none text-accent-blue">Full History <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle custom-table-geist">
+                            <thead>
+                                <tr class="extra-small text-muted uppercase">
+                                    <th>Invoice</th>
+                                    <th>Particulars</th>
+                                    <th>Period</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bill-row unpaid">
+                                    <td><span class="small fw-bold font-mono">INV-4902</span></td>
+                                    <td><span class="small">Rent + Service Charge</span></td>
+                                    <td><span class="extra-small text-muted">Apr 1–30, 2026</span></td>
+                                    <td><span class="small fw-bold text-danger">৳23,500</span></td>
+                                    <td><span class="badge bg-danger-subtle text-danger extra-small">UNPAID</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm border extra-small px-3 rounded-3 fw-bold"
+                                                data-bs-toggle="modal" data-bs-target="#payNowModal">Pay Now</button>
+                                    </td>
+                                </tr>
+                                <tr class="bill-row overdue">
+                                    <td><span class="small fw-bold font-mono">INV-4903</span></td>
+                                    <td><span class="small">Utility Bills (Elec / Water / Gas)</span></td>
+                                    <td><span class="extra-small text-muted">Apr 1–30, 2026</span></td>
+                                    <td><span class="small fw-bold text-warning">৳1,000</span></td>
+                                    <td><span class="badge bg-warning-subtle text-warning extra-small">OVERDUE</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm border extra-small px-3 rounded-3 fw-bold"
+                                                data-bs-toggle="modal" data-bs-target="#payNowModal">Pay Now</button>
+                                    </td>
+                                </tr>
+                                <tr class="bill-row paid">
+                                    <td><span class="small fw-bold font-mono">INV-4821</span></td>
+                                    <td><span class="small">Rent + Service Charge</span></td>
+                                    <td><span class="extra-small text-muted">Mar 1–31, 2026</span></td>
+                                    <td><span class="small fw-bold text-success">৳23,500</span></td>
+                                    <td><span class="badge bg-success-subtle text-success extra-small">PAID</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-white btn-sm border extra-small px-3"><i class="bi bi-file-earmark-pdf text-danger me-1"></i>RCP</button>
+                                    </td>
+                                </tr>
+                                <tr class="bill-row paid">
+                                    <td><span class="small fw-bold font-mono">INV-4822</span></td>
+                                    <td><span class="small">Utility Bills (Elec / Water / Gas)</span></td>
+                                    <td><span class="extra-small text-muted">Mar 1–31, 2026</span></td>
+                                    <td><span class="small fw-bold text-success">৳300</span></td>
+                                    <td><span class="badge bg-success-subtle text-success extra-small">PAID</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-white btn-sm border extra-small px-3"><i class="bi bi-file-earmark-pdf text-danger me-1"></i>RCP</button>
+                                    </td>
+                                </tr>
+                                <tr class="bill-row paid">
+                                    <td><span class="small fw-bold font-mono">INV-4740</span></td>
+                                    <td><span class="small">Rent + Service Charge</span></td>
+                                    <td><span class="extra-small text-muted">Feb 1–28, 2026</span></td>
+                                    <td><span class="small fw-bold text-success">৳23,500</span></td>
+                                    <td><span class="badge bg-success-subtle text-success extra-small">PAID</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-white btn-sm border extra-small px-3"><i class="bi bi-file-earmark-pdf text-danger me-1"></i>RCP</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Reconciliation Summary -->
+                    <div class="row g-3 mt-2 pt-3 border-top">
+                        <div class="col-md-4 text-center">
+                            <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Total Billed (2026)</p>
+                            <h6 class="fw-bold mb-0">৳1,44,600</h6>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Total Collected</p>
+                            <h6 class="fw-bold text-success mb-0">৳1,19,100</h6>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Outstanding</p>
+                            <h6 class="fw-bold text-danger mb-0">৳25,500</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods Info -->
+        <div class="row g-4">
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="p-4 bg-white border rounded-4 shadow-sm">
+                    <h6 class="fw-bold mb-4">Preferred Payment Method</h6>
+                    <div class="d-flex align-items-center gap-4 p-3 border rounded-4 bg-primary-navy text-white mb-3">
+                        <i class="bi bi-credit-card-2-front fs-2"></i>
+                        <div>
+                            <h6 class="mb-1 small fw-bold">VISA •••• 4902</h6>
+                            <p class="mb-0 extra-small opacity-50">Expires 09/27</p>
+                        </div>
+                        <span class="ms-auto badge bg-white text-primary-navy extra-small">PRIMARY</span>
+                    </div>
+                    <p class="extra-small text-muted mb-3">Supported: Cash, Bank Transfer, bKash, Nagad, Rocket, Cheque, Card</p>
+                    <button class="btn btn-link text-decoration-none extra-small fw-bold p-0">Manage Payment Methods</button>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-4 bg-info-subtle border border-info border-opacity-25 rounded-4 h-100">
+                    <h6 class="fw-bold mb-3"><i class="bi bi-info-circle-fill text-info me-2"></i>Auto-Pay Notice</h6>
+                    <p class="small text-muted mb-4">Auto-pay is enabled for your rental invoices. Outstanding balance will be debited from your primary card on the <strong>10th of every month.</strong></p>
+                    <div class="form-check form-switch geist-switch">
+                        <input class="form-check-input" type="checkbox" checked id="autoPaySwitch">
+                        <label class="form-check-label small fw-bold ms-2" for="autoPaySwitch">Auto-Pay Enabled</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="billing-tenant.html" class="bottom-nav-item active">
+            <i class="bi bi-receipt-cutoff"></i>
+            <span>Bills</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+</div>
+
+<!-- Pay Now Modal -->
+<div class="modal fade" id="payNowModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Record Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3 bg-light rounded-4 mb-4">
+                    <div class="d-flex justify-content-between extra-small mb-1">
+                        <span class="text-muted">Invoice</span><span class="fw-bold font-mono">INV-4902</span>
+                    </div>
+                    <div class="d-flex justify-content-between extra-small">
+                        <span class="text-muted">Total Due</span><span class="fw-bold text-danger">৳24,500</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="extra-small fw-bold text-muted mb-2 uppercase">Payment Amount</label>
+                    <input type="number" class="form-control border-0 bg-light py-2 small" placeholder="Enter amount (partial accepted)">
+                </div>
+                <div class="mb-3">
+                    <label class="extra-small fw-bold text-muted mb-2 uppercase">Payment Method</label>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="method-badge active"><i class="bi bi-credit-card"></i> bKash</span>
+                        <span class="method-badge"><i class="bi bi-bank"></i> Bank</span>
+                        <span class="method-badge"><i class="bi bi-cash-coin"></i> Nagad</span>
+                        <span class="method-badge"><i class="bi bi-cash-stack"></i> Cash</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="extra-small fw-bold text-muted mb-2 uppercase">Transaction Reference</label>
+                    <input type="text" class="form-control border-0 bg-light py-2 small" placeholder="e.g. TXN123456">
+                </div>
+                <div class="mb-4">
+                    <label class="extra-small fw-bold text-muted mb-2 uppercase">Payment Date</label>
+                    <input type="date" class="form-control border-0 bg-light py-2 small">
+                </div>
+                <button class="btn btn-primary-navy w-100 rounded-4 py-2 small fw-bold" data-bs-dismiss="modal">
+                    <i class="bi bi-check2-circle me-2"></i>Confirm Payment
+                </button>
+                <p class="extra-small text-muted text-center mt-3 mb-0">Receipt (RCP-2026-XXXXX) will be auto-generated after confirmation.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+    AOS.init({ once: true, duration: 600, offset: 0 });
+    document.querySelectorAll('.method-badge').forEach(b => {
+        b.addEventListener('click', () => {
+            document.querySelectorAll('.method-badge').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>

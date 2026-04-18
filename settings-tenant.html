@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Settings - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .settings-section { background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:1.75rem;margin-bottom:1.25rem; }
+        .settings-section h6 { font-size:0.8rem;text-transform:uppercase;letter-spacing:0.07em;color:#9ca3af;font-weight:700;margin-bottom:1.25rem; }
+        .avatar-upload { position:relative;width:80px;height:80px; }
+        .avatar-upload .avatar-img { width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb; }
+        .avatar-upload .avatar-edit { position:absolute;bottom:0;right:0;width:26px;height:26px;background:#1e3a5f;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:0.7rem; }
+        .notif-row { display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid #f1f5f9; }
+        .notif-row:last-child { border-bottom:none; }
+        .danger-zone { background:#fff;border:1px solid rgba(220,38,38,0.25);border-radius:20px;padding:1.75rem; }
+        .tab-btn { padding:0.5rem 1.25rem;border-radius:100px;font-size:0.8rem;font-weight:700;border:1px solid #e5e7eb;background:transparent;cursor:pointer;transition:all 0.2s; }
+        .tab-btn.active { background:#1e3a5f;color:#fff;border-color:#1e3a5f; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Portal Settings</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TN</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar-geist">
+        <div class="px-3 mb-5">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/></svg>
+                Imperial OS
+            </a>
+        </div>
+        <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+            <p class="nav-category">Primary</p>
+            <a href="dashboard-tenant.html" class="nav-item-geist"><i class="bi bi-house-door"></i> My Residence</a>
+            <a href="billing-tenant.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Monthly Bills</a>
+            <a href="maintenance-tenant.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance</a>
+            <p class="nav-category">Finance</p>
+            <a href="payment-history-tenant.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Payment History</a>
+            <a href="documents-tenant.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> My Documents</a>
+            <p class="nav-category">System</p>
+            <a href="notices-tenant.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Building Notices</a>
+            <a href="settings-tenant.html" class="nav-item-geist active"><i class="bi bi-gear"></i> Portal Settings</a>
+        </nav>
+        <div class="sidebar-profile">
+            <div class="d-flex align-items-center gap-3">
+                <div class="profile-avatar">TN</div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <h6 class="profile-name">Sarah Rahman</h6>
+                    <p class="profile-role">Imperial Resident</p>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Sign Out</button>
+        </div>
+    </aside>
+
+    <main class="main-content-geist">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div data-aos="fade-right">
+                <h2 class="fw-bold mb-1">Portal Settings</h2>
+                <p class="text-muted mb-0">Manage your profile, security, and notification preferences.</p>
+            </div>
+            <div data-aos="fade-left">
+                <button class="btn btn-primary-navy rounded-4 px-4 py-2 small fw-bold shadow-sm" onclick="saveSettings()">
+                    <i class="bi bi-check2 me-2"></i>Save Changes
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Nav -->
+        <div class="d-flex gap-2 mb-4" data-aos="fade-up">
+            <button class="tab-btn active" onclick="switchTab('profile', this)">Profile</button>
+            <button class="tab-btn" onclick="switchTab('security', this)">Security</button>
+            <button class="tab-btn" onclick="switchTab('notifications', this)">Notifications</button>
+            <button class="tab-btn" onclick="switchTab('emergency', this)">Emergency Contact</button>
+        </div>
+
+        <!-- ═══ TAB: PROFILE ═══ -->
+        <div id="tab-profile" class="tab-content-area">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="settings-section">
+                        <h6>Personal Information</h6>
+                        <!-- Avatar -->
+                        <div class="d-flex align-items-center gap-4 mb-4 pb-4 border-bottom">
+                            <div class="avatar-upload">
+                                <div class="avatar-img" style="background:#1e3a5f;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;font-weight:800;">SR</div>
+                                <div class="avatar-edit"><i class="bi bi-camera"></i></div>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 small">Sarah Rahman</h6>
+                                <p class="extra-small text-muted mb-2">JPG, PNG — Max 2MB. Admin approval required for changes.</p>
+                                <button class="btn btn-sm border extra-small px-3 rounded-3">Change Photo</button>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Full Name</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="Sarah Rahman">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Date of Birth</label>
+                                <input type="date" class="form-control border-0 bg-light py-2 small" value="1994-06-15">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Gender</label>
+                                <select class="form-select border-0 bg-light py-2 small">
+                                    <option selected>Female</option>
+                                    <option>Male</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Nationality</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="Bangladeshi">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Primary Email</label>
+                                <input type="email" class="form-control border-0 bg-light py-2 small" value="sarah.r@example.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Phone Number</label>
+                                <input type="tel" class="form-control border-0 bg-light py-2 small" value="01700-223344">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">NID / Passport No.</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="19940615123456">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Occupation</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="Software Engineer">
+                            </div>
+                            <div class="col-12">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Employer / Company</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="TechCorp Bangladesh Ltd.">
+                            </div>
+                            <div class="col-12">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Permanent Address</label>
+                                <textarea class="form-control border-0 bg-light py-2 small" rows="2">12/B, Mirpur-10, Dhaka-1216</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h6>Household Information</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Total Occupants</label>
+                                <input type="number" class="form-control border-0 bg-light py-2 small" value="3">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Family Members</label>
+                                <input type="number" class="form-control border-0 bg-light py-2 small" value="2">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Co-Occupants</label>
+                                <input type="number" class="form-control border-0 bg-light py-2 small" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Read-only unit info -->
+                    <div class="settings-section">
+                        <h6>Lease Information (Read Only)</h6>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Unit</p>
+                                <strong class="small">Tower A — Floor 4 — Unit 402</strong>
+                            </div>
+                            <div>
+                                <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Agreement Period</p>
+                                <strong class="small">01 Jan 2026 – 31 Dec 2026</strong>
+                            </div>
+                            <div>
+                                <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Monthly Rent</p>
+                                <strong class="small">৳22,000</strong>
+                            </div>
+                            <div>
+                                <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Security Deposit</p>
+                                <strong class="small">৳44,000</strong>
+                            </div>
+                            <div>
+                                <p class="extra-small text-muted mb-1 uppercase fw-bold opacity-60">Resident Status</p>
+                                <span class="badge bg-success-subtle text-success extra-small">Primary Tenant — Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TAB: SECURITY ═══ -->
+        <div id="tab-security" class="tab-content-area" style="display:none;">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="settings-section">
+                        <h6>Change Password</h6>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Current Password</label>
+                                <input type="password" class="form-control border-0 bg-light py-2 small" placeholder="Enter current password">
+                            </div>
+                            <div>
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">New Password</label>
+                                <input type="password" class="form-control border-0 bg-light py-2 small" placeholder="Min 8 characters">
+                            </div>
+                            <div>
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Confirm New Password</label>
+                                <input type="password" class="form-control border-0 bg-light py-2 small" placeholder="Retype new password">
+                            </div>
+                            <button class="btn btn-primary-navy rounded-4 py-2 small fw-bold w-100 mt-1">
+                                <i class="bi bi-lock me-2"></i>Update Password
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h6>Two-Factor Authentication (2FA)</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <p class="small fw-bold mb-1">Authenticator App (TOTP)</p>
+                                <p class="extra-small text-muted mb-0">Use Google Authenticator or Authy for time-based codes.</p>
+                            </div>
+                            <div class="form-check form-switch geist-switch">
+                                <input class="form-check-input" type="checkbox" id="2faSwitch">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="small fw-bold mb-1">SMS Verification</p>
+                                <p class="extra-small text-muted mb-0">Receive OTP on your registered phone number.</p>
+                            </div>
+                            <div class="form-check form-switch geist-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="settings-section">
+                        <h6>Active Sessions</h6>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <i class="bi bi-laptop text-primary"></i>
+                                    <strong class="small">Windows PC — Chrome</strong>
+                                    <span class="badge bg-success-subtle text-success extra-small ms-auto">Current</span>
+                                </div>
+                                <p class="extra-small text-muted mb-0">Dhaka, Bangladesh · 18 Apr 2026</p>
+                            </div>
+                            <div class="p-3 bg-light rounded-3">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <i class="bi bi-phone text-secondary"></i>
+                                    <strong class="small">Android — Samsung</strong>
+                                </div>
+                                <p class="extra-small text-muted mb-1">Dhaka · 15 Apr 2026</p>
+                                <button class="btn btn-sm btn-outline-danger extra-small rounded-3 px-3">Revoke</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="danger-zone mt-0">
+                        <h6 class="fw-bold text-danger mb-3" style="text-transform:none;letter-spacing:0;font-size:0.9rem;">⚠ Danger Zone</h6>
+                        <p class="extra-small text-muted mb-3">Requesting data wipe is irreversible. This will permanently remove your personal data from the portal.</p>
+                        <button class="btn btn-outline-danger btn-sm w-100 rounded-pill extra-small fw-bold py-2">Request Account Data Wipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TAB: NOTIFICATIONS ═══ -->
+        <div id="tab-notifications" class="tab-content-area" style="display:none;">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="settings-section">
+                        <h6>Notification Triggers</h6>
+                        <div class="d-flex flex-column">
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Rent Due Reminder</p>
+                                    <p class="extra-small text-muted mb-0">Auto-trigger 7 days before due date.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Agreement Expiry Alert</p>
+                                    <p class="extra-small text-muted mb-0">Notice 30 days before agreement end.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Maintenance Ticket Updates</p>
+                                    <p class="extra-small text-muted mb-0">When ticket status changes.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">New Invoice Generated</p>
+                                    <p class="extra-small text-muted mb-0">When monthly invoice is ready.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Building Notice Broadcast</p>
+                                    <p class="extra-small text-muted mb-0">Community announcements.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h6>Notification Channels</h6>
+                        <div class="d-flex flex-column">
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Portal Bell Notifications</p>
+                                    <p class="extra-small text-muted mb-0">In-app notification bell with unread count.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">Email Notifications</p>
+                                    <p class="extra-small text-muted mb-0">PDF invoices and receipts via email.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox" checked></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">SMS Alerts</p>
+                                    <p class="extra-small text-muted mb-0">Emergency building broadcasts via mobile.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox"></div>
+                            </div>
+                            <div class="notif-row">
+                                <div>
+                                    <p class="small fw-bold mb-0">WhatsApp Messages</p>
+                                    <p class="extra-small text-muted mb-0">Automated reminders for invoices & receipts.</p>
+                                </div>
+                                <div class="form-check form-switch geist-switch"><input class="form-check-input" type="checkbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TAB: EMERGENCY CONTACT ═══ -->
+        <div id="tab-emergency" class="tab-content-area" style="display:none;">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="settings-section">
+                        <h6>Emergency Contact Information</h6>
+                        <div class="p-3 bg-warning-subtle border border-warning border-opacity-25 rounded-3 mb-4">
+                            <p class="extra-small text-warning-emphasis mb-0">
+                                <i class="bi bi-exclamation-triangle me-1"></i>
+                                This contact will be reached by management in case of emergencies involving you or your unit.
+                            </p>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Contact Full Name</label>
+                                <input type="text" class="form-control border-0 bg-light py-2 small" value="Ahmed Rahman">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Relationship</label>
+                                <select class="form-select border-0 bg-light py-2 small">
+                                    <option selected>Spouse</option>
+                                    <option>Parent</option>
+                                    <option>Sibling</option>
+                                    <option>Friend</option>
+                                    <option>Colleague</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Phone Number</label>
+                                <input type="tel" class="form-control border-0 bg-light py-2 small" value="01900-556677">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Alternative Phone</label>
+                                <input type="tel" class="form-control border-0 bg-light py-2 small" placeholder="Optional">
+                            </div>
+                            <div class="col-12">
+                                <label class="extra-small fw-bold text-muted mb-2 uppercase">Contact Address</label>
+                                <textarea class="form-control border-0 bg-light py-2 small" rows="2" placeholder="Full address of emergency contact">15/C, Mohammadpur, Dhaka-1207</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="settings-section">
+                        <h6>Current Emergency Contact</h6>
+                        <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4">
+                            <div class="profile-avatar" style="width:44px;height:44px;font-size:0.8rem;">AR</div>
+                            <div>
+                                <h6 class="mb-0 small fw-bold">Ahmed Rahman</h6>
+                                <p class="mb-0 extra-small text-muted">Spouse · 01900-556677</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="billing-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Bills</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item active">
+            <i class="bi bi-person-circle-fill"></i>
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+    AOS.init({ once: true, duration: 600, offset: 0 });
+
+    function switchTab(tab, btn) {
+        document.querySelectorAll('.tab-content-area').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + tab).style.display = '';
+        btn.classList.add('active');
+    }
+
+    function saveSettings() {
+        const btn = event.target;
+        btn.innerHTML = '<i class="bi bi-check2 me-2"></i>Saved!';
+        btn.classList.add('btn-success');
+        setTimeout(() => {
+            btn.innerHTML = '<i class="bi bi-check2 me-2"></i>Save Changes';
+            btn.classList.remove('btn-success');
+        }, 2500);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Management - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+    
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Command Center</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">JS</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+<div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard.html" class="nav-item-geist"><i class="bi bi-grid-1x2-fill"></i> Overview</a>
+                <a href="buildings.html" class="nav-item-geist"><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units.html" class="nav-item-geist active"><i class="bi bi-door-closed"></i> Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners.html" class="nav-item-geist"><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants.html" class="nav-item-geist"><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance.html" class="nav-item-geist"><i class="bi bi-tools"></i> Maintenance <span class="badge bg-danger ms-auto rounded-pill">4</span></a>
+                <a href="notices.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings.html" class="nav-item-geist"><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers.html" class="nav-item-geist"><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports.html" class="nav-item-geist"><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors.html" class="nav-item-geist"><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="user-roles.html" class="nav-item-geist"><i class="bi bi-person-gear"></i> User Roles</a>
+                <a href="settings.html" class="nav-item-geist"><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">JS</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">James Sterling</h6>
+                        <p class="profile-role">Super Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Unit Inventory</h2>
+                    <p class="text-muted mb-0">Managing 142 units across 12 buildings.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm">
+                        <i class="bi bi-download me-2"></i> Export
+                    </button>
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="create" data-id="NEW_UNIT">
+                        <i class="bi bi-plus-lg me-2"></i> Add Unit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Asset Intelligence Layer -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <!-- Unit ROI Matrix -->
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center">
+                            <h5 class="fw-bold mb-0">Unit ROI Efficiency Matrix</h5>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark extra-small border">Revenue Score</span>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <tbody class="extra-small">
+                                    <tr class="border-bottom">
+                                        <td class="ps-4 py-3"><span class="fw-bold">Apt 402</span><br><span class="text-muted">Imperial Heights</span></td>
+                                        <td><div class="progress" style="height: 4px; width: 60px;"><div class="progress-bar bg-success" style="width: 92%;"></div></div></td>
+                                        <td><span class="fw-bold">৳120K/mo</span></td>
+                                        <td class="text-success pe-4 fw-bold">+8.2% Yield</td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="ps-4 py-3"><span class="fw-bold">Off 801</span><br><span class="text-muted">Skyline Plaza</span></td>
+                                        <td><div class="progress" style="height: 4px; width: 60px;"><div class="progress-bar bg-primary" style="width: 76%;"></div></div></td>
+                                        <td><span class="fw-bold">৳540K/mo</span></td>
+                                        <td class="text-primary pe-4 fw-bold">+6.4% Yield</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4 py-3"><span class="fw-bold">Shop 04</span><br><span class="text-muted">Imperial Heights</span></td>
+                                        <td><div class="progress" style="height: 4px; width: 60px;"><div class="progress-bar bg-warning" style="width: 45%;"></div></div></td>
+                                        <td><span class="fw-bold">৳320K/mo</span></td>
+                                        <td class="text-warning pe-4 fw-bold">+4.1% Yield</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Utility Consumption Heatmap -->
+                <div class="col-lg-5">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Grid Consumption Pulse</h5>
+                            <i class="bi bi-lightning-charge text-warning"></i>
+                        </div>
+                        <div class="d-flex align-items-end gap-1 h-100 mb-4" style="min-height: 120px;">
+                            <div class="bg-primary-navy rounded-top opacity-25" style="width: 10%; height: 40%;"></div>
+                            <div class="bg-primary-navy rounded-top opacity-25" style="width: 10%; height: 60%;"></div>
+                            <div class="bg-primary-navy rounded-top opacity-50" style="width: 10%; height: 80%;"></div>
+                            <div class="bg-primary-navy rounded-top opacity-75" style="width: 10%; height: 50%;"></div>
+                            <div class="bg-primary-navy rounded-top" style="width: 10%; height: 90%;"></div>
+                            <div class="bg-primary-navy rounded-top" style="width: 10%; height: 100%;"></div>
+                            <div class="bg-primary-navy rounded-top opacity-75" style="width: 10%; height: 70%;"></div>
+                        </div>
+                        <div class="d-flex justify-content-between extra-small text-muted mt-2">
+                            <span>MON</span>
+                            <span>WED</span>
+                            <span>FRI</span>
+                            <span class="fw-bold text-dark">SUN (PEAK)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters & Building Selector -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+                            <div class="d-flex gap-2">
+                                <select class="form-select border-0 shadow-sm rounded-4 px-4" style="width: 220px;">
+                                    <option>All Buildings</option>
+                                    <option>Imperial Heights</option>
+                                    <option>Skyline Plaza</option>
+                                    <option>Emerald Gardens</option>
+                                </select>
+                                <select class="form-select border-0 shadow-sm rounded-4 px-4" style="width: 150px;">
+                                    <option>All Floors</option>
+                                    <option>Ground Floor</option>
+                                    <option>1st Floor</option>
+                                    <option>2nd Floor</option>
+                                </select>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <div class="btn-group shadow-sm rounded-4">
+                                    <button class="btn btn-white border-0 active px-3"><i class="bi bi-grid"></i></button>
+                                    <button class="btn btn-white border-0 px-3"><i class="bi bi-list-task"></i></button>
+                                </div>
+                                <div class="input-group shadow-sm rounded-4 overflow-hidden" style="width: 300px;">
+                                    <span class="input-group-text bg-white border-0"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control border-0 px-2" placeholder="Search Unit # or Tenant...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit Grid -->
+            <div class="row g-4 mb-5">
+                <!-- Unit 1 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bg-white border rounded-4 p-4 shadow-sm h-100 transition-hover">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">Apt 402</h5>
+                            <span class="badge bg-success-subtle text-success extra-small">Vacant</span>
+                        </div>
+                        <p class="extra-small text-muted mb-3"><i class="bi bi-geo-alt me-1"></i> Imperial Heights • 4th Floor</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-3">
+                            <span><i class="bi bi-door-open me-1"></i> 3 Bed</span>
+                            <span><i class="bi bi-droplet me-1"></i> 3 Bath</span>
+                            <span><i class="bi bi-bounding-box me-1"></i> 1850 ft²</span>
+                        </div>
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="fw-bold small">$1,200/mo</span>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="View Detail" data-action="view" data-id="APT-402"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="APT-402"><i class="bi bi-pencil-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 2 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="unit-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">Apt 12B</h5>
+                            <span class="badge bg-primary-subtle text-primary extra-small">Occupied</span>
+                        </div>
+                        <p class="extra-small text-muted mb-1"><i class="bi bi-geo-alt me-1"></i> Skyline Plaza • 12th Floor</p>
+                        <p class="extra-small fw-bold text-dark mb-3"><i class="bi bi-person me-1"></i> Sarah Jenkins</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-3">
+                            <span><i class="bi bi-door-open me-1"></i> 2 Bed</span>
+                            <span><i class="bi bi-droplet me-1"></i> 2 Bath</span>
+                            <span><i class="bi bi-bounding-box me-1"></i> 1450 ft²</span>
+                        </div>
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="fw-bold small">$1,850/mo</span>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="View Detail" data-action="view" data-id="APT-12B"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="APT-12B"><i class="bi bi-pencil-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 3 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="unit-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">Shop 04</h5>
+                            <span class="badge bg-warning-subtle text-warning extra-small">Booked</span>
+                        </div>
+                        <p class="extra-small text-muted mb-3"><i class="bi bi-geo-alt me-1"></i> Imperial Heights • Ground</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-3">
+                            <span><i class="bi bi-shop me-1"></i> Retail</span>
+                            <span><i class="bi bi-bounding-box me-1"></i> 850 ft²</span>
+                        </div>
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="fw-bold small">$3,200/mo</span>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="View Detail" data-action="view" data-id="SHOP-04"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="SHOP-04"><i class="bi bi-pencil-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 4 -->
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="unit-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">Off 801</h5>
+                            <span class="badge bg-danger-subtle text-danger extra-small">Repair</span>
+                        </div>
+                        <p class="extra-small text-muted mb-3"><i class="bi bi-geo-alt me-1"></i> Skyline Plaza • 8th Floor</p>
+                        <div class="d-flex justify-content-between align-items-center extra-small mb-3">
+                            <span><i class="bi bi-building me-1"></i> Office</span>
+                            <span><i class="bi bi-bounding-box me-1"></i> 2400 ft²</span>
+                        </div>
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="fw-bold small">$5,400/mo</span>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="View Detail" data-action="view" data-id="OFF-801"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-light border p-1 px-2 rounded-3 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="OFF-801"><i class="bi bi-pencil-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Table View (Hidden by default or shown on toggle) -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h5 class="fw-bold mb-4">Unit Analytics</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table-geist">
+                                <thead>
+                                    <tr>
+                                        <th class="extra-small text-muted uppercase">Unit</th>
+                                        <th class="extra-small text-muted uppercase">Type</th>
+                                        <th class="extra-small text-muted uppercase">Status</th>
+                                        <th class="extra-small text-muted uppercase">Occupancy</th>
+                                        <th class="extra-small text-muted uppercase">Last Rent</th>
+                                        <th class="extra-small text-muted uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="small fw-bold">Apt 402</td>
+                                        <td class="small">Residential</td>
+                                        <td><span class="badge bg-success-subtle text-success extra-small">Vacant</span></td>
+                                        <td><span class="small">0%</span></td>
+                                        <td class="small">$1,200.00</td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-light border rounded-3 p-1 px-2 shadow-sm-hover" title="View Details" data-action="view" data-id="APT-402"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 p-1 px-2 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="APT-402"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-light-subtle border rounded-3 p-1 px-2 text-danger shadow-sm-hover" title="Delete Unit" data-action="delete" data-id="APT-402"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="small fw-bold">Apt 12B</td>
+                                        <td class="small">Residential</td>
+                                        <td><span class="badge bg-primary-subtle text-primary extra-small">Occupied</span></td>
+                                        <td><span class="small">100% (Sarah J.)</span></td>
+                                        <td class="small">$1,850.00</td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-light border rounded-3 p-1 px-2 shadow-sm-hover" title="View Details" data-action="view" data-id="APT-12B"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-light border rounded-3 p-1 px-2 shadow-sm-hover" title="Edit Unit" data-action="edit" data-id="APT-12B"><i class="bi bi-pencil"></i></button>
+                                                <button class="btn btn-sm btn-light-subtle border rounded-3 p-1 px-2 text-danger shadow-sm-hover" title="Delete Unit" data-action="delete" data-id="APT-12B"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Overview</span>
+        </a>
+        <a href="buildings.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Ops</span>
+        </a>
+        <a href="settings.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

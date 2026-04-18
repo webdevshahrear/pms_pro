@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The Imperial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Floating Pill Navbar -->
+    <nav class="navbar-geist">
+        <div class="d-flex align-items-center">
+            <button class="navbar-mobile-toggle d-md-none me-3" aria-label="Toggle Menu">
+                <i class="bi bi-list fs-3"></i>
+            </button>
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                </svg>
+                The Imperial
+            </a>
+        </div>
+        <ul class="nav-links d-none d-md-flex mb-0">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link active">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="properties.html" class="nav-link">Properties</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+            <a href="login.html" class="btn-geist-secondary d-none d-sm-block" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Portal Login</a>
+            <a href="contact.html" class="btn-geist" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Inquiry</a>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <button class="navbar-mobile-toggle position-absolute top-0 end-0 m-4 text-white p-2" aria-label="Close Menu">
+            <i class="bi bi-x-lg fs-2"></i>
+        </button>
+        <a href="index.html" class="mobile-nav-link" style="transition-delay: 0.1s;">Home</a>
+        <a href="about.html" class="mobile-nav-link" style="transition-delay: 0.2s;">About</a>
+        <a href="services.html" class="mobile-nav-link" style="transition-delay: 0.3s;">Services</a>
+        <a href="properties.html" class="mobile-nav-link" style="transition-delay: 0.4s;">Properties</a>
+        <a href="login.html" class="btn btn-outline-light rounded-pill px-5 py-3 mt-4">Resident Login</a>
+    </div>
+
+    <!-- Mobile Floating Action Button (FAB) -->
+    <a href="contact.html" class="fab-inquiry d-md-none shadow-lg">
+        <i class="bi bi-chat-dots-fill"></i>
+    </a>
+
+    <!-- Page Header (Atmospheric Aura) -->
+    <header class="page-header about-hero-aura" style="padding-top: 180px; padding-bottom: 100px;">
+        <div class="container text-center" data-aos="fade-up">
+            <span class="geist-badge mb-3">ESTABLISHED 1998</span>
+            <h1 class="display-3 fw-extrabold text-primary-navy mb-4">
+                Pioneering the Future of <br><span class="text-reveal-gradient">Property Intelligence.</span>
+            </h1>
+            <p class="lead text-muted mx-auto mb-5" style="max-width: 800px;">
+                The Imperial provides high-performance property ecosystems, blending advanced data automation with unparalleled architectural governance.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="services.html" class="btn-geist py-3 px-5 fs-5">Our Capabilities</a>
+                <a href="contact.html" class="btn-geist-secondary py-3 px-5 fs-5">Contact Concierge</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Genesis Story (Bento Style) -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5" data-aos="fade-right">
+                    <span class="geist-badge mb-3">GENESIS</span>
+                    <h2 class="display-4 fw-extrabold text-primary-navy mb-4">Bridging masonry <br>and digital logic.</h2>
+                    <p class="text-muted fs-5 mb-4">We recognized early on that luxury real estate required more than just physical maintenance—it required a digital operating system.</p>
+                    <div class="row g-4 mt-2">
+                        <div class="col-sm-6">
+                            <div class="p-4 border rounded-4 bg-light-subtle shadow-sm-hover transition h-100">
+                                <h3 class="display-5 fw-bold text-primary-navy mb-1 stat-aura">500+</h3>
+                                <p class="small text-muted mb-0">Luxury Units Managed</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-4 border rounded-4 bg-light-subtle shadow-sm-hover transition h-100">
+                                <h3 class="display-5 fw-bold text-primary-navy mb-1 stat-aura">99.9%</h3>
+                                <p class="small text-muted mb-0">System Uptime</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <div class="glass-deep p-3 rounded-4 shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80" alt="Imperial Command Center" class="img-fluid rounded-3 shadow-lg border">
+                        </div>
+                        <div class="position-absolute bottom-0 start-0 transform translate-x-n25 translate-y-25 d-none d-md-block" style="z-index: 2;">
+                            <div class="glass-deep p-4 rounded-4 shadow-xl border-accent-blue" style="max-width: 240px; border-width: 2px !important;">
+                                <i class="bi bi-shield-check text-primary fs-3 mb-2 d-block"></i>
+                                <p class="mb-0 small fw-bold text-primary-navy upper">TRUST PROTOCOL</p>
+                                <p class="mb-0 text-muted smaller">Advanced structural governance enabled.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restored Alternating Timeline (User Preference) -->
+    <section class="section-padding overflow-hidden bg-light-subtle">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="geist-badge mb-3">OUR JOURNEY</span>
+                <h2 class="display-5 fw-bold text-primary-navy">Milestones of Excellence</h2>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-event left-event" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <span class="timeline-date">1998</span>
+                        <h4 class="fw-bold text-primary-navy">The Foundation</h4>
+                        <p class="text-muted mb-0 small">Started as a boutique property consultancy with a vision to revolutionize urban living standards and structural governance.</p>
+                    </div>
+                </div>
+                <div class="timeline-event right-event" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2005</span>
+                        <h4 class="fw-bold text-primary-navy">Imperial Tower 1</h4>
+                        <p class="text-muted mb-0 small">Completed our first signature high-rise, setting a new benchmark for structural integrity and early IoT integration.</p>
+                    </div>
+                </div>
+                <div class="timeline-event left-event" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2012</span>
+                        <h4 class="fw-bold text-primary-navy">Digital Transformation</h4>
+                        <p class="text-muted mb-0 small">Launched the first version of our Asset Management Portal, digitizing 500+ units across the city's key hubs.</p>
+                    </div>
+                </div>
+                <div class="timeline-event right-event" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2020</span>
+                        <h4 class="fw-bold text-primary-navy">Imperial OS v1.0</h4>
+                        <p class="text-muted mb-0 small">Introduced the industry's first cloud-native operating system for total luxury real estate administration.</p>
+                    </div>
+                </div>
+                <div class="timeline-event left-event" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2026</span>
+                        <h4 class="fw-bold text-primary-navy">AI-Driven Evolution</h4>
+                        <p class="text-muted mb-0 small">Expanding into predictive maintenance logic and global portfolio transparency for elite stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governance & Trust (High-Density Cards) -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-lg-4">
+                    <div class="p-5 border rounded-4 bg-light-subtle h-100 shadow-sm transition">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Portfolio Scale</h5>
+                            <i class="bi bi-graph-up-arrow text-success"></i>
+                        </div>
+                        <h2 class="display-5 fw-bold text-primary-navy mb-2 stat-aura">৳4.2B</h2>
+                        <p class="text-muted small">Total Managed Asset Value 2026</p>
+                        <div class="mt-4 pt-3 border-top border-subtle">
+                            <div class="d-flex justify-content-between extra-small fw-bold">
+                                <span class="text-primary uppercase">Portfolio CAGR (5Y):</span>
+                                <span class="text-success">+24.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="p-5 glass-deep h-100 border-2" style="border-color: var(--primary-navy) !important;">
+                        <span class="badge bg-primary-navy text-white mb-4 p-2 px-3">GOVERNANCE & TRUST</span>
+                        <h3 class="display-6 fw-bold text-primary-navy mb-4">A Legacy Built on <br>Surgical Transparency.</h3>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-4 bg-white border rounded-4 shadow-sm-hover transition">
+                                    <i class="bi bi-shield-check fs-2 text-primary mb-2 d-block"></i>
+                                    <h6 class="fw-bold mb-1">ISO 27001</h6>
+                                    <p class="extra-small text-muted m-0">Information Security</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4 bg-white border rounded-4 shadow-sm-hover transition">
+                                    <i class="bi bi-patch-check fs-2 text-primary mb-2 d-block"></i>
+                                    <h6 class="fw-bold mb-1">LEED Gold</h6>
+                                    <p class="extra-small text-muted m-0">Environmental</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4 bg-white border rounded-4 shadow-sm-hover transition">
+                                    <i class="bi bi-bank fs-2 text-primary mb-2 d-block"></i>
+                                    <h6 class="fw-bold mb-1">RAK Regulatory</h6>
+                                    <p class="extra-small text-muted m-0">Global Compliance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Aura -->
+    <section class="section-padding bg-light-subtle">
+        <div class="container text-center mb-5" data-aos="fade-up">
+            <span class="geist-badge mb-3">LEADERSHIP</span>
+            <h2 class="display-5 fw-extrabold text-primary-navy">The Minds Behind The Engine</h2>
+        </div>
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="team-card-premium h-100">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="CEO" class="team-img-premium">
+                        <h4 class="fw-bold text-primary-navy">Julian Sterling</h4>
+                        <p class="text-primary fw-bold small uppercase mb-4">Chief Executive Officer</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-twitter-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-card-premium h-100">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="COO" class="team-img-premium">
+                        <h4 class="fw-bold text-primary-navy">Sarah Al-Farabi</h4>
+                        <p class="text-primary fw-bold small uppercase mb-4">Chief Operations Officer</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-envelope-fill"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-card-premium h-100">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="VPE" class="team-img-premium">
+                        <h4 class="fw-bold text-primary-navy">Marcus Vane</h4>
+                        <p class="text-primary fw-bold small uppercase mb-4">VP of Engineering</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="icon-box shadow-lg" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; color: var(--primary-navy); background: #f8f9fa;"><i class="bi bi-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnerships -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="geist-badge" data-aos="fade-up">NETWORK</span>
+                <h2 class="display-6 fw-bold text-primary-navy" data-aos="fade-up">Strategic Alliances</h2>
+            </div>
+            <div class="partner-wall" data-aos="fade-up">
+                <img src="assets/images/partners.png" alt="Strategic Partners Logo Wall" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Premium Footer Section -->
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Column 1: Brand & Social -->
+                <div class="col-lg-4">
+                    <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center mb-4">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="me-2">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                        </svg>
+                        <span class="fs-4 fw-bold text-primary-navy">The Imperial</span>
+                    </a>
+                    <p class="mb-4 lh-lg">Empowering luxury real estate with the world's most advanced property management operating system. Experience the future of living.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-social-link"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="footer-social-link"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Platform -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-title-modern">Resources</h6>
+                    <nav>
+                        <a href="login.html" class="footer-link-modern">Resident Portal</a>
+                        <a href="faq.html" class="footer-link-modern">Knowledge Base</a>
+                        <a href="contact.html" class="footer-link-modern">Contact Support</a>
+                        <a href="about.html" class="footer-link-modern">Corporate Info</a>
+                        <a href="terms-conditions.html" class="footer-link-modern">Legal Terms</a>
+                    </nav>
+                </div>
+
+                <!-- Column 3: Inventory -->
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-title-modern">Inventory</h6>
+                    <nav>
+                        <a href="properties.html" class="footer-link-modern">All Units</a>
+                        <a href="flats-for-sale.html" class="footer-link-modern">For Sale</a>
+                        <a href="flats-for-rent.html" class="footer-link-modern">For Rent</a>
+                        <a href="commercial-spaces.html" class="footer-link-modern">Commercial</a>
+                        <a href="buildings.html" class="footer-link-modern">Project View</a>
+                    </nav>
+                </div>
+
+                <!-- Column 4: Corporate -->
+                <div class="col-lg-4">
+                    <h6 class="footer-title-modern">Direct Inquiry</h6>
+                    <p class="small mb-4">Stay updated with the latest off-plan releases and project milestones globally.</p>
+                    <div class="position-relative">
+                        <input type="email" class="newsletter-input" placeholder="Your executive email...">
+                        <button class="btn btn-primary rounded-circle position-absolute end-0 top-0 mt-1 me-1 shadow-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4 pt-2">
+                        <a href="about.html" class="footer-link-modern d-inline-block me-3">About Us</a>
+                        <a href="contact.html" class="footer-link-modern d-inline-block">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top mt-5 pt-4" style="border-color: rgba(30, 58, 95, 0.08) !important;">
+                <p class="small mb-0">&copy; 2026 Imperial Inc. All rights reserved.</p>
+                <div class="d-flex gap-4 mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="footer-link-modern small mb-0">Privacy Policy</a>
+                    <a href="terms-conditions.html" class="footer-link-modern small mb-0">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/8801711223344" class="wa-float" target="_blank" title="Chat on WhatsApp">
+        <span class="wa-tooltip">Chat with us!</span>
+        <i class="bi bi-whatsapp"></i>
+    </a>
+</body>
+</html>

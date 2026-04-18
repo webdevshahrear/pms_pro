@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Flats - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Owner Console</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">FO</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar (Role: Flat Owner) -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-flat-owner.html" class="nav-item-geist "><i class="bi bi-grid"></i> Dashboard</a>
+                <a href="units-flat-owner.html" class="nav-item-geist active"><i class="bi bi-door-closed"></i> My Flats</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings-flat-owner.html" class="nav-item-geist "><i class="bi bi-tags"></i> My Listings</a>
+                <a href="transfers-flat-owner.html" class="nav-item-geist "><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Finance</p>
+                <a href="statements-flat-owner.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Statements</a>
+                <a href="documents-flat-owner.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="notices-flat-owner.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Admin Notices</a>
+                <a href="settings-flat-owner.html" class="nav-item-geist "><i class="bi bi-gear"></i> Profile Settings</a>
+            </nav>
+
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">FO</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Flat Owner</h6>
+                        <p class="profile-role">Individual Owner</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">My Owned Flats</h2>
+                    <p class="text-muted mb-0">Manage residency and operational status of your individual units.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                     <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="create" data-id="TRANSFER">
+                        <i class="bi bi-arrow-left-right me-2"></i> Register Transfer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Unit KPI Summary -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="glass-widget">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Total Units</p>
+                        <h3 class="fw-bold mb-0">3</h3>
+                        <p class="text-muted extra-small mt-2 mb-0">Verified Ownership Assets</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-widget">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Current Occupancy</p>
+                        <h3 class="fw-bold mb-0">66%</h3>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-primary-navy" style="width: 66%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-widget border-primary">
+                        <p class="text-muted extra-small fw-bold uppercase mb-1">Est. Monthly Income</p>
+                        <h3 class="fw-bold mb-0 text-primary-navy">$6,300</h3>
+                        <p class="text-primary extra-small mt-2 mb-0">From active rentals</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Units Explorer -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-md-6 col-lg-4">
+                    <div class="p-4 bg-white rounded-5 border shadow-sm shadow-sm-hover transition">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-success-subtle text-success extra-small mb-2">RENTED</span>
+                                <h6 class="fw-bold mb-1">Apt 405, Tower A</h6>
+                                <p class="extra-small text-muted mb-0">4th Floor • 1,450 SQFT</p>
+                            </div>
+                            <div class="icon-box bg-light p-2 px-3 rounded-4"><i class="bi bi-house-door text-primary"></i></div>
+                        </div>
+                        <div class="p-3 bg-light rounded-4 mb-4">
+                            <h6 class="extra-small fw-bold text-muted mb-2 uppercase">Resident Detail</h6>
+                            <p class="small fw-bold mb-1">Sarah Jenkins</p>
+                            <p class="extra-small text-muted mb-0">Ends 31 Dec 2026</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary-navy">$2,800/mo</span>
+                            <button class="btn btn-sm btn-white border px-3 rounded-pill extra-small fw-bold" data-action="view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="p-4 bg-white rounded-5 border shadow-sm shadow-sm-hover transition">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-success-subtle text-success extra-small mb-2">RENTED</span>
+                                <h6 class="fw-bold mb-1">Apt 12B, Tower A</h6>
+                                <p class="extra-small text-muted mb-0">12th Floor • 1,200 SQFT</p>
+                            </div>
+                            <div class="icon-box bg-light p-2 px-3 rounded-4"><i class="bi bi-house-door text-primary"></i></div>
+                        </div>
+                        <div class="p-3 bg-light rounded-4 mb-4">
+                            <h6 class="extra-small fw-bold text-muted mb-2 uppercase">Resident Detail</h6>
+                            <p class="small fw-bold mb-1">Michael Chen</p>
+                            <p class="extra-small text-muted mb-0">Ends 20 Aug 2026</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary-navy">$3,500/mo</span>
+                            <button class="btn btn-sm btn-white border px-3 rounded-pill extra-small fw-bold" data-action="view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="p-4 bg-white rounded-5 border-dashed border-primary shadow-sm shadow-sm-hover transition" style="border: 2px dashed #0070f31a;">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-primary extra-small mb-2">LISTED</span>
+                                <h6 class="fw-bold mb-1">Shop 04, Tower A</h6>
+                                <p class="extra-small text-muted mb-0">Ground Floor • 1,200 SQFT</p>
+                            </div>
+                            <div class="icon-box bg-primary p-2 px-3 rounded-4 text-white"><i class="bi bi-shop"></i></div>
+                        </div>
+                        <div class="p-3 bg-primary-subtle rounded-4 mb-4">
+                            <h6 class="extra-small fw-bold text-primary mb-2 uppercase">Market Status</h6>
+                            <p class="small fw-bold mb-1">Active Listing</p>
+                            <p class="extra-small text-muted mb-0">24 Inquiries Received</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary-navy">$4,200/mo</span>
+                            <a href="listings-flat-owner.html" class="btn btn-sm btn-geist px-3 rounded-pill extra-small fw-bold">Manage Listing</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-grid-fill"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="units-flat-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-door-closed"></i>
+            <span>My Flats</span>
+        </a>
+        <a href="statements-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="settings-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

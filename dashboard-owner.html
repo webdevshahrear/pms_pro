@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Portfolio - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Portfolio Intelligence</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">SW</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-owner.html" class="nav-item-geist active"><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-owner.html" class="nav-item-geist "><i class="bi bi-buildings"></i> My Buildings</a>
+                <a href="units-owner.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> My Units</a>
+
+                <p class="nav-category">Stakeholders</p>
+                <a href="tenants-owner.html" class="nav-item-geist "><i class="bi bi-people"></i> Resident Base</a>
+
+                <p class="nav-category">Operations</p>
+                <a href="billing-owner.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Revenue Stream</a>
+                <a href="maintenance-owner.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maint. Overview</a>
+                <a href="notices-owner.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Notice Board</a>
+
+                <p class="nav-category">Intelligence</p>
+                <a href="statements-owner.html" class="nav-item-geist "><i class="bi bi-bar-chart-line"></i> Statements</a>
+                <a href="documents-owner.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+
+                <p class="nav-category">System</p>
+                <a href="settings-owner.html" class="nav-item-geist "><i class="bi bi-gear"></i> Settings</a>
+            </nav>
+
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">SW</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Sheikh Waqas</h6>
+                        <p class="profile-role">Portfolio Owner</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <!-- Top Header -->
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Portfolio Intelligence</h2>
+                    <p class="text-muted mb-0">High-level financial and operational summary of your estates.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-geist-secondary rounded-4 px-4 py-2 border shadow-sm" data-action="export">
+                        <i class="bi bi-download me-2"></i> Annual Statement
+                    </button>
+                    <button class="btn btn-geist rounded-4 px-4 py-2 border shadow-sm" data-action="view">
+                        <i class="bi bi-eye me-2"></i> Property Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portfolio Summary (PRD 17.3) -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100">
+                        <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-50">My Buildings</p>
+                        <h4 class="fw-bold mb-0">2</h4>
+                        <p class="text-muted extra-small mt-2 mb-0">Imperial Tower A & B</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100">
+                        <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-50">Total Units</p>
+                        <h4 class="fw-bold mb-0">850</h4>
+                        <p class="text-success extra-small mt-2 mb-0">100% Licensed</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100" style="border-left: 4px solid var(--accent-green) !important;">
+                        <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-50">Occupancy Rate</p>
+                        <h4 class="fw-bold mb-0 text-success">98.5%</h4>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-success" style="width: 98.5%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100" style="background: var(--light-blue-bg);">
+                        <p class="text-muted extra-small fw-bold mb-2 uppercase opacity-50">Monthly Income</p>
+                        <h4 class="fw-bold mb-0 text-primary-navy">$1.24M</h4>
+                        <p class="text-primary-navy opacity-50 extra-small mt-2 mb-0">Est. Net Yield: 8.4%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Trend Hub -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Net Rental Revenue Trend</h5>
+                            <button class="btn btn-white border rounded-pill px-3 extra-small">Last 12 Months</button>
+                        </div>
+                        <div id="revenueExpenseChart" style="min-height: 350px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden d-flex flex-column">
+                        <div class="p-4 bg-primary text-white">
+                            <h6 class="fw-bold small mb-3">Asset Distribution</h6>
+                            <div class="d-flex justify-content-between align-items-end mb-4">
+                                <h2 class="fw-bold mb-0">$142M</h2>
+                                <p class="extra-small opacity-75 m-0 mb-1">Total Portfolio Value</p>
+                            </div>
+                        </div>
+                        <div class="p-4 flex-grow-1">
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span>Residential (Towers)</span>
+                                    <span class="fw-bold">85%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;"><div class="progress-bar" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span>Commercial (Plaza)</span>
+                                    <span class="fw-bold">15%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;"><div class="progress-bar bg-info" style="width: 15%;"></div></div>
+                            </div>
+                            <button class="btn btn-geist-secondary w-100 mt-4 rounded-3 py-2 extra-small border">Asset Appraisal History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Assets Table -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h5 class="fw-bold mb-4">My Estate Assets</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table-geist">
+                                <thead>
+                                    <tr class="extra-small text-muted uppercase">
+                                        <th>Building</th>
+                                        <th>Location</th>
+                                        <th>Total Units</th>
+                                        <th>Occupancy</th>
+                                        <th>Revenue (Mo)</th>
+                                        <th>Yield</th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="stats-icon bg-light-blue text-primary-navy"><i class="bi bi-buildings"></i></div>
+                                                <span class="small fw-bold text-primary-navy">Imperial Tower A</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="extra-small text-muted">Gulshan, Dhaka</span></td>
+                                        <td><span class="small">425</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress flex-grow-1" style="height: 4px; min-width: 50px;"><div class="progress-bar bg-success" style="width: 99%;"></div></div>
+                                                <span class="extra-small fw-bold">99%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="small fw-bold">$620,000</span></td>
+                                        <td><span class="badge bg-primary-subtle text-primary extra-small">8.5%</span></td>
+                                        <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">Prime Performance</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="stats-icon bg-light-blue text-primary-navy"><i class="bi bi-buildings-fill"></i></div>
+                                                <span class="small fw-bold text-primary-navy">Imperial Tower B</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="extra-small text-muted">Gulshan, Dhaka</span></td>
+                                        <td><span class="small">425</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="progress flex-grow-1" style="height: 4px; min-width: 50px;"><div class="progress-bar bg-success" style="width: 98%;"></div></div>
+                                                <span class="extra-small fw-bold">98%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="small fw-bold">$605,000</span></td>
+                                        <td><span class="badge bg-primary-subtle text-primary extra-small">8.2%</span></td>
+                                        <td class="text-end"><span class="badge bg-success-subtle text-success extra-small">Prime Performance</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maintenance & Yield Section -->
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="fw-bold mb-0">Maintenance Cost vs. Reserve</h6>
+                            <span class="extra-small text-muted">Building A+B Aggregated</span>
+                        </div>
+                        <div id="expenseCategoryChart" style="min-height: 250px;"></div>
+                        <p class="extra-small text-muted mt-3">Maintenance expenditure is currently 12% below reserve budget. Savings are being diverted to the Green Energy Fund.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white border rounded-4 shadow-sm p-4 h-100">
+                        <h6 class="fw-bold mb-4">Latest Portfolio Notices</h6>
+                        <div class="list-group list-group-flush gap-3">
+                            <div class="d-flex align-items-start gap-3 p-3 border rounded-4 bg-light shadow-sm-hover transition">
+                                <div class="icon-box bg-primary text-white p-2 px-3 rounded-3"><i class="bi bi-lightning-charge"></i></div>
+                                <div>
+                                    <h6 class="mb-1 small fw-bold">Solar Upgrade Confirmation</h6>
+                                    <p class="mb-0 extra-small text-muted">Scheduled for Tower B in Q4. Estimated 40% reduction in communal energy costs.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-3 p-3 border rounded-4 bg-light shadow-sm-hover transition">
+                                <div class="icon-box bg-success text-white p-2 px-3 rounded-3"><i class="bi bi-shield-check"></i></div>
+                                <div>
+                                    <h6 class="mb-1 small fw-bold">Insurance Policy Renewal</h6>
+                                    <p class="mb-0 extra-small text-muted">Global estate insurance renewed with Allianz. Premium optimized by 5%.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-white w-100 border rounded-3 mt-4 py-2 extra-small fw-bold" data-action="view">Read Admin Briefing</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Portfolio</span>
+        </a>
+        <a href="units-owner.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Units</span>
+        </a>
+        <a href="billing-owner.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Revenue</span>
+        </a>
+        <a href="settings-owner.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-owner.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-owner.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="statements-owner.html" class="bottom-nav-item">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Reports</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

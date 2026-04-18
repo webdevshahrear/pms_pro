@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .ticket-card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:1.25rem 1.5rem; transition:all 0.3s; position:relative; overflow:hidden; }
+        .ticket-card:hover { box-shadow:0 10px 30px rgba(30,58,95,0.08); transform:translateY(-3px); }
+        .ticket-card .status-bar { position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:4px 0 0 4px; }
+        .status-bar.open     { background:#dc2626; }
+        .status-bar.assigned { background:#d97706; }
+        .status-bar.progress { background:#2b7be8; }
+        .status-bar.completed{ background:#16a34a; }
+        .status-bar.closed   { background:#9ca3af; }
+        .status-bar.rejected { background:#e11d48; }
+        .priority-pill { font-size:0.65rem; padding:3px 10px; border-radius:100px; font-weight:800; }
+        .star-rating { display:flex; gap:4px; font-size:1.2rem; color:#d1d5db; cursor:pointer; }
+        .star-rating .star:hover, .star-rating .star.active { color:#f59e0b; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Support Hub</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TN</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar-geist">
+        <div class="px-3 mb-5">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/></svg>
+                Imperial OS
+            </a>
+        </div>
+        <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+            <p class="nav-category">Primary</p>
+            <a href="dashboard-tenant.html" class="nav-item-geist"><i class="bi bi-house-door"></i> My Residence</a>
+            <a href="billing-tenant.html" class="nav-item-geist"><i class="bi bi-receipt"></i> Monthly Bills</a>
+            <a href="maintenance-tenant.html" class="nav-item-geist active"><i class="bi bi-tools"></i> Maintenance</a>
+            <p class="nav-category">Finance</p>
+            <a href="payment-history-tenant.html" class="nav-item-geist"><i class="bi bi-wallet2"></i> Payment History</a>
+            <a href="documents-tenant.html" class="nav-item-geist"><i class="bi bi-file-earmark-text"></i> My Documents</a>
+            <p class="nav-category">System</p>
+            <a href="notices-tenant.html" class="nav-item-geist"><i class="bi bi-megaphone"></i> Building Notices</a>
+            <a href="settings-tenant.html" class="nav-item-geist"><i class="bi bi-gear"></i> Portal Settings</a>
+        </nav>
+        <div class="sidebar-profile">
+            <div class="d-flex align-items-center gap-3">
+                <div class="profile-avatar">TN</div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <h6 class="profile-name">Sarah Rahman</h6>
+                    <p class="profile-role">Imperial Resident</p>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Sign Out</button>
+        </div>
+    </aside>
+
+    <main class="main-content-geist">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div data-aos="fade-right">
+                <h2 class="fw-bold mb-1">Service Requests</h2>
+                <p class="text-muted mb-0">Submit, track, and rate all maintenance & complaint tickets for your unit.</p>
+            </div>
+            <div class="d-flex gap-3" data-aos="fade-left">
+                <button class="btn btn-primary-navy rounded-4 px-4 py-2 small fw-bold shadow-sm"
+                        data-bs-toggle="modal" data-bs-target="#newTicketModal">
+                    <i class="bi bi-plus-lg me-2"></i>New Service Ticket
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Summary KPIs -->
+        <div class="row g-3 mb-4" data-aos="fade-up">
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0 text-danger">1</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">🔴 Open</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0 text-warning">1</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">🟡 Assigned</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0 text-primary">1</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">🔵 In Progress</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0 text-success">2</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">✅ Completed</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0 text-secondary">1</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">⬜ Closed</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="glass-widget text-center p-3">
+                    <h4 class="fw-bold mb-0" style="color:#e11d48;">0</h4>
+                    <p class="extra-small text-muted mb-0 mt-1">❌ Rejected</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="d-flex gap-2 mb-4 flex-wrap align-items-center" data-aos="fade-up">
+            <span class="extra-small fw-bold text-muted me-2">Filter:</span>
+            <button class="btn btn-sm border rounded-pill extra-small px-3 fw-bold active-filter-btn"
+                    onclick="filterTickets('all', this)">All</button>
+            <button class="btn btn-sm border rounded-pill extra-small px-3"
+                    onclick="filterTickets('open', this)">🔴 Open</button>
+            <button class="btn btn-sm border rounded-pill extra-small px-3"
+                    onclick="filterTickets('progress', this)">🔵 In Progress</button>
+            <button class="btn btn-sm border rounded-pill extra-small px-3"
+                    onclick="filterTickets('completed', this)">✅ Completed</button>
+            <button class="btn btn-sm border rounded-pill extra-small px-3"
+                    onclick="filterTickets('closed', this)">⬜ Closed</button>
+        </div>
+
+        <!-- Tickets List -->
+        <div class="d-flex flex-column gap-3 mb-4">
+
+            <!-- Ticket 1: Open -->
+            <div class="ticket-card" data-status="open" data-aos="fade-up">
+                <div class="status-bar open"></div>
+                <div class="d-flex align-items-start justify-content-between gap-3" style="padding-left:8px;">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <span class="small fw-bold text-primary-navy font-mono">TKT-2026-00051</span>
+                            <span class="badge bg-danger extra-small rounded-pill">OPEN</span>
+                            <span class="priority-pill bg-danger-subtle text-danger">EMERGENCY</span>
+                            <span class="badge bg-light text-dark extra-small">Electrical</span>
+                        </div>
+                        <h6 class="mb-1 fw-bold">Main Circuit Breaker Tripping</h6>
+                        <p class="extra-small text-muted mb-3">Power keeps cutting off in the bedroom. Submitted on 18 Apr 2026 · Unit 402 · Reported by: Sarah Rahman</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="progress flex-grow-1" style="height:4px;max-width:300px;">
+                                <div class="progress-bar bg-danger" style="width:10%;"></div>
+                            </div>
+                            <span class="extra-small text-muted">Awaiting assignment</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-2 align-items-end">
+                        <button class="btn btn-sm border extra-small px-3 rounded-3" data-bs-toggle="modal" data-bs-target="#ticketDetailModal">View Detail</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ticket 2: Assigned -->
+            <div class="ticket-card" data-status="assigned" data-aos="fade-up" data-aos-delay="50">
+                <div class="status-bar assigned"></div>
+                <div class="d-flex align-items-start justify-content-between gap-3" style="padding-left:8px;">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <span class="small fw-bold text-primary-navy font-mono">TKT-2026-00049</span>
+                            <span class="badge bg-warning text-dark extra-small rounded-pill">ASSIGNED</span>
+                            <span class="priority-pill bg-warning-subtle text-warning">HIGH</span>
+                            <span class="badge bg-light text-dark extra-small">HVAC / Cooling</span>
+                        </div>
+                        <h6 class="mb-1 fw-bold">HVAC Fan Noise / Cooling Issue</h6>
+                        <p class="extra-small text-muted mb-2">Reported on 14 Apr 2026 · Assigned to: Kamal Electricals (Vendor)</p>
+                        <div class="p-2 bg-light rounded-3 extra-small text-muted mb-3">
+                            <strong>Vendor Note:</strong> Spare parts ordered. Expected completion: 22 Apr 2026
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="progress flex-grow-1" style="height:4px;max-width:300px;">
+                                <div class="progress-bar bg-warning" style="width:30%;"></div>
+                            </div>
+                            <span class="extra-small text-muted">Awaiting Parts (30%)</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-2 align-items-end">
+                        <button class="btn btn-sm border extra-small px-3 rounded-3"
+                                data-bs-toggle="modal" data-bs-target="#ticketDetailModal">View Detail</button>
+                        <button class="btn btn-sm border extra-small px-3 rounded-3 text-muted">
+                            <i class="bi bi-file-earmark-text me-1"></i>Work Order PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ticket 3: In Progress -->
+            <div class="ticket-card" data-status="progress" data-aos="fade-up" data-aos-delay="100">
+                <div class="status-bar progress"></div>
+                <div class="d-flex align-items-start justify-content-between gap-3" style="padding-left:8px;">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <span class="small fw-bold text-primary-navy font-mono">TKT-2026-00047</span>
+                            <span class="badge bg-primary extra-small rounded-pill">IN PROGRESS</span>
+                            <span class="priority-pill bg-primary-subtle text-primary">MEDIUM</span>
+                            <span class="badge bg-light text-dark extra-small">Plumbing</span>
+                        </div>
+                        <h6 class="mb-1 fw-bold">Bathroom Hot Water Not Working</h6>
+                        <p class="extra-small text-muted mb-3">Reported 10 Apr 2026 · Technician on-site</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="progress flex-grow-1" style="height:4px;max-width:300px;">
+                                <div class="progress-bar bg-primary" style="width:60%;"></div>
+                            </div>
+                            <span class="extra-small text-muted">Work Underway (60%)</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-2 align-items-end">
+                        <button class="btn btn-sm border extra-small px-3 rounded-3" data-bs-toggle="modal" data-bs-target="#ticketDetailModal">View Detail</button>
+                        <button class="btn btn-sm border extra-small px-3 rounded-3 text-muted">
+                            <i class="bi bi-file-earmark-text me-1"></i>Work Order PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ticket 4: Completed (needs rating) -->
+            <div class="ticket-card" data-status="completed" data-aos="fade-up" data-aos-delay="150">
+                <div class="status-bar completed"></div>
+                <div class="d-flex align-items-start justify-content-between gap-3" style="padding-left:8px;">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <span class="small fw-bold text-primary-navy font-mono">TKT-2026-00038</span>
+                            <span class="badge bg-success extra-small rounded-pill">COMPLETED</span>
+                            <span class="priority-pill bg-secondary-subtle text-secondary">LOW</span>
+                            <span class="badge bg-light text-dark extra-small">Cleaning</span>
+                        </div>
+                        <h6 class="mb-1 fw-bold">Common Area Deep Cleaning Request</h6>
+                        <p class="extra-small text-muted mb-2">Completed on 05 Apr 2026 · Cost: ৳350 · Technician: Office Team</p>
+                        <!-- PRD: Tenant rates resolution (1–5 star) -->
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="extra-small text-muted fw-bold">Rate Resolution:</span>
+                            <div class="star-rating" id="ratingTicket38">
+                                <span class="star" data-val="1">★</span>
+                                <span class="star active" data-val="2">★</span>
+                                <span class="star active" data-val="3">★</span>
+                                <span class="star active" data-val="4">★</span>
+                                <span class="star" data-val="5">★</span>
+                            </div>
+                            <span class="extra-small text-warning fw-bold">4/5</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm border extra-small px-3 rounded-3">View Detail</button>
+                </div>
+            </div>
+
+            <!-- Ticket 5: Closed -->
+            <div class="ticket-card opacity-75" data-status="closed" data-aos="fade-up" data-aos-delay="200">
+                <div class="status-bar closed"></div>
+                <div class="d-flex align-items-start justify-content-between gap-3" style="padding-left:8px;">
+                    <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                            <span class="small fw-bold text-muted font-mono">TKT-2026-00029</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary extra-small rounded-pill">CLOSED</span>
+                            <span class="priority-pill bg-secondary-subtle text-secondary">LOW</span>
+                            <span class="badge bg-light text-dark extra-small">Structural</span>
+                        </div>
+                        <h6 class="mb-1 fw-bold text-muted">Minor Wall Crack — Living Room</h6>
+                        <p class="extra-small text-muted mb-1">Closed 20 Mar 2026 · Resolution verified by Manager</p>
+                        <div class="d-flex align-items-center gap-1 mt-1">
+                            <span class="star" style="color:#f59e0b;font-size:0.9rem;">★★★★★</span>
+                            <span class="extra-small text-muted ms-1">5/5 — Excellent</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm border extra-small px-3 rounded-3 text-muted">View</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Urgent Help Section -->
+        <div class="p-4 bg-white border rounded-4 shadow-sm" data-aos="fade-up">
+            <h6 class="fw-bold mb-4">Urgent Help</h6>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-danger-subtle text-danger rounded-circle p-2 px-3"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h6 class="mb-0 small fw-bold">Emergency Line</h6>
+                            <p class="mb-0 extra-small text-muted">01900-112233 (24/7)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-subtle text-primary rounded-circle p-2 px-3"><i class="bi bi-chat-dots-fill"></i></div>
+                        <div>
+                            <h6 class="mb-0 small fw-bold">Concierge Chat</h6>
+                            <p class="mb-0 extra-small text-muted">Available 24/7</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-success-subtle text-success rounded-circle p-2 px-3"><i class="bi bi-whatsapp"></i></div>
+                        <div>
+                            <h6 class="mb-0 small fw-bold">WhatsApp Support</h6>
+                            <p class="mb-0 extra-small text-muted">01700-445566</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- New Ticket Modal (Full PRD Spec) -->
+<div class="modal fade" id="newTicketModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">New Service Ticket</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="extra-small fw-bold text-muted mb-2 uppercase">Issue Category</label>
+                        <select class="form-select border-0 bg-light py-2 small">
+                            <option>Plumbing</option>
+                            <option>Electrical</option>
+                            <option>HVAC / Cooling</option>
+                            <option>Structural</option>
+                            <option>Cleaning</option>
+                            <option>Pest Control</option>
+                            <option>Security</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="extra-small fw-bold text-muted mb-2 uppercase">Priority Level</label>
+                        <div class="d-flex gap-2 flex-wrap mt-1">
+                            <button class="btn btn-sm btn-outline-secondary rounded-pill extra-small px-3" onclick="setPriority(this,'low')">Low</button>
+                            <button class="btn btn-sm btn-warning rounded-pill extra-small px-3" onclick="setPriority(this,'medium')">Medium</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-pill extra-small px-3" onclick="setPriority(this,'high')">High</button>
+                            <button class="btn btn-sm btn-danger rounded-pill extra-small px-3 text-white" onclick="setPriority(this,'emergency')">Emergency</button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="extra-small fw-bold text-muted mb-2 uppercase">Ticket Title</label>
+                        <input type="text" class="form-control border-0 bg-light py-2" placeholder="Brief title of the issue (max 100 chars)">
+                    </div>
+                    <div class="col-12">
+                        <label class="extra-small fw-bold text-muted mb-2 uppercase">Detailed Description</label>
+                        <textarea class="form-control border-0 bg-light py-2 small" rows="4" placeholder="Describe the problem in detail. Include when it started, affected areas, and any steps you've taken..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="extra-small fw-bold text-muted mb-2 uppercase">Attach Photos (Optional, Max 5)</label>
+                        <div class="border border-dashed rounded-4 p-4 text-center" style="cursor:pointer;background:#fafafa;">
+                            <i class="bi bi-camera fs-2 text-muted"></i>
+                            <p class="extra-small text-muted mb-0 mt-2">Click or drag to upload (JPG, PNG — max 10MB each)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3 mt-4">
+                    <button class="btn border flex-grow-1 rounded-4 py-2 small fw-bold" data-bs-dismiss="modal">Save as Draft</button>
+                    <button class="btn btn-primary-navy flex-grow-1 rounded-4 py-2 small fw-bold" data-bs-dismiss="modal">
+                        <i class="bi bi-send me-2"></i>Submit Ticket
+                    </button>
+                </div>
+                <p class="extra-small text-muted text-center mt-2 mb-0">A ticket number (TKT-YYYY-NNNNN) will be auto-assigned on submission.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ticket Detail Modal -->
+<div class="modal fade" id="ticketDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-3">
+            <div class="modal-header border-0">
+                <div>
+                    <h5 class="modal-title fw-bold mb-1">TKT-2026-00049 — HVAC Issue</h5>
+                    <span class="badge bg-warning text-dark extra-small">ASSIGNED</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3 mb-4">
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Category</p><strong class="small">HVAC / Cooling</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Priority</p><strong class="small text-warning">HIGH</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Submitted</p><strong class="small">14 Apr 2026</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Est. Completion</p><strong class="small">22 Apr 2026</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Assigned To</p><strong class="small">Kamal Electricals</strong></div>
+                    <div class="col-6"><p class="extra-small text-muted mb-1">Cost Incurred</p><strong class="small text-muted">Pending</strong></div>
+                </div>
+                <div class="p-3 bg-light rounded-3 mb-3">
+                    <p class="extra-small fw-bold text-muted mb-2">AUDIT TRAIL</p>
+                    <div class="extra-small text-muted d-flex flex-column gap-2">
+                        <span>📝 14 Apr 10:32 AM — Ticket submitted by Sarah Rahman</span>
+                        <span>🔔 14 Apr 10:33 AM — Admin & Manager notified</span>
+                        <span>👤 15 Apr 02:00 PM — Assigned to Kamal Electricals</span>
+                        <span>📦 16 Apr 09:00 AM — Spare parts ordered</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline-secondary w-100 rounded-4 py-2 small fw-bold">
+                    <i class="bi bi-file-earmark-text me-2"></i>Download Work Order PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="payment-history-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-wallet2"></i>
+            <span>Wallet</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item active">
+            <i class="bi bi-tools"></i>
+            <span>Maint</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+    AOS.init({ once: true, duration: 600, offset: 0 });
+
+    function filterTickets(status, btn) {
+        document.querySelectorAll('.ticket-card').forEach(card => {
+            if (status === 'all' || card.dataset.status === status) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        document.querySelectorAll('.active-filter-btn').forEach(b => b.classList.remove('active-filter-btn', 'btn-primary-navy', 'text-white', 'border-0'));
+        btn.classList.add('active-filter-btn', 'btn-primary-navy', 'text-white', 'border-0');
+    }
+
+    function setPriority(btn, val) {
+        btn.closest('.d-flex').querySelectorAll('button').forEach(b => {
+            b.className = 'btn btn-sm btn-outline-secondary rounded-pill extra-small px-3';
+        });
+        btn.className = 'btn btn-sm btn-warning rounded-pill extra-small px-3';
+    }
+
+    // Star rating
+    document.querySelectorAll('.star-rating').forEach(ratingEl => {
+        ratingEl.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.dataset.val);
+                ratingEl.querySelectorAll('.star').forEach((s, i) => {
+                    s.classList.toggle('active', i < val);
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>

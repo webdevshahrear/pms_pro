@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment History - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .nav-item-geist {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--accents-5);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 0.25rem;
+        }
+        .nav-item-geist:hover, .nav-item-geist.active {
+            background: var(--accents-1);
+            color: var(--primary-navy);
+        }
+        .nav-item-geist.active { font-weight: 700; background: rgba(30, 58, 95, 0.05); }
+        .nav-item-geist i { margin-right: 12px; font-size: 1.1rem; }
+    </style>
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+    
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Tenant Portal</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">TR</div>
+    </header>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+<div class="dashboard-wrapper">
+        <!-- Sidebar (Role: Tenant/Resident) -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-tenant.html" class="nav-item-geist "><i class="bi bi-house-door"></i> My Residence</a>
+                <a href="billing-tenant.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Monthly Bills</a>
+                <a href="maintenance-tenant.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maintenance</a>
+
+                <p class="nav-category">Finance</p>
+                <a href="payment-history-tenant.html" class="nav-item-geist "><i class="bi bi-wallet2"></i> Payment History</a>
+                <a href="documents-tenant.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> My Documents</a>
+
+                <p class="nav-category">System</p>
+                <a href="notices-tenant.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Building Notices</a>
+                <a href="settings-tenant.html" class="nav-item-geist active"><i class="bi bi-gear"></i> Portal Settings</a>
+            </nav>
+
+            <div class="mt-auto border-top pt-4 px-3 bg-white">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-navy d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">SJ</div>
+                    <div>
+                        <h6 class="mb-0 fw-bold small">Sarah Jenkins</h6>
+                        <p class="mb-0 text-muted extra-small">Apt 405, Tower A</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+             <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Payment Ledger</h2>
+                    <p class="text-muted mb-0">Transparent tracking of all your financial transactions within the building.</p>
+                </div>
+                <div class="d-flex gap-3" data-aos="fade-left">
+                    <button class="btn btn-white border rounded-4 px-4 py-2 shadow-sm" data-action="export">
+                        <i class="bi bi-download me-2"></i> Export Ledger (.csv)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Transaction Filters -->
+            <div class="glass-widget mb-4" data-aos="fade-up">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="extra-small fw-bold text-muted uppercase mb-2">Time Period</label>
+                        <select class="form-select border-0 bg-light rounded-3 small">
+                            <option>Last 6 Months</option>
+                            <option>Last 12 Months</option>
+                            <option>Year 2025</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="extra-small fw-bold text-muted uppercase mb-2">Transaction Type</label>
+                        <select class="form-select border-0 bg-light rounded-3 small">
+                            <option>All Transactions</option>
+                            <option>Rent Payments</option>
+                            <option>Utility Refills</option>
+                            <option>Security Deposits</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn-primary-navy w-100 rounded-3 small py-2">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ledger Table -->
+            <div class="glass-widget mb-5" data-aos="fade-up">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table-geist">
+                        <thead>
+                            <tr class="extra-small text-muted uppercase">
+                                <th>Date</th>
+                                <th>Ref ID</th>
+                                <th>Description</th>
+                                <th>Method</th>
+                                <th>Credit (৳)</th>
+                                <th>Debit (৳)</th>
+                                <th class="text-end">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="small">12 Apr 2026</span></td>
+                                <td><span class="extra-small font-mono text-muted">#TXN-99812</span></td>
+                                <td><span class="small fw-bold">Prepaid Electricity Recharge</span></td>
+                                <td><span class="extra-small">bKash App</span></td>
+                                <td><span class="small text-success fw-bold">1,000.00</span></td>
+                                <td>-</td>
+                                <td class="text-end"><span class="small">1,240.00</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="small">10 Apr 2026</span></td>
+                                <td><span class="extra-small font-mono text-muted">#TXN-99701</span></td>
+                                <td><span class="small fw-bold">Manual Utility Usage Debit</span></td>
+                                <td><span class="extra-small">System Auto</span></td>
+                                <td>-</td>
+                                <td><span class="small text-danger">450.00</span></td>
+                                <td class="text-end"><span class="small">240.00</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="small">01 Apr 2026</span></td>
+                                <td><span class="extra-small font-mono text-muted">#TXN-99450</span></td>
+                                <td><span class="small fw-bold">Monthly Rent Payment - April</span></td>
+                                <td><span class="extra-small">Visa ••4902</span></td>
+                                <td><span class="small text-success fw-bold">1,200.00</span></td>
+                                <td>-</td>
+                                <td class="text-end"><span class="small">690.00</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-house-door"></i>
+            <span>Home</span>
+        </a>
+        <a href="billing-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Wallet</span>
+        </a>
+        <a href="maintenance-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Maintenance</span>
+        </a>
+        <a href="settings-tenant.html" class="bottom-nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

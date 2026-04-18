@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Properties for Sale - The Imperial</title>
+    <meta name="description" content="Browse verified luxury properties for sale in Dhaka. Gulshan, Banani, Dhanmondi, and Uttara — direct ownership through The Imperial.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; }
+
+        /* ── HERO ── */
+        .listing-hero {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 60%, #0d2d5e 100%);
+            position: relative; overflow: hidden;
+        }
+        .listing-hero.sell-hero { background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 60%, #0d2d5e 100%); }
+        .listing-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 15% 50%, rgba(43,123,232,0.2) 0%, transparent 60%),
+                        radial-gradient(circle at 85% 20%, rgba(197,160,89,0.15) 0%, transparent 50%);
+        }
+        .grid-bg {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-type-tabs {
+            display: inline-flex;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            padding: 4px;
+            backdrop-filter: blur(10px);
+            gap: 2px;
+            margin-bottom: 2rem;
+        }
+        .hero-type-tab {
+            padding: 8px 22px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: all 0.25s;
+            letter-spacing: 0.04em;
+        }
+        .hero-type-tab:hover { color: rgba(255,255,255,0.85); }
+        .hero-type-tab.active { background: #fff; color: #1e3a5f; }
+        .hero-badge-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 5px 14px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 100px;
+            font-size: 0.67rem; font-weight: 700;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+        .hero-badge-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero-title span { color: #fbbf24; }
+        .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .h-stat .val { font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; }
+        .h-stat .lbl { font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+        /* ── FILTER SIDEBAR ── */
+        .filter-panel {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 1.75rem;
+            position: sticky;
+            top: 90px;
+        }
+        .filter-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .filter-input {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 0.65rem 0.9rem;
+            font-size: 0.85rem;
+            color: #1e3a5f;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .filter-input:focus { border-color: #2b7be8; }
+        .bed-btn {
+            flex: 1;
+            padding: 0.45rem 0;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f8fafc;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .bed-btn.active, .bed-btn:hover { background: #1e3a5f; color: #fff; border-color: #1e3a5f; }
+        .btn-apply-filter {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3a5f, #2b7be8);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+        .btn-apply-filter:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(30,58,95,0.3); }
+        .btn-clear-filter {
+            width: 100%;
+            background: transparent;
+            color: #9ca3af;
+            border: none;
+            border-radius: 12px;
+            padding: 0.6rem;
+            font-weight: 600;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin-top: 0.25rem;
+        }
+        .btn-clear-filter:hover { color: #dc2626; }
+
+        /* ── PROPERTY CARDS ── */
+        .prop-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+        }
+        .prop-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(30,58,95,0.13); border-color: #2b7be8; color: inherit; }
+        .prop-img-wrap { position: relative; overflow: hidden; height: 230px; }
+        .prop-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .prop-card:hover .prop-img-wrap img { transform: scale(1.07); }
+        .prop-badge {
+            position: absolute; top: 14px; left: 14px;
+            padding: 5px 13px; border-radius: 100px;
+            font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .badge-sell { background: #1e3a5f; color: #fff; }
+        .prop-wish {
+            position: absolute; top: 14px; right: 14px;
+            width: 34px; height: 34px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: #9ca3af;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .prop-wish:hover { background: #fff; color: #dc2626; }
+        .prop-verified {
+            position: absolute; bottom: 14px; right: 14px;
+            background: rgba(22,163,74,0.9); color: #fff;
+            padding: 3px 10px; border-radius: 100px;
+            font-size: 0.6rem; font-weight: 700;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .prop-body { padding: 1.2rem 1.4rem 1.4rem; }
+        .prop-price { font-size: 1.35rem; font-weight: 800; color: #1e3a5f; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+        .prop-title { font-size: 0.95rem; font-weight: 700; color: #1e3a5f; margin-bottom: 0.3rem; line-height: 1.35; }
+        .prop-loc { font-size: 0.78rem; color: #9ca3af; margin-bottom: 1rem; display: flex; align-items: center; gap: 4px; }
+        .prop-specs { display: flex; gap: 1rem; padding-top: 0.85rem; border-top: 1px solid #f1f5f9; }
+        .prop-spec { font-size: 0.75rem; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 5px; }
+        .prop-spec i { color: #2b7be8; font-size: 0.85rem; }
+
+        /* Featured card (wider) */
+        .prop-card.featured { border-color: #fbbf24; }
+        .prop-card.featured::before {
+            content: '⭐ FEATURED';
+            position: absolute; top: 0; right: 0;
+            background: #fbbf24; color: #1e3a5f;
+            font-size: 0.6rem; font-weight: 800;
+            padding: 4px 12px;
+            border-bottom-left-radius: 10px;
+            letter-spacing: 0.06em;
+            z-index: 5;
+        }
+
+        /* Toolbar */
+        .listing-toolbar {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .view-btn {
+            width: 34px; height: 34px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s;
+            background: #f8fafc; font-size: 0.9rem; color: #6b7280;
+        }
+        .view-btn.active, .view-btn:hover { background: #1e3a5f; color: #fff; border-color: #1e3a5f; }
+
+        /* Pagination */
+        .pager { display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 3rem; }
+        .page-pill {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.82rem; font-weight: 700;
+            border: 1.5px solid #e5e7eb;
+            background: #fff; color: #6b7280;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .page-pill.active, .page-pill:hover { background: #1e3a5f; color: #fff; border-color: #1e3a5f; }
+        .page-pill.disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* No results */
+        .no-results { text-align: center; padding: 5rem 1rem; display: none; }
+        .no-results i { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar-geist">
+        <div class="d-flex align-items-center">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                </svg>
+                The Imperial
+            </a>
+        </div>
+        <ul class="nav-links d-none d-md-flex mb-0">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="flats-for-sale.html" class="nav-link active">Properties</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+            <a href="login.html" class="btn-geist-secondary d-none d-sm-block" style="padding:0.4rem 1rem;font-size:0.85rem;">Portal Login</a>
+            <a href="contact.html" class="btn-geist" style="padding:0.4rem 1rem;font-size:0.85rem;">Inquiry</a>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="listing-hero sell-hero">
+        <div class="grid-bg"></div>
+        <div class="container position-relative" style="z-index:2;">
+            <!-- Type Navigation Tabs -->
+            <div class="hero-type-tabs">
+                <a href="flats-for-sale.html" class="hero-type-tab active">🏷️ For Sale</a>
+                <a href="flats-for-rent.html" class="hero-type-tab">🏠 For Rent</a>
+                <a href="commercial-spaces.html" class="hero-type-tab">🏢 Commercial</a>
+            </div>
+            <div class="hero-badge-pill">
+                <span class="dot"></span>
+                Verified Listings — Ownership Transfer Ready
+            </div>
+            <h1 class="hero-title">Premium Properties<br>Available for <span>Sale.</span></h1>
+            <p style="color:rgba(255,255,255,0.55);max-width:560px;line-height:1.75;font-size:0.95rem;">
+                Direct ownership opportunities through The Imperial's verified real estate network. Every listing is title-cleared and legally verified.
+            </p>
+            <div class="hero-stats">
+                <div class="h-stat"><div class="val">48</div><div class="lbl">Active Listings</div></div>
+                <div class="h-stat"><div class="val">100%</div><div class="lbl">Title Verified</div></div>
+                <div class="h-stat"><div class="val">₹0</div><div class="lbl">Hidden Fees</div></div>
+                <div class="h-stat"><div class="val">24/7</div><div class="lbl">Concierge</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CONTENT ═══ -->
+    <div class="container py-5">
+        <div class="row g-4">
+
+            <!-- ── FILTER SIDEBAR ── -->
+            <div class="col-lg-3">
+                <div class="filter-panel" data-aos="fade-right">
+                    <h6 class="fw-bold mb-4" style="font-size:0.95rem;color:#1e3a5f;">Refine Search</h6>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Location / Area</p>
+                        <div class="position-relative">
+                            <i class="bi bi-search position-absolute" style="top:50%;left:12px;transform:translateY(-50%);color:#9ca3af;font-size:0.8rem;"></i>
+                            <input type="text" class="filter-input" id="locSearch" placeholder="Gulshan, Banani..." style="padding-left:2rem;" oninput="applyFilters()">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Property Type</p>
+                        <select class="filter-input" id="typeFilter" onchange="applyFilters()">
+                            <option value="">All Types</option>
+                            <option value="apartment">Apartment / Flat</option>
+                            <option value="duplex">Duplex / Penthouse</option>
+                            <option value="villa">Villa / Bungalow</option>
+                            <option value="plot">Plot / Land</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Bedrooms</p>
+                        <div class="d-flex gap-2">
+                            <button class="bed-btn" onclick="setBed(this,'1')">1+</button>
+                            <button class="bed-btn" onclick="setBed(this,'2')">2+</button>
+                            <button class="bed-btn active" onclick="setBed(this,'3')">3+</button>
+                            <button class="bed-btn" onclick="setBed(this,'4')">4+</button>
+                            <button class="bed-btn" onclick="setBed(this,'5')">5+</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Price Range (Crore BDT)</p>
+                        <div class="d-flex gap-2">
+                            <input type="number" class="filter-input" id="minPrice" placeholder="Min" oninput="applyFilters()">
+                            <input type="number" class="filter-input" id="maxPrice" placeholder="Max" oninput="applyFilters()">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Floor Area (SqFt)</p>
+                        <select class="filter-input" id="areaFilter" onchange="applyFilters()">
+                            <option value="">Any Size</option>
+                            <option value="1000">1,000+</option>
+                            <option value="1500">1,500+</option>
+                            <option value="2000">2,000+</option>
+                            <option value="3000">3,000+</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="filter-label">Features</p>
+                        <div class="d-flex flex-column gap-2">
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;">
+                                <input type="checkbox" class="form-check-input m-0"> Rooftop / Sky Lounge
+                            </label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;">
+                                <input type="checkbox" class="form-check-input m-0"> Swimming Pool
+                            </label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;">
+                                <input type="checkbox" class="form-check-input m-0"> Basement Parking
+                            </label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;">
+                                <input type="checkbox" class="form-check-input m-0"> 24/7 Security
+                            </label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;">
+                                <input type="checkbox" class="form-check-input m-0"> Smart Home Ready
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn-apply-filter">Apply Filters</button>
+                    <button class="btn-clear-filter" onclick="clearFilters()">Clear All Filters</button>
+                </div>
+            </div>
+
+            <!-- ── LISTINGS ── -->
+            <div class="col-lg-9">
+                <!-- Toolbar -->
+                <div class="listing-toolbar" data-aos="fade-down">
+                    <p class="mb-0 small fw-bold" style="color:#1e3a5f;" id="resultCount">Showing <strong>6</strong> of 48 verified listings</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <select class="filter-input" style="width:160px;padding:0.45rem 0.75rem;" id="sortSelect" onchange="applyFilters()">
+                            <option>Newest First</option>
+                            <option>Price: Low → High</option>
+                            <option>Price: High → Low</option>
+                            <option>Largest Area</option>
+                        </select>
+                        <div class="d-flex gap-1">
+                            <div class="view-btn active" id="gridViewBtn" onclick="setView('grid')"><i class="bi bi-grid-3x3-gap"></i></div>
+                            <div class="view-btn" id="listViewBtn" onclick="setView('list')"><i class="bi bi-list-ul"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="row g-4" id="propGrid">
+
+                    <!-- Property 1: Featured -->
+                    <div class="col-md-6" data-aos="fade-up" data-location="gulshan" data-beds="3" data-price="1.2" data-type="apartment">
+                        <a href="property-detail.html" class="prop-card featured">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart'); this.style.color = this.style.color === 'rgb(220, 38, 38)' ? '#9ca3af' : '#dc2626';">
+                                    <i class="bi bi-heart"></i>
+                                </div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80" alt="Gulshan Lake View">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳1.2 Crore</div>
+                                <div class="prop-title">Gulshan Lake View Apartment</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Block C, Gulshan-1, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 3 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 3 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,850 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 6th Floor</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Property 2 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50" data-location="banani" data-beds="4" data-price="2.4" data-type="duplex">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Banani Penthouse">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳2.4 Crore</div>
+                                <div class="prop-title">Banani Sky Penthouse — Duplex</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 11, Banani, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 4 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 4 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 2,800 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> Top Floor</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Property 3 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100" data-location="dhanmondi" data-beds="3" data-price="0.95" data-type="apartment">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80" alt="Dhanmondi Apartment">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳95 Lakh</div>
+                                <div class="prop-title">Dhanmondi Smart Residence</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 27, Dhanmondi, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 3 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 2 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,450 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 4th Floor</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Property 4 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="150" data-location="uttara" data-beds="5" data-price="3.2" data-type="Villa">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=80" alt="Uttara Villa">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳3.2 Crore</div>
+                                <div class="prop-title">Uttara Lake-Edge Villa</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Sector 7, Uttara, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 5 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 5 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 4,200 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-p-circle"></i> 2 Parking</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Property 5 -->
+                    <div class="col-md-6" data-aos="fade-up" data-location="gulshan" data-beds="2" data-price="0.75" data-type="apartment">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=80" alt="Gulshan 2">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳75 Lakh</div>
+                                <div class="prop-title">Gulshan 2 Minimalist Studio</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 54, Gulshan-2, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 2 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 2 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,100 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 8th Floor</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Property 6 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50" data-location="mirpur" data-beds="3" data-price="0.58" data-type="apartment">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-sell">For Sale</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Mirpur Apartment">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳58 Lakh</div>
+                                <div class="prop-title">Mirpur DOHS Garden Flat</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> DOHS, Mirpur, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-door-open"></i> 3 Beds</div>
+                                    <div class="prop-spec"><i class="bi bi-droplet"></i> 2 Baths</div>
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,320 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 3rd Floor</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- No results -->
+                <div class="no-results" id="noResults">
+                    <i class="bi bi-building-slash d-block"></i>
+                    <h5 class="fw-bold mb-2" style="color:#1e3a5f;">No Listings Found</h5>
+                    <p class="text-muted small">Try adjusting your filters or <a href="contact.html" class="text-decoration-none fw-bold" style="color:#2b7be8;">contact our concierge</a> for off-market listings.</p>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pager" data-aos="fade-up">
+                    <div class="page-pill disabled"><i class="bi bi-chevron-left" style="font-size:0.7rem;"></i></div>
+                    <div class="page-pill active">1</div>
+                    <div class="page-pill">2</div>
+                    <div class="page-pill">3</div>
+                    <span class="page-pill" style="border:none;background:transparent;color:#9ca3af;">...</span>
+                    <div class="page-pill">8</div>
+                    <div class="page-pill"><i class="bi bi-chevron-right" style="font-size:0.7rem;"></i></div>
+                </div>
+
+                <!-- CTA Strip -->
+                <div class="mt-5 p-5 text-center rounded-4" style="background:linear-gradient(135deg,#1e3a5f,#2b7be8);" data-aos="fade-up">
+                    <h4 class="fw-bold text-white mb-2">Can't Find the Right Property?</h4>
+                    <p class="text-white opacity-75 mb-4 small">Our concierge team has access to <strong>off-market exclusive listings</strong> not published online. Let us find your perfect home.</p>
+                    <a href="contact.html" class="btn fw-bold rounded-pill px-5 py-2" style="background:#fff;color:#1e3a5f;">Request Exclusive Listing</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="geist-footer">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                        </svg>
+                        The Imperial
+                    </a>
+                    <p class="text-muted small pe-lg-5">The enterprise operating system for luxury real estate — premium asset management and tenant administration.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="footer-title">Properties</h6>
+                    <a href="flats-for-sale.html" class="footer-link">For Sale</a>
+                    <a href="flats-for-rent.html" class="footer-link">For Rent</a>
+                    <a href="commercial-spaces.html" class="footer-link">Commercial</a>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="footer-title">Resources</h6>
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="faq.html" class="footer-link">Support Desk</a>
+                    <a href="contact.html" class="footer-link">Concierge</a>
+                </div>
+                <div class="col-lg-4 text-lg-end pt-3 pt-lg-0">
+                    <div class="d-inline-flex align-items-center bg-white border px-3 py-2 rounded-pill shadow-sm">
+                        <span class="spinner-grow spinner-grow-sm text-success me-2" role="status" aria-hidden="true"></span>
+                        <span class="font-mono small text-muted">ALL SYSTEMS OPERATIONAL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top mt-5 pt-4" style="border-color:var(--accents-2)!important;">
+                <p class="text-muted small mb-0">© 2026 Imperial Inc. All rights reserved.</p>
+                <div class="mt-3 mt-md-0 font-mono small d-flex gap-4">
+                    <a href="#" class="text-muted text-decoration-none">Privacy</a>
+                    <a href="#" class="text-muted text-decoration-none">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/8801711223344" class="wa-float" target="_blank" title="Chat on WhatsApp">
+        <span class="wa-tooltip">Chat with us!</span>
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 700, offset: 60 });
+        let activeBed = '3';
+
+        function setBed(btn, val) {
+            document.querySelectorAll('.bed-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeBed = val;
+            applyFilters();
+        }
+        function applyFilters() {
+            const loc = document.getElementById('locSearch').value.toLowerCase();
+            const type = document.getElementById('typeFilter').value.toLowerCase();
+            const min = parseFloat(document.getElementById('minPrice').value) || 0;
+            const max = parseFloat(document.getElementById('maxPrice').value) || 999;
+            let visible = 0;
+            document.querySelectorAll('#propGrid > .col-md-6').forEach(card => {
+                const cLoc = (card.dataset.location || '').toLowerCase();
+                const cBeds = parseInt(card.dataset.beds || '0');
+                const cPrice = parseFloat(card.dataset.price || '0');
+                const cType = (card.dataset.type || '').toLowerCase();
+                const show = (loc === '' || cLoc.includes(loc)) &&
+                             (type === '' || cType.includes(type)) &&
+                             cBeds >= parseInt(activeBed) &&
+                             cPrice >= min && cPrice <= max;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+            document.getElementById('resultCount').innerHTML = `Showing <strong>${visible}</strong> of 48 verified listings`;
+        }
+        function clearFilters() {
+            document.getElementById('locSearch').value = '';
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            document.getElementById('areaFilter').value = '';
+            activeBed = '1';
+            document.querySelectorAll('.bed-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.bed-btn')[0].classList.add('active');
+            applyFilters();
+        }
+        function setView(type) {
+            document.getElementById('gridViewBtn').classList.toggle('active', type === 'grid');
+            document.getElementById('listViewBtn').classList.toggle('active', type === 'list');
+            document.querySelectorAll('#propGrid > .col-md-6').forEach(c => {
+                c.className = type === 'list' ? 'col-12' : 'col-md-6';
+            });
+        }
+        document.querySelectorAll('.page-pill:not(.disabled)').forEach(p => {
+            p.addEventListener('click', () => {
+                document.querySelectorAll('.page-pill').forEach(x => x.classList.remove('active'));
+                p.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

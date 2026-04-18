@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Spaces - The Imperial</title>
+    <meta name="description" content="Premium commercial office spaces, retail shops and showrooms available in Dhaka's prime business districts. Verified by The Imperial.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; }
+        .listing-hero {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, #1a0533 0%, #4c1d95 55%, #5b21b6 100%);
+            position: relative; overflow: hidden;
+        }
+        .listing-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 15% 50%, rgba(139,92,246,0.25) 0%, transparent 60%),
+                        radial-gradient(circle at 85% 20%, rgba(196,181,253,0.15) 0%, transparent 50%);
+        }
+        .grid-bg {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-type-tabs { display: inline-flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 4px; gap: 2px; backdrop-filter: blur(10px); margin-bottom: 2rem; }
+        .hero-type-tab { padding: 8px 22px; border-radius: 100px; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.25s; letter-spacing: 0.04em; }
+        .hero-type-tab:hover { color: rgba(255,255,255,0.85); }
+        .hero-type-tab.active { background: #fff; color: #4c1d95; }
+        .hero-badge-pill { display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 100px; font-size: 0.67rem; font-weight: 700; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; }
+        .hero-badge-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #c4b5fd; box-shadow: 0 0 6px #c4b5fd; }
+        .hero-title { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+        .hero-title span { color: #c4b5fd; }
+        .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .h-stat .val { font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; }
+        .h-stat .lbl { font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+        .filter-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; padding: 1.75rem; position: sticky; top: 90px; }
+        .filter-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #9ca3af; font-weight: 700; margin-bottom: 0.6rem; }
+        .filter-input { width: 100%; background: #f8fafc; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 0.65rem 0.9rem; font-size: 0.85rem; color: #1e3a5f; outline: none; transition: border-color 0.2s; font-family: inherit; }
+        .filter-input:focus { border-color: #8b5cf6; }
+        .btn-apply-filter { width: 100%; background: linear-gradient(135deg, #4c1d95, #8b5cf6); color: #fff; border: none; border-radius: 12px; padding: 0.85rem; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; margin-top: 0.5rem; }
+        .btn-apply-filter:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(76,29,149,0.3); }
+        .btn-clear-filter { width: 100%; background: transparent; color: #9ca3af; border: none; border-radius: 12px; padding: 0.6rem; font-weight: 600; font-size: 0.78rem; cursor: pointer; transition: color 0.2s; }
+        .btn-clear-filter:hover { color: #dc2626; }
+
+        .prop-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; overflow: hidden; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); cursor: pointer; text-decoration: none; color: inherit; display: block; position: relative; }
+        .prop-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(76,29,149,0.13); border-color: #8b5cf6; color: inherit; }
+        .prop-img-wrap { position: relative; overflow: hidden; height: 230px; }
+        .prop-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .prop-card:hover .prop-img-wrap img { transform: scale(1.07); }
+        .prop-badge { position: absolute; top: 14px; left: 14px; padding: 5px 13px; border-radius: 100px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+        .badge-commercial { background: #4c1d95; color: #fff; }
+        .prop-wish { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: #9ca3af; cursor: pointer; transition: all 0.2s; }
+        .prop-wish:hover { background: #fff; color: #dc2626; }
+        .prop-verified { position: absolute; bottom: 14px; right: 14px; background: rgba(22,163,74,0.9); color: #fff; padding: 3px 10px; border-radius: 100px; font-size: 0.6rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .prop-body { padding: 1.2rem 1.4rem 1.4rem; }
+        .prop-price { font-size: 1.35rem; font-weight: 800; color: #4c1d95; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+        .prop-price-sub { font-size: 0.78rem; font-weight: 500; color: #9ca3af; }
+        .prop-title { font-size: 0.95rem; font-weight: 700; color: #1e3a5f; margin-bottom: 0.3rem; }
+        .prop-loc { font-size: 0.78rem; color: #9ca3af; margin-bottom: 1rem; display: flex; align-items: center; gap: 4px; }
+        .prop-specs { display: flex; gap: 0.85rem; padding-top: 0.85rem; border-top: 1px solid #f1f5f9; flex-wrap: wrap; }
+        .prop-spec { font-size: 0.72rem; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 4px; }
+        .prop-spec i { color: #8b5cf6; font-size: 0.85rem; }
+        .type-tag { position: absolute; bottom: 14px; left: 14px; padding: 3px 10px; border-radius: 100px; font-size: 0.6rem; font-weight: 700; }
+
+        .listing-toolbar { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+        .view-btn { width: 34px; height: 34px; border: 1.5px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; background: #f8fafc; font-size: 0.9rem; color: #6b7280; }
+        .view-btn.active, .view-btn:hover { background: #4c1d95; color: #fff; border-color: #4c1d95; }
+        .pager { display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 3rem; }
+        .page-pill { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; border: 1.5px solid #e5e7eb; background: #fff; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+        .page-pill.active, .page-pill:hover { background: #4c1d95; color: #fff; border-color: #4c1d95; }
+        .page-pill.disabled { opacity: 0.4; cursor: not-allowed; }
+        .no-results { text-align: center; padding: 5rem 1rem; display: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar-geist">
+        <div class="d-flex align-items-center">
+            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                </svg>
+                The Imperial
+            </a>
+        </div>
+        <ul class="nav-links d-none d-md-flex mb-0">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="flats-for-sale.html" class="nav-link active">Properties</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+            <a href="login.html" class="btn-geist-secondary d-none d-sm-block" style="padding:0.4rem 1rem;font-size:0.85rem;">Portal Login</a>
+            <a href="contact.html" class="btn-geist" style="padding:0.4rem 1rem;font-size:0.85rem;">Inquiry</a>
+        </div>
+    </nav>
+
+    <section class="listing-hero">
+        <div class="grid-bg"></div>
+        <div class="container position-relative" style="z-index:2;">
+            <div class="hero-type-tabs">
+                <a href="flats-for-sale.html" class="hero-type-tab">🏷️ For Sale</a>
+                <a href="flats-for-rent.html" class="hero-type-tab">🏠 For Rent</a>
+                <a href="commercial-spaces.html" class="hero-type-tab active">🏢 Commercial</a>
+            </div>
+            <div class="hero-badge-pill"><span class="dot"></span>Business-Grade Spaces — Grade A Buildings</div>
+            <h1 class="hero-title">Prime Commercial<br>Spaces for <span>Business.</span></h1>
+            <p style="color:rgba(255,255,255,0.55);max-width:560px;line-height:1.75;font-size:0.95rem;">
+                Office floors, retail showrooms and co-working suites in Dhaka's top business districts. All spaces are CAT-6 wired with backup power.
+            </p>
+            <div class="hero-stats">
+                <div class="h-stat"><div class="val">35</div><div class="lbl">Active Spaces</div></div>
+                <div class="h-stat"><div class="val">Grade A</div><div class="lbl">Buildings Only</div></div>
+                <div class="h-stat"><div class="val">100%</div><div class="lbl">Backup Power</div></div>
+                <div class="h-stat"><div class="val">3+</div><div class="lbl">Business Zones</div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="filter-panel" data-aos="fade-right">
+                    <h6 class="fw-bold mb-4" style="font-size:0.95rem;color:#4c1d95;">Refine Search</h6>
+                    <div class="mb-4">
+                        <p class="filter-label">Location / Area</p>
+                        <div class="position-relative">
+                            <i class="bi bi-search position-absolute" style="top:50%;left:12px;transform:translateY(-50%);color:#9ca3af;font-size:0.8rem;"></i>
+                            <input type="text" class="filter-input" id="locSearch" placeholder="Gulshan, Motijheel..." style="padding-left:2rem;" oninput="applyFilters()">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="filter-label">Space Type</p>
+                        <select class="filter-input" id="typeFilter" onchange="applyFilters()">
+                            <option value="">All Types</option>
+                            <option value="office">Open Office Floor</option>
+                            <option value="retail">Retail Showroom</option>
+                            <option value="cowork">Co-Working Suite</option>
+                            <option value="warehouse">Godown / Warehouse</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <p class="filter-label">Transaction</p>
+                        <select class="filter-input" id="txnFilter" onchange="applyFilters()">
+                            <option value="">Buy or Rent</option>
+                            <option value="rent">Rent Only</option>
+                            <option value="buy">Buy Only</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <p class="filter-label">Floor Area (SqFt)</p>
+                        <select class="filter-input" onchange="applyFilters()">
+                            <option value="">Any Size</option>
+                            <option value="500">500+</option>
+                            <option value="1000">1,000+</option>
+                            <option value="2000">2,000+</option>
+                            <option value="5000">5,000+</option>
+                            <option value="10000">10,000+</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <p class="filter-label">Monthly Budget Range (৳)</p>
+                        <div class="d-flex gap-2">
+                            <input type="number" class="filter-input" placeholder="Min" oninput="applyFilters()">
+                            <input type="number" class="filter-input" placeholder="Max" oninput="applyFilters()">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="filter-label">Amenities</p>
+                        <div class="d-flex flex-column gap-2">
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;"><input type="checkbox" class="form-check-input m-0"> 24/7 Access</label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;"><input type="checkbox" class="form-check-input m-0"> Generator Backup</label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;"><input type="checkbox" class="form-check-input m-0"> Basement Parking</label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;"><input type="checkbox" class="form-check-input m-0"> Freight Elevator</label>
+                            <label class="d-flex align-items-center gap-2 extra-small" style="cursor:pointer;"><input type="checkbox" class="form-check-input m-0"> Fire Safety System</label>
+                        </div>
+                    </div>
+                    <button class="btn-apply-filter">Apply Filters</button>
+                    <button class="btn-clear-filter" onclick="clearFilters()">Clear All</button>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="listing-toolbar" data-aos="fade-down">
+                    <p class="mb-0 small fw-bold" style="color:#4c1d95;" id="resultCount">Showing <strong>6</strong> of 35 commercial spaces</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <select class="filter-input" style="width:160px;padding:0.45rem 0.75rem;">
+                            <option>Newest First</option>
+                            <option>Area: Largest</option>
+                            <option>Price: Low → High</option>
+                        </select>
+                        <div class="d-flex gap-1">
+                            <div class="view-btn active" onclick="setView('grid')"><i class="bi bi-grid-3x3-gap"></i></div>
+                            <div class="view-btn" onclick="setView('list')"><i class="bi bi-list-ul"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4" id="propGrid">
+                    <div class="col-md-6" data-aos="fade-up" data-location="gulshan" data-type="office">
+                        <a href="property-detail-commercial.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Office</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(76,29,149,0.85);color:#fff;">For Rent</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="Gulshan Office">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳1.8 Lakh <span class="prop-price-sub">/month</span></div>
+                                <div class="prop-title">Gulshan 2 Premium Office Floor</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 53, Gulshan-2, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 3,200 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 7th Floor</div>
+                                    <div class="prop-spec"><i class="bi bi-lightning-charge"></i> Generator</div>
+                                    <div class="prop-spec"><i class="bi bi-p-circle"></i> 4 Parking</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50" data-location="motijheel" data-type="office">
+                        <a href="property-detail-commercial.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Office</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(30,58,95,0.85);color:#fff;">For Sale</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Motijheel Office">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳4.5 Crore</div>
+                                <div class="prop-title">Motijheel Corporate Tower Suite</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Dilkusha, Motijheel, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 5,000 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 12th Floor</div>
+                                    <div class="prop-spec"><i class="bi bi-wifi"></i> Fiber Ready</div>
+                                    <div class="prop-spec"><i class="bi bi-p-circle"></i> 6 Parking</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100" data-location="banani" data-type="retail">
+                        <a href="property-detail-commercial.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Retail</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(76,29,149,0.85);color:#fff;">For Rent</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=900&q=80" alt="Banani Retail">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳85,000 <span class="prop-price-sub">/month</span></div>
+                                <div class="prop-title">Banani 11 Retail Showroom</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 11, Banani, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,800 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> Ground Floor</div>
+                                    <div class="prop-spec"><i class="bi bi-front"></i> Glass Facade</div>
+                                    <div class="prop-spec"><i class="bi bi-people"></i> High Footfall</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="150" data-location="dhanmondi" data-type="cowork">
+                        <a href="property-detail-commercial.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Co-Work</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(76,29,149,0.85);color:#fff;">For Rent</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Co-Work">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳35,000 <span class="prop-price-sub">/month</span></div>
+                                <div class="prop-title">Dhanmondi Co-Working Suite</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 2, Dhanmondi, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 800 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-people"></i> 20 Desks</div>
+                                    <div class="prop-spec"><i class="bi bi-wifi"></i> 1Gbps WiFi</div>
+                                    <div class="prop-spec"><i class="bi bi-cup-hot"></i> Cafeteria</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-location="uttara" data-type="warehouse">
+                        <a href="property-detail-commercial.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Warehouse</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(76,29,149,0.85);color:#fff;">For Rent</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80" alt="Warehouse">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳1.2 Lakh <span class="prop-price-sub">/month</span></div>
+                                <div class="prop-title">Uttara Industrial Godown</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Sector 10, Uttara, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 8,500 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-truck"></i> Loading Dock</div>
+                                    <div class="prop-spec"><i class="bi bi-arrows-expand"></i> 20ft Ceiling</div>
+                                    <div class="prop-spec"><i class="bi bi-shield-check"></i> 24/7 Guard</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50" data-location="gulshan" data-type="office">
+                        <a href="property-detail.html" class="prop-card">
+                            <div class="prop-img-wrap">
+                                <span class="prop-badge badge-commercial">Office</span>
+                                <div class="prop-wish" onclick="event.preventDefault(); this.querySelector('i').classList.toggle('bi-heart-fill'); this.querySelector('i').classList.toggle('bi-heart');"><i class="bi bi-heart"></i></div>
+                                <div class="type-tag" style="background:rgba(76,29,149,0.85);color:#fff;">For Rent</div>
+                                <div class="prop-verified"><i class="bi bi-patch-check-fill"></i> Verified</div>
+                                <img src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80" alt="Gulshan small office">
+                            </div>
+                            <div class="prop-body">
+                                <div class="prop-price">৳65,000 <span class="prop-price-sub">/month</span></div>
+                                <div class="prop-title">Gulshan 1 Boutique Office Pod</div>
+                                <div class="prop-loc"><i class="bi bi-geo-alt-fill"></i> Road 27, Gulshan-1, Dhaka</div>
+                                <div class="prop-specs">
+                                    <div class="prop-spec"><i class="bi bi-bounding-box"></i> 1,200 SqFt</div>
+                                    <div class="prop-spec"><i class="bi bi-building"></i> 5th Floor</div>
+                                    <div class="prop-spec"><i class="bi bi-camera-video"></i> CCTV</div>
+                                    <div class="prop-spec"><i class="bi bi-lightning-charge"></i> Generator</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="no-results" id="noResults">
+                    <i class="bi bi-building-slash d-block fs-1 text-muted mb-3"></i>
+                    <h5 class="fw-bold mb-2" style="color:#4c1d95;">No Spaces Found</h5>
+                    <p class="text-muted small">Try adjusting your filters or <a href="contact.html" class="text-decoration-none fw-bold" style="color:#8b5cf6;">talk to our team</a> about off-market spaces.</p>
+                </div>
+
+                <div class="pager" data-aos="fade-up">
+                    <div class="page-pill disabled"><i class="bi bi-chevron-left" style="font-size:0.7rem;"></i></div>
+                    <div class="page-pill active">1</div>
+                    <div class="page-pill">2</div>
+                    <div class="page-pill">3</div>
+                    <div class="page-pill"><i class="bi bi-chevron-right" style="font-size:0.7rem;"></i></div>
+                </div>
+
+                <div class="mt-5 p-5 text-center rounded-4" style="background:linear-gradient(135deg,#4c1d95,#8b5cf6);" data-aos="fade-up">
+                    <h4 class="fw-bold text-white mb-2">Need a Custom Commercial Space?</h4>
+                    <p class="text-white opacity-75 mb-4 small">Looking for a full-floor corporate HQ, branded showroom, or custom fit-out? We handle <strong>build-to-spec commercial leases</strong>.</p>
+                    <a href="contact.html" class="btn fw-bold rounded-pill px-5 py-2" style="background:#fff;color:#4c1d95;">Request Custom Space</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="geist-footer">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:8px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/></svg>
+                        The Imperial
+                    </a>
+                    <p class="text-muted small pe-lg-5">The enterprise operating system for luxury real estate.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="footer-title">Properties</h6>
+                    <a href="flats-for-sale.html" class="footer-link">For Sale</a>
+                    <a href="flats-for-rent.html" class="footer-link">For Rent</a>
+                    <a href="commercial-spaces.html" class="footer-link">Commercial</a>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="footer-title">Resources</h6>
+                    <a href="faq.html" class="footer-link">Support Desk</a>
+                    <a href="contact.html" class="footer-link">Concierge</a>
+                </div>
+                <div class="col-lg-4 text-lg-end pt-3 pt-lg-0">
+                    <div class="d-inline-flex align-items-center bg-white border px-3 py-2 rounded-pill shadow-sm">
+                        <span class="spinner-grow spinner-grow-sm text-success me-2" role="status"></span>
+                        <span class="font-mono small text-muted">ALL SYSTEMS OPERATIONAL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top mt-5 pt-4" style="border-color:var(--accents-2)!important;">
+                <p class="text-muted small mb-0">© 2026 Imperial Inc.</p>
+                <div class="mt-3 mt-md-0 font-mono small d-flex gap-4">
+                    <a href="#" class="text-muted text-decoration-none">Privacy</a>
+                    <a href="#" class="text-muted text-decoration-none">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/8801711223344" class="wa-float" target="_blank">
+        <span class="wa-tooltip">Chat with us!</span>
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 700, offset: 60 });
+        function applyFilters() {
+            const loc = document.getElementById('locSearch').value.toLowerCase();
+            const type = document.getElementById('typeFilter').value.toLowerCase();
+            let visible = 0;
+            document.querySelectorAll('#propGrid > .col-md-6').forEach(card => {
+                const show = (loc === '' || (card.dataset.location||'').toLowerCase().includes(loc)) &&
+                             (type === '' || (card.dataset.type||'').toLowerCase().includes(type));
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+            document.getElementById('resultCount').innerHTML = `Showing <strong>${visible}</strong> of 35 commercial spaces`;
+        }
+        function clearFilters() { document.getElementById('locSearch').value=''; document.getElementById('typeFilter').value=''; applyFilters(); }
+        function setView(type) { document.querySelectorAll('#propGrid > .col-md-6').forEach(c => c.className = type === 'list' ? 'col-12' : 'col-md-6'); }
+    </script>
+</body>
+</html>

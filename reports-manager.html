@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics & Reports - Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Portfolio Analytics</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">RC</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+                        
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-manager.html" class="nav-item-geist "><i class="bi bi-grid-1x2-fill"></i> Portfolio</a>
+                <a href="buildings-manager.html" class="nav-item-geist "><i class="bi bi-buildings"></i> Buildings</a>
+                <a href="units-manager.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> My Units</a>
+                
+                <p class="nav-category">Stakeholders</p>
+                <a href="owners-manager.html" class="nav-item-geist "><i class="bi bi-person-badge"></i> Owners</a>
+                <a href="tenants-manager.html" class="nav-item-geist "><i class="bi bi-people"></i> Tenants</a>
+                
+                <p class="nav-category">Operations</p>
+                <a href="billing-manager.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Billing</a>
+                <a href="accounts-manager.html" class="nav-item-geist "><i class="bi bi-wallet2"></i> Accounts</a>
+                <a href="maintenance-manager.html" class="nav-item-geist "><i class="bi bi-tools"></i> Maintenance</a>
+                <a href="notices-manager.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Notice Board</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings-manager.html" class="nav-item-geist "><i class="bi bi-tags"></i> Listings</a>
+                <a href="transfers-manager.html" class="nav-item-geist "><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Intelligence</p>
+                <a href="reports-manager.html" class="nav-item-geist active"><i class="bi bi-bar-chart-line"></i> Reports</a>
+                <a href="documents-manager.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="visitors-manager.html" class="nav-item-geist "><i class="bi bi-shield-check"></i> Visitors</a>
+                <a href="settings-manager.html" class="nav-item-geist "><i class="bi bi-gear"></i> Profile Settings</a>
+            </nav>
+
+                        
+            
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">RC</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Robert Chen</h6>
+                        <p class="profile-role">Estate Manager</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <!-- Cinematic Hero Banner (High-Contrast Fix) -->
+            <div class="position-relative overflow-hidden rounded-4 mb-4 shadow-lg bg-primary-navy" data-aos="fade-in" style="height: 320px; background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 100%) !important;">
+                <!-- Animated Ambient Background (Z-INDEX 0) -->
+                <div class="position-absolute inset-0 opacity-20" style="z-index: 0;">
+                    <div class="position-absolute bg-accent-blue rounded-circle blur-3xl shadow-lg" style="width: 500px; height: 500px; top: -150px; right: -150px; animation: pulse-slow 8s infinite alternate;"></div>
+                    <div class="position-absolute bg-primary-navy rounded-circle blur-3xl shadow-lg" style="width: 400px; height: 400px; bottom: -80px; left: -80px; animation: pulse-slow 12s infinite reverse;"></div>
+                </div>
+                <!-- Content Layer (Z-INDEX 1) -->
+                <div class="position-relative z-1 h-100 d-flex flex-column justify-content-center px-5 text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div data-aos="fade-right" data-aos-delay="200">
+                            <span class="badge border border-white border-opacity-25 px-3 py-2 rounded-pill extra-small uppercase tracking-widest mb-3 backdrop-blur shadow-sm text-white fw-bold">Executive Intelligence Console</span>
+                            <h1 class="display-3 fw-bold mb-2 tracking-tight text-white shadow-sm">Portfolio Analytics</h1>
+                            <p class="lead opacity-90 mb-0" style="max-width: 550px; color: #f8fafc;">Transforming raw operational data into high-fidelity strategic insights with zero latency.</p>
+                        </div>
+                        <div class="d-none d-xl-block" data-aos="fade-left" data-aos-delay="400">
+                            <div class="p-4 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-4 backdrop-blur shadow-sm text-center">
+                                <h6 class="extra-small opacity-50 uppercase tracking-widest mb-2 font-mono" style="color: #cbd5e1;">Live Neural Sync</h6>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="spinner-grow spinner-grow-sm text-success shadow-sm" style="width: 12px; height: 12px;"></div>
+                                    <span class="small fw-bold text-white">Ecosystem Status: Optimized</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Intelligence Layer -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <!-- Custom Intelligence Builder Console -->
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-0 overflow-hidden transition-hover translate-y-hover border-accent-left">
+                        <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-light-subtle">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary-navy">Intelligence Generation Control</h6>
+                                <p class="extra-small text-muted mb-0">Configure multi-dimensional data aggregation protocols.</p>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-primary-navy text-white extra-small px-3 rounded-pill shadow-sm">Engine v2.5</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3 border rounded-4 bg-light shadow-sm-inset transition-hover">
+                                        <label class="extra-small text-muted fw-bold mb-2 uppercase opacity-50 d-block">Temporal Range</label>
+                                        <select class="form-select border-0 bg-transparent p-0 small fw-bold text-primary-navy">
+                                            <option>Fiscal Quarter (Q1)</option>
+                                            <option>Temporal Delta (30d)</option>
+                                            <option>Annual Synthesis</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 border rounded-4 bg-light shadow-sm-inset transition-hover">
+                                        <label class="extra-small text-muted fw-bold mb-2 uppercase opacity-50 d-block">Intelligence Axis</label>
+                                        <select class="form-select border-0 bg-transparent p-0 small fw-bold text-primary-navy">
+                                            <option>Yield & Efficiency</option>
+                                            <option>Resolution Matrix</option>
+                                            <option>Asset Lifecycle</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 border rounded-4 bg-light shadow-sm-inset transition-hover">
+                                        <label class="extra-small text-muted fw-bold mb-2 uppercase opacity-50 d-block">Output Vector</label>
+                                        <select class="form-select border-0 bg-transparent p-0 small fw-bold text-primary-navy">
+                                            <option>Cinematic Archive</option>
+                                            <option>Interactive Sync</option>
+                                            <option>Raw Stream (JSON)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary-navy w-100 mt-4 rounded-4 py-3 small fw-bold shadow-lg transition-hover position-relative overflow-hidden">
+                                <span class="position-relative z-1"><i class="bi bi-gear-wide-connected me-2"></i> Execute Synthetic Compilation</span>
+                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-accent-blue opacity-10 blur-xl"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High-Fidelity Performance Matrix (Interactive Visualization) -->
+                <div class="col-lg-5">
+                    <div class="bg-white border rounded-4 shadow-sm h-100 p-4 transition-hover translate-y-hover overflow-hidden position-relative">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary-navy">Historical Yield Vector</h6>
+                                <p class="extra-small text-muted mb-0">Ecosystem distribution audit</p>
+                            </div>
+                            <span class="badge bg-success-subtle text-success fw-bold p-2 px-3 rounded-pill"><i class="bi bi-arrow-up-right me-1"></i> 12.4%</span>
+                        </div>
+                        
+                        <div class="h-150-px d-flex align-items-end gap-3 mb-4 px-2">
+                            <div class="flex-grow-1 bg-light rounded-top position-relative group-hover-scale" style="height: 45%;">
+                                <div class="position-absolute bottom-0 start-0 w-100 bg-accent-blue rounded-top shadow-sm" style="height: 100%; opacity: 0.7;"></div>
+                            </div>
+                            <div class="flex-grow-1 bg-light rounded-top position-relative group-hover-scale" style="height: 65%;">
+                                <div class="position-absolute bottom-0 start-0 w-100 bg-accent-blue rounded-top shadow-sm" style="height: 100%; opacity: 0.85;"></div>
+                            </div>
+                            <div class="flex-grow-1 bg-light rounded-top position-relative group-hover-scale" style="height: 55%;">
+                                <div class="position-absolute bottom-0 start-0 w-100 bg-accent-blue rounded-top shadow-sm" style="height: 100%; opacity: 0.7;"></div>
+                            </div>
+                            <div class="flex-grow-1 bg-light rounded-top position-relative group-hover-scale" style="height: 90%;">
+                                <div class="position-absolute bottom-0 start-0 w-100 bg-primary-navy rounded-top shadow-lg" style="height: 100%;"></div>
+                            </div>
+                            <div class="flex-grow-1 bg-light rounded-top position-relative group-hover-scale" style="height: 75%;">
+                                <div class="position-absolute bottom-0 start-0 w-100 bg-accent-blue rounded-top shadow-sm" style="height: 100%; opacity: 0.85;"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted extra-small font-mono fw-bold px-1">
+                            <span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span>
+                        </div>
+                        <!-- Background Decoration -->
+                        <i class="bi bi-bar-chart-fill position-absolute bottom-0 end-0 m-n4 display-1 opacity-5 text-accent-blue" style="pointer-events: none;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Portfolio Pulse (Cinematic Intelligence) -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="bg-primary-navy border border-white border-opacity-10 shadow-sm text-white p-5 rounded-4 overflow-hidden position-relative">
+                        <div class="position-relative z-1">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8">
+                                    <span class="badge border border-white border-opacity-25 mb-4 p-2 px-3 uppercase tracking-widest font-mono extra-small">Strategic Ecosystem Overview</span>
+                                    <h2 class="display-5 fw-bold mb-4">Portfolio Intelligence Pulse</h2>
+                                    <p class="lead text-white-50 mb-5" style="max-width: 600px; font-size: 1.1rem;">A real-time cross-asset audit of financial health, operational stability, and risk vectors across the Imperial ecosystem.</p>
+                                    
+                                    <div class="row g-4">
+                                        <div class="col-md-3">
+                                            <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10 text-center backdrop-blur transition-hover">
+                                                <h4 class="fw-bold mb-0">98.2%</h4>
+                                                <p class="extra-small text-white-50 m-0">System Integrity</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10 text-center backdrop-blur transition-hover">
+                                                <h4 class="fw-bold mb-0">৳42.8M</h4>
+                                                <p class="extra-small text-white-50 m-0">Net Receivables</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10 text-center backdrop-blur transition-hover">
+                                                <h4 class="fw-bold mb-0">14.2m</h4>
+                                                <p class="extra-small text-white-50 m-0">Mean Resolution</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 bg-success bg-opacity-10 rounded-4 border border-success border-opacity-25 text-center backdrop-blur transition-hover">
+                                                <h4 class="fw-bold mb-0 text-success">AAA+</h4>
+                                                <p class="extra-small text-white-50 m-0">Risk Profile</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 d-none d-lg-block text-center">
+                                    <div class="position-relative">
+                                        <div class="spinner-grow text-white opacity-10" style="width: 240px; height: 240px;"></div>
+                                        <i class="bi bi-cpu position-absolute top-50 start-50 translate-middle display-1 text-white opacity-25"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative element -->
+                        <div class="position-absolute top-0 end-0 m-n5 opacity-10" style="pointer-events: none;">
+                            <svg width="400" height="400" viewBox="0 0 200 200"><path fill="#fff" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-46.2C87.4,-33.3,90.1,-17.6,88.4,-2.4C86.7,12.8,80.7,27.5,71.7,40.1C62.7,52.7,50.7,63.2,36.8,70.5C22.9,77.8,7.1,81.9,-8.3,80.5C-23.7,79.1,-38.7,72.2,-51.1,62.8C-63.5,53.4,-73.3,41.5,-79.1,28.2C-84.9,14.9,-86.7,0.2,-84.3,-13.7C-81.9,-27.6,-75.3,-40.7,-64.9,-51.2C-54.5,-61.7,-40.3,-69.6,-26.1,-76.3C-11.9,-83,2.3,-88.5,16.7,-88.2C31,-88,44.7,-82,44.7,-76.4Z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intelligence Vault: Re-envisioned as High-Impact Cards (AOS Force In View) -->
+            <div data-aos="fade-up" data-aos-offset="0">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0 text-primary-navy">Intelligence Vault</h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-white border rounded-pill px-3 shadow-sm extra-small fw-bold">Recent Compilations</button>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <!-- High-Yield Audit (Premium Contrast Fix) -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="bg-white border rounded-4 shadow-sm p-4 h-100 transition-hover translate-y-hover overflow-hidden position-relative border-secondary-top">
+                            <div class="d-flex align-items-center gap-3 mb-4 pb-2 border-bottom border-light">
+                                <div class="icon-box bg-success-subtle text-success p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center border border-success border-opacity-10" style="width: 48px; height: 48px;"><i class="bi bi-currency-dollar fs-5"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-primary-navy small">Financial Yield Sync</h6>
+                                    <p class="extra-small text-muted mb-0">Audited 12 mins ago</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-light-subtle rounded-4 mb-4 border shadow-sm-inset">
+                                <p class="extra-small text-muted mb-2 uppercase fw-bold tracking-widest opacity-75">Key Determinant</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="fw-bold mb-0 text-primary-navy font-mono">৳12.8M</h4>
+                                    <span class="badge bg-success text-success bg-opacity-10 border border-success border-opacity-25 rounded-pill extra-small px-3">+4.2%</span>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary-navy btn-sm rounded-4 extra-small py-2 shadow-sm transition-hover"><i class="bi bi-file-earmark-pdf me-1"></i> Retrieve Statement</button>
+                                <button class="btn btn-white border btn-sm rounded-4 extra-small py-2 shadow-sm transition-hover">View Raw Sync</button>
+                            </div>
+                            <!-- Background Decoration (Z-INDEX 0) -->
+                            <i class="bi bi-activity position-absolute bottom-0 end-0 m-n4 display-1 opacity-5 text-success" style="pointer-events: none;"></i>
+                        </div>
+                    </div>
+
+                    <!-- Operational Efficiency -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="bg-white border rounded-4 shadow-sm p-4 h-100 transition-hover translate-y-hover overflow-hidden position-relative">
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="icon-box bg-primary-subtle text-primary p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;"><i class="bi bi-speedometer2 fs-5"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-primary-navy small">Operational Latency Audit</h6>
+                                    <p class="extra-small text-muted mb-0">System Verified</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-light rounded-4 mb-4">
+                                <p class="extra-small text-muted mb-2 uppercase fw-bold tracking-widest opacity-50">Resolution TAT</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="fw-bold mb-0 text-primary-navy">14.2m</h4>
+                                    <span class="badge bg-primary-subtle text-primary rounded-pill extra-small">Optimal</span>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary-navy btn-sm rounded-4 extra-small py-2 shadow-sm"><i class="bi bi-bar-chart-steps me-1"></i> Performance Matrix</button>
+                                <button class="btn btn-white border btn-sm rounded-4 extra-small py-2 shadow-sm">Audit Logic</button>
+                            </div>
+                            <!-- Background Decoration -->
+                            <i class="bi bi-gear-wide-connected position-absolute bottom-0 end-0 m-n4 display-1 opacity-5 text-primary"></i>
+                        </div>
+                    </div>
+
+                    <!-- Risk Matrix -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="bg-white border rounded-4 shadow-sm p-4 h-100 transition-hover translate-y-hover overflow-hidden position-relative">
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="icon-box bg-danger-subtle text-danger p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;"><i class="bi bi-shield-lock fs-5"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-primary-navy small">Compliance Risk Sync</h6>
+                                    <p class="extra-small text-muted mb-0">Real-time Analysis</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-light rounded-4 mb-4">
+                                <p class="extra-small text-muted mb-2 uppercase fw-bold tracking-widest opacity-50">Risk Sensitivity</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="fw-bold mb-0 text-danger">Minimal</h4>
+                                    <span class="badge bg-danger-subtle text-danger rounded-pill extra-small">0.2% Delta</span>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary-navy btn-sm rounded-4 extra-small py-2 shadow-sm"><i class="bi bi-clipboard-check me-1"></i> Compliance PDF</button>
+                                <button class="btn btn-white border btn-sm rounded-4 extra-small py-2 shadow-sm">Risk Parameters</button>
+                            </div>
+                            <!-- Background Decoration -->
+                            <i class="bi bi-shield-vibration position-absolute bottom-0 end-0 m-n4 display-1 opacity-5 text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-manager.html" class="bottom-nav-item active">
+            <i class="bi bi-grid-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="buildings-manager.html" class="bottom-nav-item">
+            <i class="bi bi-buildings"></i>
+            <span>Properties</span>
+        </a>
+        <a href="billing-manager.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="maintenance-manager.html" class="bottom-nav-item">
+            <i class="bi bi-tools"></i>
+            <span>Support</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

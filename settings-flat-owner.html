@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - Flat Owner | Imperial OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Header -->
+    <header class="dashboard-mobile-header d-lg-none">
+        <button class="btn btn-toggle-sidebar text-primary-navy p-0 border-0 bg-transparent">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="fw-bold text-primary-navy">Owner Console</div>
+        <div class="profile-avatar" style="width:32px;height:32px;font-size:0.7rem;">FO</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar-geist">
+            <div class="px-3 mb-5">
+                <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+                    </svg>
+                    Imperial OS
+                </a>
+            </div>
+
+            
+            <nav class="flex-grow-1 overflow-y-auto nav-sidebar-geist">
+                <p class="nav-category">Primary</p>
+                <a href="dashboard-flat-owner.html" class="nav-item-geist "><i class="bi bi-grid"></i> Dashboard</a>
+                <a href="units-flat-owner.html" class="nav-item-geist "><i class="bi bi-door-closed"></i> My Flats</a>
+                
+                <p class="nav-category">Marketplace</p>
+                <a href="listings-flat-owner.html" class="nav-item-geist "><i class="bi bi-tags"></i> My Listings</a>
+                <a href="transfers-flat-owner.html" class="nav-item-geist "><i class="bi bi-arrow-left-right"></i> Transfers</a>
+                
+                <p class="nav-category">Finance</p>
+                <a href="statements-flat-owner.html" class="nav-item-geist "><i class="bi bi-receipt"></i> Statements</a>
+                <a href="documents-flat-owner.html" class="nav-item-geist "><i class="bi bi-file-earmark-text"></i> Documents</a>
+                
+                <p class="nav-category">System</p>
+                <a href="notices-flat-owner.html" class="nav-item-geist "><i class="bi bi-megaphone"></i> Admin Notices</a>
+                <a href="settings-flat-owner.html" class="nav-item-geist active"><i class="bi bi-gear"></i> Profile Settings</a>
+            </nav>
+
+            
+            <div class="sidebar-profile">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-avatar">FO</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="profile-name">Flat Owner</h6>
+                        <p class="profile-role">Individual Owner</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content-geist">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div data-aos="fade-right">
+                    <h2 class="fw-bold mb-1">Profile Settings</h2>
+                    <p class="text-muted mb-0">Manage your flat owner profile and security.</p>
+                </div>
+            </div>
+
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h6 class="fw-bold mb-4">Personal Information</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Full Name</label>
+                                <input type="text" class="geist-input" value="Flat Owner Name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Email Address</label>
+                                <input type="email" class="geist-input" value="owner@example.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Phone Number</label>
+                                <input type="tel" class="geist-input" value="+880 1XXX-XXXXXX">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="extra-small text-muted uppercase fw-bold mb-2 d-block">Emergency Contact</label>
+                                <input type="text" class="geist-input" value="+880 1XXX-XXXXXX">
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-geist px-4 rounded-3 shadow-sm-hover">Save Profile Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-white border rounded-4 shadow-sm p-4">
+                        <h6 class="fw-bold mb-4 text-danger">Security</h6>
+                        <button class="btn btn-light border w-100 rounded-3 mb-3 extra-small fw-bold">Change Password</button>
+                        <button class="btn btn-light border w-100 rounded-3 extra-small fw-bold">Active Sessions</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav d-lg-none">
+        <a href="dashboard-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-grid-fill"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="units-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-door-closed"></i>
+            <span>My Flats</span>
+        </a>
+        <a href="statements-flat-owner.html" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Finance</span>
+        </a>
+        <a href="settings-flat-owner.html" class="bottom-nav-item active">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -13,25 +13,69 @@
 
     <!-- Floating Pill Navbar -->
     <nav class="navbar-geist">
-        <div class="d-flex align-items-center">
-            <a href="index.html" class="navbar-brand text-decoration-none d-flex align-items-center">
+        <!-- Left: Hamburger (Mobile) & Logo (Desktop) -->
+        <div class="d-flex align-items-center position-relative z-1">
+            <button class="navbar-mobile-toggle d-md-none me-3 btn btn-light rounded-circle shadow-sm border border-light-subtle d-flex align-items-center justify-content-center transition" style="width: 44px; height: 44px;" aria-label="Toggle Menu">
+                <i class="bi bi-list text-primary-navy" style="font-size: 1.5rem;"></i>
+            </button>
+            <a href="index.html" class="navbar-brand text-decoration-none d-none d-md-flex align-items-center font-cinzel text-primary-navy fw-bold tracking-wide">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
                 </svg>
-                The Imperial
+                THE IMPERIAL
             </a>
         </div>
-        <ul class="nav-links d-none d-md-flex mb-0">
+        
+        <!-- Desktop Nav Links -->
+        <ul class="nav-links d-none d-md-flex mb-0 mx-auto position-relative z-1">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
             <li><a href="services.html" class="nav-link">Services</a></li>
             <li><a href="flats-for-sale.html" class="nav-link">Properties</a></li>
         </ul>
-        <div class="d-flex align-items-center gap-3">
-            <a href="login.html" class="btn-geist-secondary d-none d-sm-block" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Portal Login</a>
-            <a href="contact.html" class="btn-geist" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Inquiry</a>
+
+        <!-- Mobile Centered Logo -->
+        <a href="index.html" class="navbar-brand text-decoration-none d-flex d-md-none align-items-center position-absolute top-50 start-50 translate-middle z-0 font-cinzel text-primary-navy fw-bold tracking-wide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#1E3A5F"/>
+            </svg>
+            IMPERIAL
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-2 position-relative z-1">
+            <a href="login.html" class="btn-geist-secondary d-none d-sm-block text-uppercase fw-bold" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; letter-spacing: 1px;">Portal</a>
+            <a href="contact.html" class="btn-geist text-uppercase fw-bold" style="padding: 0.5rem 1.2rem; font-size: 0.75rem; letter-spacing: 1px;">Inquiry</a>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay d-lg-none">
+        <button class="navbar-mobile-toggle position-absolute top-0 end-0 m-4 btn btn-outline-light rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; border-width: 2px;" aria-label="Close Menu">
+            <i class="bi bi-x-lg fs-5"></i>
+        </button>
+        
+        <!-- Elegant Crest inside menu -->
+        <div class="mb-5 text-center mobile-nav-link" style="transition-delay: 0.1s;">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" class="mb-3 drop-shadow">
+                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2L2 19.5H22L12 2Z" fill="#ffffff"/>
+            </svg>
+            <div class="font-cinzel text-white fs-4 tracking-wide fw-bold">THE IMPERIAL</div>
+            <div class="text-white-50 mt-1" style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Residences & Suites</div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center flex-grow-1 justify-content-center w-100">
+            <a href="index.html" class="mobile-nav-link" style="transition-delay: 0.1s;">Home</a>
+            <a href="about.html" class="mobile-nav-link" style="transition-delay: 0.2s;">About</a>
+            <a href="services.html" class="mobile-nav-link" style="transition-delay: 0.3s;">Services</a>
+            <a href="flats-for-sale.html" class="mobile-nav-link" style="transition-delay: 0.4s;">Properties</a>
+        </div>
+
+        <div class="w-100 px-4 pb-5 mobile-nav-link" style="transition-delay: 0.5s; max-width: 320px;">
+            <a href="contact.html" class="btn btn-light rounded-pill py-3 fw-bold border-0 shadow-lg w-100 text-primary-navy tracking-wide mb-3">SCHEDULE VIEWING</a>
+            <a href="login.html" class="btn btn-outline-light rounded-pill py-3 fw-bold w-100 tracking-wide border-2 bg-dark bg-opacity-25 backdrop-blur">RESIDENT PORTAL</a>
+        </div>
+    </div>
 
     <!-- Page Header -->
     <header class="page-header" style="padding-top: 180px; padding-bottom: 100px; background: linear-gradient(to bottom, var(--light-blue-bg) 0%, #fff 100%);">
@@ -228,7 +272,7 @@
                 <div class="col-6 col-lg-2">
                     <h6 class="footer-title-modern">Inventory</h6>
                     <nav>
-                        <a href="properties.html" class="footer-link-modern">All Units</a>
+                        <a href="index.html#inventory" class="footer-link-modern">All Units</a>
                         <a href="flats-for-sale.html" class="footer-link-modern">For Sale</a>
                         <a href="flats-for-rent.html" class="footer-link-modern">For Rent</a>
                         <a href="commercial-spaces.html" class="footer-link-modern">Commercial</a>

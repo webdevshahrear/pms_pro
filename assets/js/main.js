@@ -1497,20 +1497,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Public Site Mobile Menu Overlay
-    const menuOverlay = document.querySelector('.mobile-menu-overlay');
-    const toggleMenu = () => {
-        if (!menuOverlay) return;
-        menuOverlay.classList.toggle('active');
-        document.body.style.overflow = menuOverlay.classList.contains('active') ? 'hidden' : '';
-    };
-
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('.navbar-mobile-toggle')) {
-            toggleMenu();
-        }
-    });
-
+    // Logic moved to global scope at the end of the file.
     // 3. Bottom Navigation Active State
     const updateBottomNav = () => {
         const bottomLinks = document.querySelectorAll('.bottom-nav-item');
@@ -1530,4 +1517,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Subtle Page Transition
     document.body.classList.add('app-loaded');
+});
+
+// ══════════════════════════════════════════════════════════════
+// SAFE GLOBAL EVENT LISTENERS
+// ══════════════════════════════════════════════════════════════
+
+// Public Site Mobile Menu Overlay Navigation
+const togglePublicMenu = () => {
+    const menuOverlay = document.querySelector('.mobile-menu-overlay');
+    if (!menuOverlay) return;
+    
+    const isActive = menuOverlay.classList.toggle('active');
+    document.body.style.overflow = isActive ? 'hidden' : '';
+    
+    // Optional: Add semantic attribute for screen readers
+    const toggleButtons = document.querySelectorAll('.navbar-mobile-toggle');
+    toggleButtons.forEach(btn => {
+        btn.setAttribute('aria-expanded', isActive);
+    });
+};
+
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.navbar-mobile-toggle')) {
+        e.preventDefault();
+        togglePublicMenu();
+    }
 });
